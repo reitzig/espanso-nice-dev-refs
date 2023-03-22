@@ -1,0 +1,35 @@
+# Reference to some URL from clipboard
+matches:
+  # Markdown:
+  - trigger: ":mdref"
+    replace: "[{{label}}]({{clipboard}})"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: label
+        type: shell
+        params:
+          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          trim: true
+  # AsciiDoc-formatted reference to some URL from clipboard
+  - trigger: ":adref"
+    replace: "link:{{clipboard}}[{{label}}]"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: label
+        type: shell
+        params:
+          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          trim: true
+  # "Rich" reference to some URL from clipboard
+  - trigger: ":ref"
+    markdown: "[{{label}}]({{clipboard}})"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: label
+        type: shell
+        params:
+          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          trim: true
