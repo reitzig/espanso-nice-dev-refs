@@ -21,9 +21,12 @@ def determine_label(input_url: str) -> str:
             return f"{m.group('project')}/{m.group('repo')}"
     elif m := re.search(r'^https://[^/]*jira[^/]*/browse/(?P<issue>\w+-\d+)', input_url):
         return m.group('issue')
-    elif m := re.search(r'^https://github.com/(?P<project>[^/]+)/(?P<repo>[^/]+)(/(issues|pull|discussions)/(?P<id>\d+))?', input_url):
+    elif m := re.search(r'^https://github.com/(?P<project>[^/]+)/(?P<repo>[^/]+)($|/(issues|pull|discussions)/(?P<id>\d+))', input_url):
         id = f"#{m.group('id')}" if m.group('id') else ''
         return f"{m.group('project')}/{m.group('repo')}{id}"
+    elif m := re.search(r'^https://github.com/(?P<project>[^/]+)/(?P<repo>[^/]+)/blob/(?P<rev>[^/]+)/(?P<file>[^#]+)(?:#L(?P<line>\d+))?', input_url):
+        line = f"#{m.group('line')}" if m.group('line') else ''
+        return f"{m.group('project')}/{m.group('repo')}:{m.group('file')}{line}"
     elif m := re.search(r'^https://[^/]*jenkins[^/]*/(?:view/[^/]+/)?job/(?P<job>[^/]+)/(?:job/(?P<subjob>[^/]+)/)?(?P<build>\d+)?', input_url):
         subjob = f"/{unquote(m.group('subjob'))}" if m.group('subjob') else ''
         build = f"#{m.group('build')}" if m.group('build') else ''
