@@ -26,6 +26,17 @@ def test_should_label_old_school_job_build():
     assert_that(label)\
         .is_equal_to('SOME_job-name#77')
 
+def test_should_label_old_school_job_build_through_view():
+    # Given:
+    url = "https://our-jenkins.my-org.de/view/Fancy/job/SOME_job-name/77/console"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label)\
+        .is_equal_to('SOME_job-name#77')
+
 
 def test_should_label_old_school_multibranch_pipeline():
     # Given:
