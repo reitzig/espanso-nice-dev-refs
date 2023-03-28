@@ -11,7 +11,7 @@ def test_should_label_url_with_title():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('MYSPACE/Some Page Nobody Reads')
 
 
@@ -23,5 +23,5 @@ def test_should_label_url_with_title_in_args():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('MYSPACE/Some Page Nobody Reads')

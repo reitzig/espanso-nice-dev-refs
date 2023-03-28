@@ -11,5 +11,5 @@ def test_should_label_repository():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('FANCY-77')

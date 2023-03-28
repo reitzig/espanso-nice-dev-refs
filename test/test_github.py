@@ -11,7 +11,7 @@ def test_should_label_repository():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('my-account/some-repo')
 
 
@@ -23,7 +23,7 @@ def test_should_label_issue():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('my-account/some-repo#77')
 
 
@@ -35,7 +35,7 @@ def test_should_label_discussion():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('my-account/some-repo#42')
 
 
@@ -47,7 +47,7 @@ def test_should_label_pr():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('my-account/some-repo#119')
 
 
@@ -59,7 +59,7 @@ def test_should_label_file():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('my-account/some-repo:some/file.md')
 
 
@@ -71,5 +71,5 @@ def test_should_label_file_and_line():
     label = determine_label(url)
 
     # Then:
-    assert_that(label)\
+    assert_that(label) \
         .is_equal_to('my-account/some-repo:some/file.md#77')
