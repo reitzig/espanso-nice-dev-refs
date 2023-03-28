@@ -32,7 +32,16 @@ def determine_label(input_url: str) -> str:
         subjob = f"/{unquote(m.group('subjob'))}" if m.group('job') != m.group('subjob') else ''
         build = f"#{m.group('build')}" if m.group('build') else ''
         return f"{m.group('job')}{subjob}{build}"
+    elif m := re.search(r'^https://.*confluence.*/display/(?P<space>[^/]+)/(?P<title>[^?]+)', input_url):
+        space = m.group('space')
+        title = m.group('title').replace('+', ' ')
+        return f"{space}/{title}"
+    elif m := re.search(r'^https://.*confluence.*/pages/viewpage\.action\?spaceKey=(?P<space>[^&]+)&title=(?P<title>[^&]+)', input_url):
+        space = m.group('space')
+        title = m.group('title').replace('+', ' ')
+        return f"{space}/{title}"
     else:
+        # TODO: Prompt for title? Access page for HTML title?
         return input_url
 
 
