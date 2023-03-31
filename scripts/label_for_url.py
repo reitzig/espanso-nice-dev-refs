@@ -5,12 +5,6 @@ import sys
 from urllib.parse import unquote
 
 
-# TODO: ship as package?
-#       -> https://espanso.org/docs/packages/package-specification/
-#       but: https://github.com/espanso/espanso/discussions/1558
-# TODO: refactor into loop over (regexp, lambda)
-
-
 def determine_label(input_url: str) -> str:
     if m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/'
                       r'repos/(?P<repo>[^/]+)/pull-requests/(?P<pr>\d+)/'
