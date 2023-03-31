@@ -53,6 +53,8 @@ def determine_label(input_url: str) -> str:
         space = m.group('space')
         title = m.group('title').replace('+', ' ')
         return f"{space}/{title}"
+    elif m := re.search(r'\w+://(www\d*\.)?(?P<path>[^?]+)', input_url):
+        return m.group('path')
     else:
         # TODO: Prompt for title? Access page for HTML title?
         return input_url
