@@ -6,6 +6,8 @@ from urllib.parse import unquote
 
 
 # TODO: ship as package?
+#       -> https://espanso.org/docs/packages/package-specification/
+#       but: https://github.com/espanso/espanso/discussions/1558
 # TODO: refactor into loop over (regexp, lambda)
 
 
@@ -33,6 +35,8 @@ def determine_label(input_url: str) -> str:
                         r'blob/(?P<rev>[^/]+)/(?P<file>[^#]+)(?:#L(?P<line>\d+))?', input_url):
         line = f"#{m.group('line')}" if m.group('line') else ''
         return f"{m.group('project')}/{m.group('repo')}:{m.group('file')}{line}"
+    elif m := re.search(r'^https://gist.github.com/(?P<account>[^/]+)/(?P<uid>[a-f0-9]+)$', input_url):
+        return f"{m.group('account')}/{m.group('uid')}"
     elif m := re.search(r'^https://[^/]*jenkins[^/]*/(?:view/[^/]+/)?job/'
                         r'(?P<job>[^/]+)/(?:job/(?P<subjob>[^/]+)/)?(?P<build>\d+)?', input_url):
         subjob = f"/{unquote(m.group('subjob'))}" if m.group('subjob') else ''

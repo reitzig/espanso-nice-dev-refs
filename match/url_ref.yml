@@ -1,6 +1,6 @@
 # Reference to some URL from clipboard
 matches:
-  # Markdown:
+  # Markdown reference to some URL from clipboard:
   - trigger: ":mdref"
     replace: "[{{label}}]({{clipboard}})"
     vars:
