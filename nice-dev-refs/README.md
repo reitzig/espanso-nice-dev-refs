@@ -13,6 +13,7 @@ then type any of the following:
 
 - **GitHub**: repository, issue, discussion, pull request, file (& line)
 - **GitHub Gist**: gist
+- **Stack Exchange**: question, answer
 - **Bitbucket**: repository, pull request, file (& line), file (& line) in pull request
 - **Jenkins** 
   - classic: "simple" job (& build), multi-branch pipeline (& build), 
