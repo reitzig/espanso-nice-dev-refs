@@ -47,6 +47,16 @@ def determine_label(input_url: str) -> str:
         space = m.group('space')
         title = m.group('title').replace('+', ' ')
         return f"{space}/{title}"
+    elif m := re.search(r'^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/'
+                        r'(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?', input_url):
+        page = m.group('page')\
+            .replace('stackexchange', 'SE')\
+            .replace('stackoverflow', 'SO')\
+            .replace('askubuntu', 'AU')\
+            .replace('serverfault', 'SF')\
+            .replace('superuser', 'SU')
+        post = m.group('aid') or m.group('qid')
+        return f"{page}#{post}"
     elif m := re.search(r'\w+://(www\d*\.)?(?P<path>[^?]+)', input_url):
         return m.group('path')
     else:
