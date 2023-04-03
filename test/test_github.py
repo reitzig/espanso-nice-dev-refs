@@ -63,6 +63,18 @@ def test_should_label_file():
         .is_equal_to('my-account/some-repo:some/file.md')
 
 
+def test_should_label_folder():
+    # Given:
+    url = "https://github.com/my-account/some-repo/tree/main/some/folder"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo:some/folder')
+
+
 def test_should_label_file_and_line():
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/file.md#L77"

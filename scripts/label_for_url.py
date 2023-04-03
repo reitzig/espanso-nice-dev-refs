@@ -26,7 +26,7 @@ def determine_label(input_url: str) -> str:
         number = f"#{m.group('number')}" if m.group('number') else ''
         return f"{m.group('project')}/{m.group('repo')}{number}"
     elif m := re.search(r'^https://github.com/(?P<project>[^/]+)/(?P<repo>[^/]+)/'
-                        r'blob/(?P<rev>[^/]+)/(?P<file>[^#]+)(?:#L(?P<line>\d+))?', input_url):
+                        r'(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#]+)(?:#L(?P<line>\d+))?', input_url):
         line = f"#{m.group('line')}" if m.group('line') else ''
         return f"{m.group('project')}/{m.group('repo')}:{m.group('file')}{line}"
     elif m := re.search(r'^https://gist.github.com/(?P<account>[^/]+)/(?P<uid>[a-f0-9]+)$', input_url):
