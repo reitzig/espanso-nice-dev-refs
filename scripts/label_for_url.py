@@ -45,7 +45,7 @@ def determine_label(input_url: str) -> str:
             or (m := re.search(r'^https://.*confluence.*/pages/viewpage\.action\?'
                                r'spaceKey=(?P<space>[^&]+)&title=(?P<title>[^&]+)', input_url)):
         space = m.group('space')
-        title = m.group('title').replace('+', ' ')
+        title = unquote(m.group('title').replace('+', ' ')).strip()
         return f"{space}/{title}"
     elif m := re.search(r'^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/'
                         r'(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?', input_url):
