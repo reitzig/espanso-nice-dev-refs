@@ -21,16 +21,23 @@ def determine_label(input_url: str) -> str:
             return f"{m.group('project')}/{m.group('repo')}"
     elif m := re.search(r'^https://[^/]*jira[^/]*/browse/(?P<issue>\w+-\d+)', input_url):
         return m.group('issue')
-    elif m := re.search(r'^https://github.com/(?P<project>[^/]+)/(?P<repo>[^/]+)($|/'
-                        r'(issues|pull|discussions)/(?P<number>\d+))', input_url):
+    elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?($|/'
+                        r'(issues|pull|discussions|merge_requests)/(?P<number>\d+))', input_url):
         number = f"#{m.group('number')}" if m.group('number') else ''
         return f"{m.group('project')}/{m.group('repo')}{number}"
-    elif m := re.search(r'^https://github.com/(?P<project>[^/]+)/(?P<repo>[^/]+)/'
+    elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/'
                         r'(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#]+)(?:#L(?P<line>\d+))?', input_url):
         line = f"#{m.group('line')}" if m.group('line') else ''
         return f"{m.group('project')}/{m.group('repo')}:{m.group('file')}{line}"
     elif m := re.search(r'^https://gist.github.com/(?P<account>[^/]+)/(?P<uid>[a-f0-9]+)$', input_url):
         return f"{m.group('account')}/{m.group('uid')}"
+    elif m := re.search(r'^https://(?P<host>[^/]*gitlab[^/]*)'
+                        r'(/(?P<project>[^/]+)/(?P<repo>[^/]+))?/-/snippets/'
+                        r'(?P<uid>[^/?#]+)', input_url):
+        if m.group('project'):
+            return f"{m.group('project')}/{m.group('repo')}${m.group('uid')}"
+        else:
+            return f"{m.group('host')}${m.group('uid')}"
     elif m := re.search(r'^https://[^/]*jenkins[^/]*/(?:view/[^/]+/)?job/'
                         r'(?P<job>[^/]+)/(?:job/(?P<subjob>[^/]+)/)?(?P<build>\d+)?', input_url):
         subjob = f"/{unquote(m.group('subjob'))}" if m.group('subjob') else ''
