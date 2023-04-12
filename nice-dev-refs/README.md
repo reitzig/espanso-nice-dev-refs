@@ -7,6 +7,7 @@ then type any of the following:
 
 - `:mdref` -- paste as Markdown link, i.e. `[label](url)`.
 - `:adref` -- paste as AsciiDoc link, i.e. `link:url[label]`.
+- `:jiraref` -- paste as Jira Markup link, i.e. `[label|url]`.
 - `:ref` -- paste as rich-text link.
 
 ### Supported URL Formats

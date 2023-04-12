@@ -22,6 +22,17 @@ matches:
         params:
           cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
           trim: true
+  # Jira-formatted reference to some URL from clipboard
+  - trigger: ":jiraref"
+    replace: "[{{label}}|{{clipboard}}]"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: label
+        type: shell
+        params:
+          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          trim: true
   # "Rich" reference to some URL from clipboard
   - trigger: ":ref"
     markdown: "[{{label}}]({{clipboard}})"
