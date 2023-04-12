@@ -48,7 +48,7 @@ def test_should_label_old_school_multibranch_pipeline():
 
     # Then:
     assert_that(label) \
-        .is_equal_to('SOME_job-name/feature/JIRA-42-some-task#42')
+        .is_equal_to('SOME_job-name:feature/JIRA-42-some-task#42')
 
 
 def test_should_label_blue_ocean_job_build():
@@ -74,7 +74,7 @@ def test_should_label_blue_ocean_multibranch_pipeline():
 
     # Then:
     assert_that(label) \
-        .is_equal_to('SOME_job-name/feature/JIRA-42-some-task#42')
+        .is_equal_to('SOME_job-name:feature/JIRA-42-some-task#42')
 
 
 def test_should_label_blue_ocean_redirect():
@@ -87,4 +87,4 @@ def test_should_label_blue_ocean_redirect():
 
     # Then:
     assert_that(label) \
-        .is_equal_to('SOME_job-name/fix/some-bug#25')
+        .is_equal_to('SOME_job-name:fix/some-bug#25')
