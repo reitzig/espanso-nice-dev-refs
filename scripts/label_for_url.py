@@ -16,11 +16,9 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('project')}/{m.group('repo')}{pr}{commit}{filename}{line}"
     elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/'
                         r'repos/(?P<repo>[^/]+)(/browse/(?P<file>[^#]+)(?P<line>#\d+)?)?', input_url):
-        if m.group('file'):
-            line = m.group('line') or ''
-            return f"{m.group('project')}/{m.group('repo')}:{m.group('file')}{line}"
-        else:
-            return f"{m.group('project')}/{m.group('repo')}"
+        filename = f":{m.group('file')}" if m.group('file') else ''
+        line = m.group('line') or ''
+        return f"{m.group('project')}/{m.group('repo')}{filename}{line}"
     elif m := re.search(r'^https://[^/]*jira[^/]*/browse/(?P<issue>\w+-\d+)', input_url):
         return m.group('issue')
     elif m := re.search(r'^https://gist.github.com/(?P<account>[^/]+)/'
