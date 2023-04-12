@@ -14,8 +14,12 @@ def determine_label(input_url: str) -> str:
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = f"#{m.group('line')}" if m.group('line') else ''
         return f"{m.group('project')}/{m.group('repo')}{pr}{commit}{filename}{line}"
-    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/'
-                        r'repos/(?P<repo>[^/]+)(/browse/(?P<file>[^#]+)(?P<line>#\d+)?)?', input_url):
+    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
+                        r'compare/(commits|diff)\?sourceBranch=refs%2Fheads%2F(?P<branch>[^&]+)', input_url):
+        branch = unquote(m.group('branch'))
+        return f"{m.group('project')}/{m.group('repo')}@{branch}"
+    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)'
+                        r'(/browse/(?P<file>[^#]+)(?P<line>#\d+)?)?', input_url):
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = m.group('line') or ''
         return f"{m.group('project')}/{m.group('repo')}{filename}{line}"

@@ -108,3 +108,29 @@ def test_should_label_commit_and_file():
     # Then:
     assert_that(label) \
         .is_equal_to('MY-PROJECT/some-project@f3b751f5:some/file.md')
+
+
+def test_should_label_branch_commits():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
+          "some-project/compare/commits?sourceBranch=refs%2Fheads%2Ffeature%2Fsome-feature&targetRepoId=77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('MY-PROJECT/some-project@feature/some-feature')
+
+
+def test_should_label_branch_diff():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
+          "some-project/compare/diff?sourceBranch=refs%2Fheads%2Ffeature%2Fsome-feature&targetRepoId=77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('MY-PROJECT/some-project@feature/some-feature')
