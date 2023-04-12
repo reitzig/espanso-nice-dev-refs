@@ -31,7 +31,7 @@ def determine_label(input_url: str) -> str:
 
         filename = f":{'-'.join(filename_parts)}" if fileline_parts else ''
         line = f"#{line_part.replace('L', '')}" if line_part else ''
-        return f"{m.group('account')}/{m.group('uid')}{filename}{line}"
+        return f"{m.group('account')}/{m.group('uid')[0:6]}{filename}{line}"
     elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?($|/'
                         r'(issues|pull|discussions|merge_requests)/(?P<number>\d+))', input_url):
         number = f"#{m.group('number')}" if m.group('number') else ''
@@ -76,7 +76,7 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(r'\w+://(www\d*\.)?(?P<path>[^?]+)', input_url):
         return m.group('path')
     else:
-        # TODO: Prompt for title? Access page for HTML title?
+        # This doesn't even try to look like a URL -- NOP
         return input_url
 
 

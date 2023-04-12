@@ -96,7 +96,7 @@ def test_should_label_gist():
 
     # Then:
     assert_that(label) \
-        .is_equal_to('my-account/abcdef123456789')
+        .is_equal_to('my-account/abcdef')
 
 
 def test_should_label_gist_and_file():
@@ -108,7 +108,7 @@ def test_should_label_gist_and_file():
 
     # Then:
     assert_that(label) \
-        .is_equal_to('my-account/abcdef123456789:some_file-md')
+        .is_equal_to('my-account/abcdef:some_file-md')
     # NB: We won't be able to determine which parts are file endings
 
 
@@ -121,5 +121,5 @@ def test_should_label_gist_and_file_and_line():
 
     # Then:
     assert_that(label) \
-        .is_equal_to('my-account/abcdef123456789:some_file-md#42')
+        .is_equal_to('my-account/abcdef:some_file-md#42')
     # NB: We won't be able to determine which parts are file endings
