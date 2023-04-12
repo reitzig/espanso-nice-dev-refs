@@ -11,7 +11,7 @@ then type any of the following:
 
 ### Supported URL Formats
 
-- **GitHub**: repository, issue, discussion, pull request, file (& line), gist
+- **GitHub**: repository, issue, discussion, pull request, file (& line), gist (& file & line)
 - **GitLab**: repository, issue, merge request, file (& line), snippet
 - **Stack Exchange**: question, answer
 - **Bitbucket**: repository, pull request, file (& line), file (& line) in pull request

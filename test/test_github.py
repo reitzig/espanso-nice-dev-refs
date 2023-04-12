@@ -88,7 +88,6 @@ def test_should_label_file_and_line():
 
 
 def test_should_label_gist():
-    # https://gist.github.com/reitzig/6582edd485a5d0a8b68600dab3b0861b
     # Given:
     url = "https://gist.github.com/my-account/abcdef123456789"
 
@@ -98,3 +97,29 @@ def test_should_label_gist():
     # Then:
     assert_that(label) \
         .is_equal_to('my-account/abcdef123456789')
+
+
+def test_should_label_gist_and_file():
+    # Given:
+    url = "https://gist.github.com/my-account/abcdef123456789#file-some_file-md"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/abcdef123456789:some_file-md')
+    # NB: We won't be able to determine which parts are file endings
+
+
+def test_should_label_gist_and_file_and_line():
+    # Given:
+    url = "https://gist.github.com/my-account/abcdef123456789#file-some_file-md-L42"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/abcdef123456789:some_file-md#42')
+    # NB: We won't be able to determine which parts are file endings
