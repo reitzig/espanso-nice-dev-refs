@@ -40,7 +40,7 @@ def determine_label(input_url: str) -> str:
             return f"{m.group('host')}${m.group('uid')}"
     elif m := re.search(r'^https://[^/]*jenkins[^/]*/(?:view/[^/]+/)?job/'
                         r'(?P<job>[^/]+)/(?:job/(?P<subjob>[^/]+)/)?(?P<build>\d+)?', input_url):
-        subjob = f"/{unquote(m.group('subjob'))}" if m.group('subjob') else ''
+        subjob = f"/{unquote(unquote(m.group('subjob')))}" if m.group('subjob') else ''
         build = f"#{m.group('build')}" if m.group('build') else ''
         return f"{m.group('job')}{subjob}{build}"
     elif m := re.search(r'^https://.*jenkins.*/blue/organizations/jenkins/'

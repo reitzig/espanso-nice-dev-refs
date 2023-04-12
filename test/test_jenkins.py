@@ -75,3 +75,16 @@ def test_should_label_blue_ocean_multibranch_pipeline():
     # Then:
     assert_that(label) \
         .is_equal_to('SOME_job-name/feature/JIRA-42-some-task#42')
+
+
+def test_should_label_blue_ocean_redirect():
+    # Given:
+    url = "https://our-jenkins.my-org.de/job/" \
+          "SOME_job-name/job/fix%252Fsome-bug/25/display/redirect"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('SOME_job-name/fix/some-bug#25')
