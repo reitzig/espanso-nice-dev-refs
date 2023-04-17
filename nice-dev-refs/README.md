@@ -16,7 +16,7 @@ then type any of the following:
               gist (& file & line)
 - **GitLab**: repository, issue, merge request, file (& line), snippet
 - **Stack Exchange**: question, answer
-- **Bitbucket**: repository, pull request (& comment), 
+- **Bitbucket**: project, repository, pull request (& comment), 
                  file (& line), file (& line) in pull request,
                  commit (& file), branch
 - **Jenkins** 

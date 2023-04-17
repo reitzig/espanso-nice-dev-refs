@@ -20,11 +20,13 @@ def determine_label(input_url: str) -> str:
                         r'compare/(commits|diff)\?sourceBranch=refs%2Fheads%2F(?P<branch>[^&]+)', input_url):
         branch = unquote(m.group('branch'))
         return f"{m.group('project')}/{m.group('repo')}@{branch}"
-    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)'
+    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)'
+                        r'(/repos/(?P<repo>[^/]+))?'
                         r'(/browse/(?P<file>[^#]+)(?P<line>#\d+)?)?', input_url):
+        repo = f"/{m.group('repo')}" if m.group('repo') else ''
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = m.group('line') or ''
-        return f"{m.group('project')}/{m.group('repo')}{filename}{line}"
+        return f"{m.group('project')}{repo}{filename}{line}"
     elif m := re.search(r'^https://[^/]*jira[^/]*/browse/(?P<issue>\w+-\d+)', input_url):
         return m.group('issue')
     elif m := re.search(r'^https://gist.github.com/(?P<account>[^/]+)/'
