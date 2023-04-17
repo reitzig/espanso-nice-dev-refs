@@ -82,7 +82,7 @@ def determine_label(input_url: str) -> str:
         post = m.group('aid') or m.group('qid')
         return f"{page}#{post}"
     elif m := re.search(r'\w+://(www\d*\.)?(?P<path>[^?]+)', input_url):
-        return m.group('path')
+        return m.group('path').strip(" /")
     else:
         # This doesn't even try to look like a URL -- NOP
         return input_url
