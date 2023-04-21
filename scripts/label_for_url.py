@@ -27,8 +27,10 @@ def determine_label(input_url: str) -> str:
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = m.group('line') or ''
         return f"{m.group('project')}{repo}{filename}{line}"
-    elif m := re.search(r'^https://[^/]*jira[^/]*/browse/(?P<issue>\w+-\d+)', input_url):
-        return m.group('issue')
+    elif m := re.search(r'^https://[^/]*jira[^/]*/browse/(?P<project>\w+)(-(?P<issue>\d+))?', input_url):
+        project = m.group('project')
+        issue = f"-{m.group('issue')}" if m.group('issue') else ''
+        return f"{project}{issue}"
     elif m := re.search(r'^https://gist.github.com/(?P<account>[^/]+)/'
                         r'(?P<uid>[a-f0-9]+)(?:#file-(?P<fileline>[^?]+))?$', input_url):
         # Take apart the wicked file-line format:
