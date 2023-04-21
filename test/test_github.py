@@ -27,6 +27,18 @@ def test_should_label_issue():
         .is_equal_to('my-account/some-repo#77')
 
 
+def test_should_label_issue_and_comment():
+    # Given:
+    url = "https://github.com/my-account/some-repo/issues/77#issuecomment-42"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo#77.42')
+
+
 def test_should_label_discussion():
     # Given:
     url = "https://github.com/my-account/some-repo/discussions/42"

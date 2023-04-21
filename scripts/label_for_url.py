@@ -43,9 +43,11 @@ def determine_label(input_url: str) -> str:
         line = f"#{line_part.replace('L', '')}" if line_part else ''
         return f"{m.group('account')}/{m.group('uid')[0:6]}{filename}{line}"
     elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?($|/'
-                        r'(issues|pull|discussions|merge_requests)/(?P<number>\d+))', input_url):
+                        r'(issues|pull|discussions|merge_requests)/(?P<number>\d+))'
+                        r'(#issuecomment-(?P<comment_id>\d+))?', input_url):
         number = f"#{m.group('number')}" if m.group('number') else ''
-        return f"{m.group('project')}/{m.group('repo')}{number}"
+        comment_id = f".{m.group('comment_id')}" if m.group('comment_id') else ''
+        return f"{m.group('project')}/{m.group('repo')}{number}{comment_id}"
     elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/'
                         r'(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#]+)(?:#L(?P<line>\d+))?', input_url):
         line = f"#{m.group('line')}" if m.group('line') else ''

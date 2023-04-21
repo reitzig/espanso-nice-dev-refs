@@ -12,7 +12,7 @@ then type any of the following:
 
 ### Supported URL Formats
 
-- **GitHub**: repository, issue, discussion, pull request, file (& line), 
+- **GitHub**: repository, issue (& comment), discussion, pull request, file (& line), 
               gist (& file & line)
 - **GitLab**: repository, issue, merge request, file (& line), snippet
 - **Stack Exchange**: question, answer
