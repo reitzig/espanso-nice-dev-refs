@@ -5,6 +5,11 @@ import sys
 from urllib.parse import unquote
 
 
+def prettify_anchor(anchor_arg: str) -> str:
+    a, _ = re.subn(r'(?:^|-)([a-z])', lambda m: f" {m[1]}".upper(), anchor_arg)
+    return a.strip()
+
+
 def determine_label(input_url: str) -> str:
     if m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
                       r'pull-requests/(?P<pr>\d+)/?'
@@ -49,16 +54,25 @@ def determine_label(input_url: str) -> str:
         filename = f":{'-'.join(filename_parts)}" if fileline_parts else ''
         line = f"#{line_part.replace('L', '')}" if line_part else ''
         return f"{m.group('account')}/{m.group('uid')[0:6]}{filename}{line}"
-    elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?($|/'
-                        r'(issues|pull|discussions|merge_requests)/(?P<number>\d+))'
+    elif m := re.search(r'https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/#]+)/?'
+                        r'(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?'
+                        r'$', input_url):  # NB: Include $ to not prematurely match any of the next two cases
+        anchor = f" > {prettify_anchor(m.group('anchor'))}" if m.group('anchor') else ''
+        return f"{m.group('project')}/{m.group('repo')}{anchor}"
+    elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/'
+                        r'(issues|pull|discussions|merge_requests)/(?P<number>\d+)'
                         r'(#issuecomment-(?P<comment_id>\d+))?', input_url):
         number = f"#{m.group('number')}" if m.group('number') else ''
         comment_id = f".{m.group('comment_id')}" if m.group('comment_id') else ''
         return f"{m.group('project')}/{m.group('repo')}{number}{comment_id}"
     elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/'
-                        r'(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#]+)(?:#L(?P<line>\d+))?', input_url):
+                        r'(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#]+)'
+                        r'(?:#L(?P<line>\d+)|#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?', input_url):
+        filename = re.sub(r'\.(adoc|md)$', '', m.group('file')) if m.group('anchor') else m.group('file')
+        filename = filename.strip('/')
         line = f"#{m.group('line')}" if m.group('line') else ''
-        return f"{m.group('project')}/{m.group('repo')}:{m.group('file')}{line}"
+        anchor = f" > {prettify_anchor(m.group('anchor'))}" if m.group('anchor') else ''
+        return f"{m.group('project')}/{m.group('repo')}:{filename}{line}{anchor}"
     elif m := re.search(r'^https://(?P<host>[^/]*gitlab[^/]*)'
                         r'(/(?P<project>[^/]+)/(?P<repo>[^/]+))?/-/snippets/'
                         r'(?P<uid>[^/?#]+)', input_url):

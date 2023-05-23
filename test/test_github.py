@@ -15,6 +15,18 @@ def test_should_label_repository():
         .is_equal_to('my-account/some-repo')
 
 
+def test_should_label_repo_and_anchor():
+    # Given:
+    url = "https://github.com/my-account/some-repo#some-headline"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo > Some Headline')
+
+
 def test_should_label_issue():
     # Given:
     url = "https://github.com/my-account/some-repo/issues/77"
@@ -87,6 +99,18 @@ def test_should_label_folder():
         .is_equal_to('my-account/some-repo:some/folder')
 
 
+def test_should_label_folder_and_anchor():
+    # Given:
+    url = "https://github.com/my-account/some-repo/tree/main/some/folder#some-headline"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo:some/folder > Some Headline')
+
+
 def test_should_label_file_and_line():
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/file.md#L77"
@@ -97,6 +121,18 @@ def test_should_label_file_and_line():
     # Then:
     assert_that(label) \
         .is_equal_to('my-account/some-repo:some/file.md#77')
+
+
+def test_should_label_markdown_and_anchor():
+    # Given:
+    url = "https://github.com/my-account/some-repo/blob/main/some/README.md#some-headline"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo:some/README > Some Headline')
 
 
 def test_should_label_gist():
