@@ -132,6 +132,18 @@ def test_should_label_commit_and_file():
         .is_equal_to('MY-PROJECT/some-project@f3b751f5:some/file.md')
 
 
+def test_should_label_branch():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/some-project/commits?until=feature/some-feature"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('MY-PROJECT/some-project@feature/some-feature')
+
+
 def test_should_label_branch_commits():
     # Given:
     url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \

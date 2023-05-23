@@ -7,15 +7,22 @@ from urllib.parse import unquote
 
 def determine_label(input_url: str) -> str:
     if m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
-                      r'(pull-requests/(?P<pr>\d+)|commits/(?P<commit>[a-fA-F0-9]+))/?'
+                      r'pull-requests/(?P<pr>\d+)/?'
                       r'((diff)?#(?P<file>[^?]+)(\?f=(?P<line>\d+))?)?'
                       r'(overview\?commentId=(?P<comment>\d+))?', input_url):
         pr = f"#{m.group('pr')}" if m.group('pr') else ''
-        commit = f"@{m.group('commit')[0:8]}" if m.group('commit') else ''
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = f"#{m.group('line')}" if m.group('line') else ''
         comment = f".{m.group('comment')}" if m.group('comment') else ''
-        return f"{m.group('project')}/{m.group('repo')}{pr}{commit}{filename}{line}{comment}"
+        return f"{m.group('project')}/{m.group('repo')}{pr}{filename}{line}{comment}"
+    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
+                        r'commits(/(?P<commit>[a-fA-F0-9]+))?/?'
+                        r'(#(?P<file>[^?]+))?'
+                        r'(\?until=(?P<branch>[^&]+))?', input_url):
+        commit = f"@{m.group('commit')[0:8]}" if m.group('commit') else ''
+        branch = f"@{unquote(m.group('branch'))}" if m.group('branch') else ''
+        filename = f":{m.group('file')}" if m.group('file') else ''
+        return f"{m.group('project')}/{m.group('repo')}{commit}{branch}{filename}"
     elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
                         r'compare/(commits|diff)\?sourceBranch=refs%2Fheads%2F(?P<branch>[^&]+)', input_url):
         branch = unquote(m.group('branch'))
