@@ -59,12 +59,15 @@ def determine_label(input_url: str) -> str:
                         r'$', input_url):  # NB: Include $ to not prematurely match any of the next two cases
         anchor = f" > {prettify_anchor(m.group('anchor'))}" if m.group('anchor') else ''
         return f"{m.group('project')}/{m.group('repo')}{anchor}"
-    elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/'
-                        r'(issues|pull|discussions|merge_requests)/(?P<number>\d+)'
-                        r'(#issuecomment-(?P<comment_id>\d+))?', input_url):
+    elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/('
+                        r'((issues|pull|discussions|merge_requests)/(?P<number>\d+)'
+                        r'(#issuecomment-(?P<comment_id>\d+))?)'
+                        r'|(releases/tag/(?P<release_tag>[^/#?]+))'
+                        r')', input_url):
         number = f"#{m.group('number')}" if m.group('number') else ''
         comment_id = f".{m.group('comment_id')}" if m.group('comment_id') else ''
-        return f"{m.group('project')}/{m.group('repo')}{number}{comment_id}"
+        release_tag = f"@{m.group('release_tag')}" if m.group('release_tag') else ''
+        return f"{m.group('project')}/{m.group('repo')}{number}{comment_id}{release_tag}"
     elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/'
                         r'(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#]+)'
                         r'(?:#L(?P<line>\d+)|#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?', input_url):

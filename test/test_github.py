@@ -135,6 +135,17 @@ def test_should_label_markdown_and_anchor():
         .is_equal_to('my-account/some-repo:some/README > Some Headline')
 
 
+def test_should_label_release():
+    url = "https://github.com/my-account/some-repo/releases/tag/1.2.3"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo@1.2.3')
+
+
 def test_should_label_gist():
     # Given:
     url = "https://gist.github.com/my-account/abcdef123456789"
