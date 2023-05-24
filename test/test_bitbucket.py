@@ -168,3 +168,19 @@ def test_should_label_branch_diff():
     # Then:
     assert_that(label) \
         .is_equal_to('MY-PROJECT/some-project@feature/some-feature')
+
+
+def test_should_label_arbitrary_diff():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
+          "some-project/compare/diff" \
+          "?targetBranch=b8aa09a9673c4b3af558313c3e08f10e7245708c" \
+          "&sourceBranch=refs%2Fheads%2Fdevelop" \
+          "&targetRepoId=77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('MY-PROJECT/some-project develop⭤b8aa09a9')

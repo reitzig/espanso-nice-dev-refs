@@ -29,9 +29,21 @@ def determine_label(input_url: str) -> str:
         filename = f":{m.group('file')}" if m.group('file') else ''
         return f"{m.group('project')}/{m.group('repo')}{commit}{branch}{filename}"
     elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
-                        r'compare/(commits|diff)\?sourceBranch=refs%2Fheads%2F(?P<branch>[^&]+)', input_url):
-        branch = unquote(m.group('branch'))
-        return f"{m.group('project')}/{m.group('repo')}@{branch}"
+                        r'compare/(commits|diff)\?'
+                        r'(?:targetBranch=(refs%2Fheads%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+)&))?'
+                        r'sourceBranch=(refs%2Fheads%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))',
+                        input_url):
+        source_branch = unquote(m.group('source_branch')) if m.group('source_branch') else ''
+        source_commit = m.group('source_commit')[0:8] if m.group('source_commit') else ''
+        source = f"{source_branch}{source_commit}"
+        target_branch = unquote(m.group('target_branch')) if m.group('target_branch') else ''
+        target_commit = m.group('target_commit')[0:8] if m.group('target_commit') else ''
+        target = f"{target_branch}{target_commit}"
+        if target == '':
+            return f"{m.group('project')}/{m.group('repo')}@{source}"
+        else:
+            return f"{m.group('project')}/{m.group('repo')} {source}⭤{target}"
+
     elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)'
                         r'(/repos/(?P<repo>[^/]+))?'
                         r'(/browse/(?P<file>[^#]+)(?P<line>#\d+)?)?', input_url):

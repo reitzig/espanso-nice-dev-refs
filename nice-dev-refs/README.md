@@ -20,7 +20,7 @@ then type any of the following:
 - **Stack Exchange**: question, answer
 - **Bitbucket**: project, repository, pull request (& comment), 
                  file (& line), file (& line) in pull request,
-                 commit (& file), branch
+                 commit (& file), branch, diff
 - **Jenkins** 
   - classic: "simple" job (& build), multi-branch pipeline (& build), 
   - BlueOcean: job build, multi-branch pipeline build
