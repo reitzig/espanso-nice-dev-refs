@@ -77,7 +77,7 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('project')}/{m.group('repo')}{wiki_page}{anchor}"
     elif m := re.search(r'^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/('
                         r'((issues|pull|discussions|merge_requests)/(?P<number>\d+)'
-                        r'(#issuecomment-(?P<comment_id>\d+))?)'
+                        r'(#(issue|discussion)comment-(?P<comment_id>\d+))?)'
                         r'|(releases/tag/(?P<release_tag>[^/#?]+))'
                         r')', input_url):
         number = f"#{m.group('number')}" if m.group('number') else ''
