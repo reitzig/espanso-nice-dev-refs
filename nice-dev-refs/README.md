@@ -24,7 +24,7 @@ then type any of the following:
 - **Jenkins** 
   - classic: "simple" job (& build), multi-branch pipeline (& build), 
   - BlueOcean: job build, multi-branch pipeline build
-- **Jira**: project, ticket
+- **Jira**: project, issue (& comment)
 - **Confluence**: page
 
 If no format matches, (a trimmed version of) the URL itself is used as link text.

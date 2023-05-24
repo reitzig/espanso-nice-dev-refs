@@ -15,7 +15,7 @@ def test_should_label_project():
         .is_equal_to('FANCY')
 
 
-def test_should_label_repository():
+def test_should_label_issue():
     # Given:
     url = "https://our-jira.my-org.de/browse/FANCY-77"
 
@@ -25,3 +25,19 @@ def test_should_label_repository():
     # Then:
     assert_that(label) \
         .is_equal_to('FANCY-77')
+
+
+def test_should_label_issue_and_comment():
+    # Given:
+    url = "https://our-jira.my-org.de/browse/FANCY-77" \
+          "?focusedCommentId=123456" \
+          "&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel" \
+          "#comment-123456"
+    # Yup, that's the URL format they went with. 👀
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('FANCY-77.123456')
