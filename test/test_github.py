@@ -182,3 +182,27 @@ def test_should_label_gist_and_file_and_line():
     assert_that(label) \
         .is_equal_to('my-account/abcdef:some_file-md#42')
     # NB: We won't be able to determine which parts are file endings
+
+
+def test_should_label_wiki_page():
+    # Given:
+    url = "https://github.com/my-account/some-repo/wiki/Some-Page"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo > Some Page')
+
+
+def test_should_label_wiki_page_and_anchor():
+    # Given:
+    url = "https://github.com/my-account/some-repo/wiki/Some-Page#some-headline"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('my-account/some-repo > Some Page > Some Headline')
