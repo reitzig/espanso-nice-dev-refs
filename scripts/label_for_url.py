@@ -45,11 +45,14 @@ def determine_label(input_url: str) -> str:
             return f"{m.group('project')}/{m.group('repo')} {source}⭤{target}"
     elif m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)'
                         r'(/repos/(?P<repo>[^/]+))?'
-                        r'(/browse/(?P<file>[^#]+)(?P<line>#\d+)?)?', input_url):
+                        r'(/browse/(?P<file>[^#?]+))?'
+                        r'(\?at=refs%2Fheads%2F(?P<branch>[^&#]+))?'
+                        r'(#(?P<line>\d+))?', input_url):
         repo = f"/{m.group('repo')}" if m.group('repo') else ''
+        branch = f"@{unquote(m.group('branch'))}" if m.group('branch') else ''
         filename = f":{m.group('file')}" if m.group('file') else ''
-        line = m.group('line') or ''
-        return f"{m.group('project')}{repo}{filename}{line}"
+        line = f"#{m.group('line')}" if m.group('line') else ''
+        return f"{m.group('project')}{repo}{branch}{filename}{line}"
     elif m := re.search(r'^https://[^/]*jira[^/]*/browse/(?P<project>\w+)(-(?P<issue>\d+))?'
                         r'(?:\?focusedCommentId=(?P<comment>\d+))?', input_url):
         project = m.group('project')
