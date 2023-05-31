@@ -28,6 +28,19 @@ def test_should_label_repository():
         .is_equal_to('MY-PROJECT/some-project')
 
 
+def test_should_label_user_repository():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/users/user123/repos/" \
+          "some-project/browse"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('user123/some-project')
+
+
 def test_should_label_file():
     # Given:
     url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \

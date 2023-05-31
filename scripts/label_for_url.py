@@ -11,7 +11,7 @@ def prettify_anchor(anchor_arg: str) -> str:
 
 
 def determine_label(input_url: str) -> str:
-    if m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
+    if m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
                       r'pull-requests/(?P<pr>\d+)/?'
                       r'((diff)?#(?P<file>[^?]+)(\?f=(?P<line>\d+))?)?'
                       r'(overview\?commentId=(?P<comment>\d+))?', input_url):
@@ -20,7 +20,7 @@ def determine_label(input_url: str) -> str:
         line = f"#{m.group('line')}" if m.group('line') else ''
         comment = f".{m.group('comment')}" if m.group('comment') else ''
         return f"{m.group('project')}/{m.group('repo')}{pr}{filename}{line}{comment}"
-    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
+    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
                         r'commits(/(?P<commit>[a-fA-F0-9]+))?/?'
                         r'(#(?P<file>[^?]+))?'
                         r'(\?until=(?P<branch>[^&]+))?', input_url):
@@ -28,7 +28,7 @@ def determine_label(input_url: str) -> str:
         branch = f"@{unquote(m.group('branch'))}" if m.group('branch') else ''
         filename = f":{m.group('file')}" if m.group('file') else ''
         return f"{m.group('project')}/{m.group('repo')}{commit}{branch}{filename}"
-    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
+    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
                         r'compare/(commits|diff)\?'
                         r'(?:targetBranch=(refs%2Fheads%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+)&))?'
                         r'sourceBranch=(refs%2Fheads%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))',
@@ -43,8 +43,7 @@ def determine_label(input_url: str) -> str:
             return f"{m.group('project')}/{m.group('repo')}@{source}"
         else:
             return f"{m.group('project')}/{m.group('repo')} {source}⭤{target}"
-
-    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/projects/(?P<project>[^/]+)'
+    elif m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)'
                         r'(/repos/(?P<repo>[^/]+))?'
                         r'(/browse/(?P<file>[^#]+)(?P<line>#\d+)?)?', input_url):
         repo = f"/{m.group('repo')}" if m.group('repo') else ''
