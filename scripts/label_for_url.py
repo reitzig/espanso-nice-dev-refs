@@ -13,13 +13,15 @@ def prettify_anchor(anchor_arg: str) -> str:
 def determine_label(input_url: str) -> str:
     if m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
                       r'pull-requests/(?P<pr>\d+)/?'
-                      r'((diff)?#(?P<file>[^?]+)(\?f=(?P<line>\d+))?)?'
-                      r'(overview\?commentId=(?P<comment>\d+))?', input_url):
+                      r'(commits/(?P<commit>[a-fA-F0-9]+))?'
+                      r'(overview\?commentId=(?P<comment>\d+))?'
+                      r'((diff)?#(?P<file>[^?]+)(\?f=(?P<line>\d+))?)?', input_url):
         pr = f"#{m.group('pr')}" if m.group('pr') else ''
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = f"#{m.group('line')}" if m.group('line') else ''
         comment = f".{m.group('comment')}" if m.group('comment') else ''
-        return f"{m.group('project')}/{m.group('repo')}{pr}{filename}{line}{comment}"
+        commit = f"@{m.group('commit')[0:8]}" if m.group('commit') else ''
+        return f"{m.group('project')}/{m.group('repo')}{pr}{commit}{filename}{line}{comment}"
     elif m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/'
                         r'commits(/(?P<commit>[a-fA-F0-9]+))?/?'
                         r'(#(?P<file>[^?]+))?'

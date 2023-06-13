@@ -18,9 +18,10 @@ then type any of the following:
 - **GitLab**: repository, issue, merge request, file (& line), snippet,
               heading in rendered file
 - **Stack Exchange**: question, answer
-- **Bitbucket**: project, repository, pull request (& comment), 
-                 file (& line), file (& line) in pull request,
-                 commit (& file), branch, diff
+  - **Bitbucket**: project, repository, 
+                   pull request (& comment, commit, file & line), 
+                   file (& line), file (& line) in pull request,
+                   commit (& file), branch, diff
 - **Jenkins** 
   - classic: "simple" job (& build), multi-branch pipeline (& build), 
   - BlueOcean: job build, multi-branch pipeline build
