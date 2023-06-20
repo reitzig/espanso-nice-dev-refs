@@ -114,7 +114,7 @@ def determine_label(input_url: str) -> str:
         build = f"#{m.group('build')}" if m.group('build') else ''
         return f"{m.group('job')}{subjob}{build}"
     elif (m := re.search(r'^https://.*confluence.*/display/(?P<space>[^/]+)/(?P<title>[^?]+)', input_url)) \
-            or (m := re.search(r'^https://.*confluence.*/pages/viewpage\.action\?'
+            or (m := re.search(r'^https://.*confluence.*/pages/(?:viewpage|releaseview)\.action\?'
                                r'spaceKey=(?P<space>[^&]+)&title=(?P<title>[^&]+)', input_url)):
         space = m.group('space')
         title = unquote(m.group('title').replace('+', ' ')).strip()
