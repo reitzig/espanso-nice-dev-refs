@@ -47,7 +47,7 @@ def determine_label(input_url: str) -> str:
             return f"{m.group('project')}/{m.group('repo')} {source}⭤{target}"
     elif m := re.search(r'^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)'
                         r'(/repos/(?P<repo>[^/]+))?'
-                        r'(/browse/(?P<file>[^#?]+))?'
+                        r'(/browse(/(?P<file>[^#?]+))?)?'
                         r'(\?at=refs%2Fheads%2F(?P<branch>[^&#]+))?'
                         r'(#(?P<line>\d+))?', input_url):
         repo = f"/{m.group('repo')}" if m.group('repo') else ''
