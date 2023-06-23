@@ -109,10 +109,14 @@ def determine_label(input_url: str) -> str:
         build = f"#{m.group('build')}" if m.group('build') else ''
         return f"{m.group('job')}{subjob}{build}"
     elif m := re.search(r'^https://.*jenkins.*/blue/organizations/jenkins/'
-                        r'(?P<job>[^/]+)/detail/(?P<subjob>[^/]+)/(?P<build>\d+)/', input_url):
-        subjob = f":{unquote(m.group('subjob'))}" if m.group('job') != m.group('subjob') else ''
+                        r'(?P<job>[^/]+)'
+                        r'(?:/detail/(?P<subjob>[^/]+)/(?P<build>\d+)/)?'
+                        r'(?:/activity\?branch=(?P<branch>[^&#]+))?', input_url):
+        subjob = f":{unquote(m.group('subjob'))}" if m.group('subjob') and m.group('job') != m.group('subjob') else ''
+        # NB: Essentially, branch == subjob, but we need two names for the regex
+        branch = f":{unquote(unquote(m.group('branch')))}" if m.group('branch') else ''
         build = f"#{m.group('build')}" if m.group('build') else ''
-        return f"{m.group('job')}{subjob}{build}"
+        return f"{m.group('job')}{subjob}{branch}{build}"
     elif (m := re.search(r'^https://.*confluence.*/display/(?P<space>[^/]+)/(?P<title>[^?]+)', input_url)) \
             or (m := re.search(r'^https://.*confluence.*/pages/(?:viewpage|releaseview)\.action\?'
                                r'spaceKey=(?P<space>[^&]+)&title=(?P<title>[^&]+)', input_url)):
