@@ -67,6 +67,19 @@ def test_should_label_file_and_line():
         .is_equal_to('MY-PROJECT/some-project:some/file.md#42')
 
 
+def test_should_label_file_and_lines():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
+          "some-project/browse/some/file.md#42,77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('MY-PROJECT/some-project:some/file.md#42,77')
+
+
 def test_should_label_file_on_branch():
     # Given:
     url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
