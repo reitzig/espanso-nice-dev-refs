@@ -279,6 +279,19 @@ def test_should_label_branch_diff():
         .is_equal_to('MY-PROJECT/some-project@feature/some-feature')
 
 
+def test_should_label_file_diff():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
+          "some-project/diff/some/file.md?until=8743ea85188c51b2c13aef82541b765bf3769d50"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('MY-PROJECT/some-project@8743ea85:some/file.md')
+
+
 def test_should_label_arbitrary_diff():
     # Given:
     url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
