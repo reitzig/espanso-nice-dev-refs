@@ -147,6 +147,19 @@ def test_should_label_pr_and_file_and_line():
         .is_equal_to('MY-PROJECT/some-project#77:some/file.md#42')
 
 
+def test_should_label_pr_and_file_and_line_alternative():
+    # Given:
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \
+          "some-project/pull-requests/77/diff#some/file.md?t=42"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('MY-PROJECT/some-project#77:some/file.md#42')
+
+
 def test_should_label_pr_and_comment():
     # Given:
     url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" \

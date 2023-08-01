@@ -15,7 +15,7 @@ def determine_label(input_url: str) -> str:
                       r'pull-requests/(?P<pr>\d+)/?'
                       r'(commits/(?P<commit>[a-fA-F0-9]+))?'
                       r'(overview\?commentId=(?P<comment>\d+))?'
-                      r'((diff)?#(?P<file>[^?]+)(\?f=(?P<line>[0-9,]+))?)?', input_url):
+                      r'((diff)?#(?P<file>[^?]+)(\?[tf]=(?P<line>[0-9,]+))?)?', input_url):
         pr = f"#{m.group('pr')}" if m.group('pr') else ''
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = f"#{m.group('line')}" if m.group('line') else ''
