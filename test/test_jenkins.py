@@ -101,3 +101,16 @@ def test_should_label_blue_ocean_multibranch_pipeline_branch():
     # Then:
     assert_that(label) \
         .is_equal_to('SOME_job-name:fix/some-bug')
+
+
+def test_should_label_artifact():
+    # Given:
+    url = "https://our-jenkins.my-org.de/job/" \
+          "SOME_job-name/job/fix%252Fsome-bug/77/artifact/some/file.md"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label) \
+        .is_equal_to('SOME_job-name:fix/some-bug#77:some/file.md')
