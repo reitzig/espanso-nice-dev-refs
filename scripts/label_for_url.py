@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import os
 import re
 import sys
 from typing import Optional
@@ -53,14 +54,15 @@ def label_from_title(input_url: str) -> Optional[str]:
 
 
 def label_from_user(input_url: str) -> Optional[str]:
-    from tkinter import simpledialog, Tk
-    Tk().withdraw()
-    if label := simpledialog.askstring(
-            "New Label",
-            f"Label for {input_url}:",
-            initialvalue=label_from_title(input_url)):
-        CACHE_FILE.write_text(label)
-        return label
+    if not os.environ['CI']:
+        from tkinter import simpledialog, Tk
+        Tk().withdraw()
+        if label := simpledialog.askstring(
+                "New Label",
+                f"Label for {input_url}:",
+                initialvalue=label_from_title(input_url)):
+            CACHE_FILE.write_text(label)
+            return label
     return None
 
 
