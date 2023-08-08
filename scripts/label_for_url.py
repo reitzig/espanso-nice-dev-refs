@@ -15,7 +15,7 @@ def determine_label(input_url: str) -> str:
                       r'pull-requests/(?P<pr>\d+)/?'
                       r'(commits/(?P<commit>[a-fA-F0-9]+))?'
                       r'(overview\?commentId=(?P<comment>\d+))?'
-                      r'((diff)?#(?P<file>[^?]+)(\?[tf]=(?P<line>[0-9,]+))?)?', input_url):
+                      r'((diff)?#(?P<file>[^?]+)(\?[tf]=(?P<line>[0-9,-]+))?)?', input_url):
         pr = f"#{m.group('pr')}" if m.group('pr') else ''
         filename = f":{m.group('file')}" if m.group('file') else ''
         line = f"#{m.group('line')}" if m.group('line') else ''
@@ -50,7 +50,7 @@ def determine_label(input_url: str) -> str:
                         r'(/(?:browse|diff)(/(?P<file>[^#?]+))?)?'
                         r'(\?at=refs%2Fheads%2F(?P<branch>[^&#]+))?'
                         r'(\?until=(?P<commit>[a-fA-F0-9]+))?'
-                        r'(#(?P<line>[0-9,]+))?', input_url):
+                        r'(#(?P<line>[0-9,-]+))?', input_url):
         repo = f"/{m.group('repo')}" if m.group('repo') else ''
         branch = f"@{unquote(m.group('branch'))}" if m.group('branch') else ''
         commit = f"@{m.group('commit')[0:8]}" if m.group('commit') else ''
