@@ -3,7 +3,7 @@ from assertpy import assert_that
 from label_for_url import determine_label
 
 
-def test_should_return_trimmed_host_for_urls():
+def test_should_return_trimmed_host_for_urls() -> None:
     # Given:
     url = "https://some.server/"
 
@@ -11,11 +11,10 @@ def test_should_return_trimmed_host_for_urls():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to("some.server")
+    assert_that(label).is_equal_to("some.server")
 
 
-def test_should_return_only_path_for_urls():
+def test_should_return_only_path_for_urls() -> None:
     # Given:
     url = "https://some.server/and/path?with=args&that=are&annoying=reading"
 
@@ -23,11 +22,10 @@ def test_should_return_only_path_for_urls():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to("some.server/and/path")
+    assert_that(label).is_equal_to("some.server/and/path")
 
 
-def test_should_drop_boring_subdomains_from_path():
+def test_should_drop_boring_subdomains_from_path() -> None:
     # Given:
     url = "https://www.some.server/and/path?with=args&that=are&annoying=reading"
 
@@ -35,11 +33,10 @@ def test_should_drop_boring_subdomains_from_path():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to("some.server/and/path")
+    assert_that(label).is_equal_to("some.server/and/path")
 
 
-def test_should_return_unmatched_input():
+def test_should_return_unmatched_input() -> None:
     # Given:
     something = "anything-that's-not-supported"
 
@@ -47,5 +44,4 @@ def test_should_return_unmatched_input():
     label = determine_label(something)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to(something)
+    assert_that(label).is_equal_to(something)

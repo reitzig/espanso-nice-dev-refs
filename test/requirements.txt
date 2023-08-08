@@ -1,4 +1,5 @@
 assertpy
+black
 coverage
-flake8
 pytest
+ruff

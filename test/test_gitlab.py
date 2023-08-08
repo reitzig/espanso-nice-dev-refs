@@ -3,7 +3,7 @@ from assertpy import assert_that
 from label_for_url import determine_label
 
 
-def test_should_label_repository():
+def test_should_label_repository() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo"
 
@@ -11,11 +11,10 @@ def test_should_label_repository():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo')
+    assert_that(label).is_equal_to("my-account/some-repo")
 
 
-def test_should_label_repo_and_anchor():
+def test_should_label_repo_and_anchor() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo#some-headline"
 
@@ -23,11 +22,10 @@ def test_should_label_repo_and_anchor():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo > Some Headline')
+    assert_that(label).is_equal_to("my-account/some-repo > Some Headline")
 
 
-def test_should_label_issue():
+def test_should_label_issue() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/issues/77"
 
@@ -35,11 +33,10 @@ def test_should_label_issue():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo#77')
+    assert_that(label).is_equal_to("my-account/some-repo#77")
 
 
-def test_should_label_mr():
+def test_should_label_mr() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/merge_requests/119"
 
@@ -47,11 +44,10 @@ def test_should_label_mr():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo#119')
+    assert_that(label).is_equal_to("my-account/some-repo#119")
 
 
-def test_should_label_file():
+def test_should_label_file() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/blob/main/some/file.md"
 
@@ -59,11 +55,10 @@ def test_should_label_file():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/file.md')
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md")
 
 
-def test_should_label_folder():
+def test_should_label_folder() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/tree/main/some/folder"
 
@@ -71,11 +66,10 @@ def test_should_label_folder():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/folder')
+    assert_that(label).is_equal_to("my-account/some-repo:some/folder")
 
 
-def test_should_label_folder_and_anchor():
+def test_should_label_folder_and_anchor() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/tree/main/some/folder/#some-headline"
 
@@ -83,11 +77,10 @@ def test_should_label_folder_and_anchor():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/folder > Some Headline')
+    assert_that(label).is_equal_to("my-account/some-repo:some/folder > Some Headline")
 
 
-def test_should_label_file_and_line():
+def test_should_label_file_and_line() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/blob/main/some/file.md#L77"
 
@@ -95,11 +88,10 @@ def test_should_label_file_and_line():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/file.md#77')
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md#77")
 
 
-def test_should_label_asciidoc_and_anchor():
+def test_should_label_asciidoc_and_anchor() -> None:
     # Given:
     url = "https://gitlab.com/my-account/some-repo/-/blob/main/some/README.adoc#some-headline"
 
@@ -107,11 +99,10 @@ def test_should_label_asciidoc_and_anchor():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/README > Some Headline')
+    assert_that(label).is_equal_to("my-account/some-repo:some/README > Some Headline")
 
 
-def test_should_label_repo_snippet():
+def test_should_label_repo_snippet() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/snippets/123456"
 
@@ -119,11 +110,10 @@ def test_should_label_repo_snippet():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo$123456')
+    assert_that(label).is_equal_to("my-account/some-repo$123456")
 
 
-def test_should_label_global_snippet():
+def test_should_label_global_snippet() -> None:
     # Given:
     url = "https://gitlab.some.org/-/snippets/123456"
 
@@ -131,5 +121,7 @@ def test_should_label_global_snippet():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('gitlab.some.org$123456')
+    assert_that(label).is_equal_to("gitlab.some.org$123456")
+
+
+# TODO: line in snippet?

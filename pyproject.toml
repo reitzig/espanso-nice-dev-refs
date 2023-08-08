@@ -1,0 +1,42 @@
+# TODO: Adopt pdm
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "scripts",
+    "test",
+]
+log_cli=true
+log_level="DEBUG"
+
+[tool.coverage.run]
+source = [
+    "scripts"
+]
+
+[tool.coverage.report]
+fail_under = 99
+skip_empty = true
+exclude_lines = [
+    # Have to re-enable the standard pragma
+    "pragma: no cover"
+]
+
+[tool.ruff]
+# cf. https://beta.ruff.rs/docs/rules/
+select = [
+    "A", "ANN", "ARG", "B", "C4", "COM", "E", "F", "FA", "FLY",
+    "INP", "INT", "N", "PGH", "PT", "PTH", "PYI", "RET", "RUF",
+    "SIM", "SLF", "TCH", "UP", "W"]
+# Set maximum line length to `ceil(1.1 * $black.line-length) to
+# make ruff's E501 equivalent to B950 (which is not implemented)
+# cf. https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#line-length
+#     https://github.com/astral-sh/ruff/issues/389
+line-length = 110
+ignore = [
+    "COM812",   # incompatible with Black code style
+    "RET505",   # I prefer symmetric structure
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py310']

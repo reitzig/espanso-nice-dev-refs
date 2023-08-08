@@ -41,7 +41,7 @@ let's stick to things you link to _all the time_ in software development.
 Whether you want to fix a bug or add a feature,
 - add at least one (red) test,
 - make it green, 
-- make sure `flake8` does not complain, and
+- make sure neither `black` nor `ruff` complain, and
 - create a PR.
 
 
@@ -53,12 +53,17 @@ Prepare a checkout of your fork:
 ```shell
 python3 -m venv .venv
 direnv allow # cf. .envrc
-# or activate .venv and set PYTHONPATH yourself
+# or activate .venv yourself
 pip install -r test/requirements.txt
 ```
 
 Now you should be able to run the relevant commands:
 ```shell
-flake8 # linting
-pytest # testing
+black .       # formatting
+ruff check .  # linting
+pytest        # testing
 ```
+
+We include configuration for 
+    [evilmartians/lefthook](https://github.com/evilmartians/lefthook)
+which we encourage you to use.

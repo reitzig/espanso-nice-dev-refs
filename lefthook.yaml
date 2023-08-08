@@ -1,0 +1,12 @@
+pre-commit:
+  piped: true
+  commands:
+    1_formatter:
+      glob: "*.py"
+      run: black {staged_files}
+      stage_fixed: true
+    2_editorconfig:
+      run: editorconfig-checker --exclude LICENSE --disable-max-line-length
+    3_linter:
+      glob: "*.py"
+      run: ruff check {staged_files}

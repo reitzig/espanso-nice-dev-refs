@@ -6,7 +6,7 @@ end_of_line = lf
 indent_size = 4
 indent_style = space
 insert_final_newline = true
-max_line_length = 120
+max_line_length = 110
 tab_width = 4
 trim_trailing_whitespace = true
 
@@ -15,11 +15,43 @@ ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
 ij_formatter_tags_enabled = false
 ij_smart_tabs = false
-ij_visual_guides = none
+ij_visual_guides = 80, 100
 ij_wrap_on_typing = false
+
+[Dockerfile]
+max_line_length = off
+
+[{*.bash,*.sh,*.zsh}]
+indent_size = 2
+tab_width = 2
+
+ij_shell_binary_ops_start_line = false
+ij_shell_keep_column_alignment_padding = false
+ij_shell_minify_program = false
+ij_shell_redirect_followed_by_space = false
+ij_shell_switch_cases_indented = false
+ij_shell_use_unix_line_separator = true
+
+[{*.har,*.json,*.json5}]
+indent_size = 2
+
+ij_json_keep_blank_lines_in_code = 0
+ij_json_keep_indents_on_empty_lines = false
+ij_json_keep_line_breaks = true
+ij_json_space_after_colon = true
+ij_json_space_after_comma = true
+ij_json_space_before_colon = true
+ij_json_space_before_comma = false
+ij_json_spaces_within_braces = false
+ij_json_spaces_within_brackets = false
+ij_json_wrap_long_lines = false
+
+[*.json5]
+ij_json_keep_trailing_comma = true
 
 [{*.markdown,*.md}]
 trim_trailing_whitespace = false
+indent_size = unset
 
 ij_markdown_force_one_space_after_blockquote_symbol = true
 ij_markdown_force_one_space_after_header_symbol = true
@@ -105,6 +137,9 @@ ij_python_use_continuation_indent_for_collection_and_comprehensions = false
 ij_python_use_continuation_indent_for_parameters = true
 ij_python_wrap_long_lines = false
 
+[{*.toml,Pipfile}]
+ij_toml_keep_indents_on_empty_lines = false
+
 [{*.yaml,*.yml}]
 indent_size = 2
 
@@ -118,3 +153,6 @@ ij_yaml_sequence_on_new_line = false
 ij_yaml_space_before_colon = false
 ij_yaml_spaces_within_braces = true
 ij_yaml_spaces_within_brackets = true
+[{*.lock,*.log,*.jsonl}]
+generated_code = true
+ij_formatter_enabled = false

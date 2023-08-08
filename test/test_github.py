@@ -3,7 +3,7 @@ from assertpy import assert_that
 from label_for_url import determine_label
 
 
-def test_should_label_repository():
+def test_should_label_repository() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo"
 
@@ -11,11 +11,10 @@ def test_should_label_repository():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo')
+    assert_that(label).is_equal_to("my-account/some-repo")
 
 
-def test_should_label_repo_and_anchor():
+def test_should_label_repo_and_anchor() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo#some-headline"
 
@@ -23,11 +22,10 @@ def test_should_label_repo_and_anchor():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo > Some Headline')
+    assert_that(label).is_equal_to("my-account/some-repo > Some Headline")
 
 
-def test_should_label_issue():
+def test_should_label_issue() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/issues/77"
 
@@ -35,11 +33,10 @@ def test_should_label_issue():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo#77')
+    assert_that(label).is_equal_to("my-account/some-repo#77")
 
 
-def test_should_label_issue_and_comment():
+def test_should_label_issue_and_comment() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/issues/77#issuecomment-42"
 
@@ -47,11 +44,10 @@ def test_should_label_issue_and_comment():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo#77.42')
+    assert_that(label).is_equal_to("my-account/some-repo#77.42")
 
 
-def test_should_label_discussion():
+def test_should_label_discussion() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/discussions/42"
 
@@ -59,11 +55,10 @@ def test_should_label_discussion():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo#42')
+    assert_that(label).is_equal_to("my-account/some-repo#42")
 
 
-def test_should_label_discussion_and_comment():
+def test_should_label_discussion_and_comment() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/discussions/42#discussioncomment-77"
 
@@ -71,11 +66,10 @@ def test_should_label_discussion_and_comment():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo#42.77')
+    assert_that(label).is_equal_to("my-account/some-repo#42.77")
 
 
-def test_should_label_pr():
+def test_should_label_pr() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/pull/119"
 
@@ -83,11 +77,10 @@ def test_should_label_pr():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo#119')
+    assert_that(label).is_equal_to("my-account/some-repo#119")
 
 
-def test_should_label_file():
+def test_should_label_file() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/file.md"
 
@@ -95,11 +88,10 @@ def test_should_label_file():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/file.md')
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md")
 
 
-def test_should_label_folder():
+def test_should_label_folder() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/tree/main/some/folder"
 
@@ -107,11 +99,10 @@ def test_should_label_folder():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/folder')
+    assert_that(label).is_equal_to("my-account/some-repo:some/folder")
 
 
-def test_should_label_folder_and_anchor():
+def test_should_label_folder_and_anchor() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/tree/main/some/folder#some-headline"
 
@@ -119,11 +110,10 @@ def test_should_label_folder_and_anchor():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/folder > Some Headline')
+    assert_that(label).is_equal_to("my-account/some-repo:some/folder > Some Headline")
 
 
-def test_should_label_file_and_line():
+def test_should_label_file_and_line() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/file.md#L77"
 
@@ -131,11 +121,10 @@ def test_should_label_file_and_line():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/file.md#77')
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md#77")
 
 
-def test_should_label_markdown_and_anchor():
+def test_should_label_markdown_and_anchor() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/README.md#some-headline"
 
@@ -143,22 +132,20 @@ def test_should_label_markdown_and_anchor():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo:some/README > Some Headline')
+    assert_that(label).is_equal_to("my-account/some-repo:some/README > Some Headline")
 
 
-def test_should_label_release():
+def test_should_label_release() -> None:
     url = "https://github.com/my-account/some-repo/releases/tag/1.2.3"
 
     # When:
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo@1.2.3')
+    assert_that(label).is_equal_to("my-account/some-repo@1.2.3")
 
 
-def test_should_label_gist():
+def test_should_label_gist() -> None:
     # Given:
     url = "https://gist.github.com/my-account/abcdef123456789"
 
@@ -166,11 +153,10 @@ def test_should_label_gist():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/abcdef')
+    assert_that(label).is_equal_to("my-account/abcdef")
 
 
-def test_should_label_gist_and_file():
+def test_should_label_gist_and_file() -> None:
     # Given:
     url = "https://gist.github.com/my-account/abcdef123456789#file-some_file-md"
 
@@ -178,12 +164,11 @@ def test_should_label_gist_and_file():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/abcdef:some_file-md')
+    assert_that(label).is_equal_to("my-account/abcdef:some_file-md")
     # NB: We won't be able to determine which parts are file endings
 
 
-def test_should_label_gist_and_file_and_line():
+def test_should_label_gist_and_file_and_line() -> None:
     # Given:
     url = "https://gist.github.com/my-account/abcdef123456789#file-some_file-md-L42"
 
@@ -191,12 +176,11 @@ def test_should_label_gist_and_file_and_line():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/abcdef:some_file-md#42')
+    assert_that(label).is_equal_to("my-account/abcdef:some_file-md#42")
     # NB: We won't be able to determine which parts are file endings
 
 
-def test_should_label_wiki_page():
+def test_should_label_wiki_page() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/wiki/Some-Page"
 
@@ -204,11 +188,10 @@ def test_should_label_wiki_page():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo > Some Page')
+    assert_that(label).is_equal_to("my-account/some-repo > Some Page")
 
 
-def test_should_label_wiki_page_and_anchor():
+def test_should_label_wiki_page_and_anchor() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/wiki/Some-Page#some-headline"
 
@@ -216,5 +199,4 @@ def test_should_label_wiki_page_and_anchor():
     label = determine_label(url)
 
     # Then:
-    assert_that(label) \
-        .is_equal_to('my-account/some-repo > Some Page > Some Headline')
+    assert_that(label).is_equal_to("my-account/some-repo > Some Page > Some Headline")
