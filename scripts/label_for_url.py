@@ -57,7 +57,7 @@ def label_from_title(input_url: str) -> str | None:
 
 
 def label_from_user(input_url: str) -> str | None:
-    if not os.environ["CI"]:
+    if not os.environ.get("CI"):
         from tkinter import simpledialog, Tk
 
         Tk().withdraw()
