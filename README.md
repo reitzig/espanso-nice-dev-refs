@@ -1,3 +1,10 @@
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![license](https://img.shields.io/github/license/reitzig/espanso-nice-dev-refs.svg)](https://github.com/reitzig/espanso-nice-dev-refs/main/LICENSE)
+[![GitHub release date](https://img.shields.io/github/tag-date/reitzig/espanso-nice-dev-refs.svg)](https://github.com/reitzig/espanso-nice-dev-refs/tags)
+[![Test](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/python-test.yml/badge.svg)](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/python-test.yml)
+[![CodeQL](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/codeql.yml/badge.svg)](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/codeql.yml)
+
 # Nice Developer References -- an espanso package
 
 A package for [espanso/espanso](https://github.com/espanso/espanso).
