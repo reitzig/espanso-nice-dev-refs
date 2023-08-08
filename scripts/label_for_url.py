@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
+from __future__ import annotations
+
 import os
 import re
 import sys
-from typing import Optional
 from urllib.parse import unquote
 
 
@@ -28,39 +29,41 @@ CACHE_DIR = None
 CACHE_FILE = None  # sufficient since every run handles only _one_ url
 
 
-def label_from_cache(input_url: str) -> Optional[str]:
+def label_from_cache(input_url: str) -> str | None:
     from hashlib import md5
     from os import environ
     from pathlib import Path
     from tempfile import gettempdir
+
     global CACHE_DIR, CACHE_FILE
 
-    CACHE_DIR = Path(environ.get('XDG_CACHE_HOME', gettempdir()), "espanso-url-refs-cache")
+    CACHE_DIR = Path(environ.get("XDG_CACHE_HOME", gettempdir()), "espanso-url-refs-cache")
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    url_hash = md5(input_url.encode('utf-8')).hexdigest()
+    url_hash = md5(input_url.encode("utf-8")).hexdigest()
     CACHE_FILE = CACHE_DIR.joinpath(url_hash)
     return CACHE_FILE.read_text() if CACHE_FILE.exists() else None
 
 
-def label_from_title(input_url: str) -> Optional[str]:
-    if input_url.startswith('http'):
+def label_from_title(input_url: str) -> str | None:
+    if input_url.startswith("http"):
         try:
             import lassie
-            if label := lassie.fetch(input_url, open_graph=False).get('title'):
+
+            if label := lassie.fetch(input_url, open_graph=False).get("title"):
                 return label
         except ImportError:
             pass
     return None
 
 
-def label_from_user(input_url: str) -> Optional[str]:
-    if not os.environ['CI']:
+def label_from_user(input_url: str) -> str | None:
+    if not os.environ["CI"]:
         from tkinter import simpledialog, Tk
+
         Tk().withdraw()
         if label := simpledialog.askstring(
-                "New Label",
-                f"Label for {input_url}:",
-                initialvalue=label_from_title(input_url)):
+            "New Label", f"Label for {input_url}:", initialvalue=label_from_title(input_url)
+        ):
             CACHE_FILE.write_text(label)
             return label
     return None
@@ -282,9 +285,9 @@ def determine_label(input_url: str) -> str:
                 return f"{host}{cluster} > {dashboard}"
     elif m := re.search(r"\w+://(www\d*\.)?(?P<path>[^?]+)", input_url):
         # TODO make I/O optional
-        return label_from_cache(input_url) \
-            or label_from_user(input_url) \
-            or m.group('path').strip(" /")
+        return (
+            label_from_cache(input_url) or label_from_user(input_url) or m.group("path").strip(" /")
+        )
     else:
         # This doesn't even try to look like a URL -- NOP
         return input_url
