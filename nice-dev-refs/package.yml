@@ -9,7 +9,7 @@ matches:
       - name: label
         type: shell
         params:
-          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          cmd: "python3.10 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
           trim: true
   # AsciiDoc-formatted reference to some URL from clipboard
   - trigger: ":adref"
@@ -20,7 +20,7 @@ matches:
       - name: label
         type: shell
         params:
-          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          cmd: "python3.10 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
           trim: true
   # Jira-formatted reference to some URL from clipboard
   - trigger: ":jiraref"
@@ -31,7 +31,7 @@ matches:
       - name: label
         type: shell
         params:
-          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          cmd: "python3.10 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
           trim: true
   # "Rich" reference to some URL from clipboard
   - trigger: ":ref"
@@ -42,5 +42,5 @@ matches:
       - name: label
         type: shell
         params:
-          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          cmd: "python3.10 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
           trim: true
