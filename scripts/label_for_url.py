@@ -25,7 +25,7 @@ def determine_label(input_url: str) -> str:
         input_url,
     ):
         pr = f"#{m.group('pr')}" if m.group("pr") else ""
-        filename = f":{m.group('file')}" if m.group("file") else ""
+        filename = f":{unquote(m.group('file'))}" if m.group("file") else ""
         line = f"#{m.group('line')}" if m.group("line") else ""
         comment = f".{m.group('comment')}" if m.group("comment") else ""
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
@@ -39,7 +39,7 @@ def determine_label(input_url: str) -> str:
     ):
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
         branch = f"@{unquote(m.group('branch'))}" if m.group("branch") else ""
-        filename = f":{m.group('file')}" if m.group("file") else ""
+        filename = f":{unquote(m.group('file'))}" if m.group("file") else ""
         return f"{m.group('project')}/{m.group('repo')}{commit}{branch}{filename}"
     elif m := re.search(
         r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
@@ -70,7 +70,7 @@ def determine_label(input_url: str) -> str:
         repo = f"/{m.group('repo')}" if m.group("repo") else ""
         branch = f"@{unquote(m.group('branch'))}" if m.group("branch") else ""
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
-        filename = f":{m.group('file')}" if m.group("file") else ""
+        filename = f":{unquote(m.group('file'))}" if m.group("file") else ""
         line = f"#{m.group('line')}" if m.group("line") else ""
         return f"{m.group('project')}{repo}{branch}{commit}{filename}{line}"
     elif m := re.search(

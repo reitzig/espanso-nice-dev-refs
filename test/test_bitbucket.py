@@ -50,6 +50,20 @@ def test_should_label_file() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project:some/file.md")
 
 
+def test_should_label_file_with_spaces_in_filename() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/browse/some/spacey%20file.md"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project:some/spacey file.md")
+
+
 def test_should_label_file_and_line() -> None:
     # Given:
     url = (
