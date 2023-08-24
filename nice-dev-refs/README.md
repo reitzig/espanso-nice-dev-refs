@@ -17,6 +17,7 @@ then type any of the following:
               wiki page (& heading), gist (& file & line)
 - **GitLab**: repository, issue, merge request, file (& line), snippet,
               heading in rendered file
+- **DockerHUb**: repository (& tag)
 - **Stack Exchange**: question, answer
   - **Bitbucket**: project, repository, 
                    pull request (& comment, commit, file & line), 

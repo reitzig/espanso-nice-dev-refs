@@ -198,6 +198,17 @@ def determine_label(input_url: str) -> str:
         )
         post = m.group("aid") or m.group("qid")
         return f"{page}#{post}"
+    elif m := re.search(
+        r"^https://hub.docker.com"
+        r"/(?:(?:_|layers/library)|(?:layers|r)/(?P<org>[^/]+))"
+        r"/(?P<repo>[^/?#$]+)"
+        r"(?:/(?P<tag>[^/?#$]+))?",
+        input_url,
+    ):
+        org = f"{m.group('org')}/" if m.group("org") else ""
+        repo = m.group("repo")
+        tag = f":{m.group('tag')}" if m.group("tag") else ""
+        return f"{org}{repo}{tag}"
     elif m := re.search(r"\w+://(www\d*\.)?(?P<path>[^?]+)", input_url):
         return m.group("path").strip(" /")
     else:
