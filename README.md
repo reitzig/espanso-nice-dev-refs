@@ -6,7 +6,7 @@
 [![Test](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/python-test.yml/badge.svg)](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/python-test.yml)
 [![CodeQL](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/codeql.yml/badge.svg)](https://github.com/reitzig/espanso-nice-dev-refs/actions/workflows/codeql.yml)
 
-# Nice Developer References -- an espanso package
+# Nice Developer References – an espanso package
 
 A package for [espanso/espanso](https://github.com/espanso/espanso).
 
@@ -41,7 +41,7 @@ to [Include and Exclude rules](https://espanso.org/docs/configuration/include-an
 
 ## Contributing
 
-🥳 Support for additional URL patterns is welcome --
+🥳 Support for additional URL patterns is welcome –
 unless and until replace performance decreases too much.
 To limit the scope _somewhat_, 
 let's stick to things you link to _all the time_ in software development.
