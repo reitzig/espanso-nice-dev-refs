@@ -1,4 +1,50 @@
-# TODO: Adopt pdm
+[build-system]
+requires = ["poetry_core>=1.6.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "espanso-nice-dev-refs"
+version = "0.0.0" # not used, cf. nice-dev-refs/_manifest.yml
+description = "A package for espanso; takes URLs from the clipboard and inserts a formatted link based on it."
+authors = [
+    "Raphael Reitzig <4246780+reitzig@users.noreply.github.com>",
+]
+maintainers = [
+    "Raphael Reitzig <4246780+reitzig@users.noreply.github.com>",
+]
+readme = "README.md"
+repository = "https://github.com/reitzig/espanso-nice-dev-refs"
+documentation = "https://github.com/reitzig/espanso-nice-dev-refs/blob/main/README.md"
+classifiers=[
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "Topic :: Utilities",
+    "Environment :: Plugins",
+]
+
+[tool.poetry.dependencies]
+python = ">=3.8"
+
+[tool.poetry.group.dev.dependencies]
+assertpy = "1.1"
+black = "23.7.0"
+coverage = {version = "7.3.0", extras = ["toml"]}
+editorconfig-checker = "2.7.2"
+poethepoet = "0.22.0"
+pytest = "7.4.0"
+ruff = "0.0.285"
+
+[tool.poe.tasks.test]
+shell = """
+    coverage run -m pytest
+    coverage report
+"""
+
+[tool.poe.tasks.lint]
+shell = """
+    black --check .
+    ruff check --respect-gitignore . && echo "ruff: clean"
+"""
 
 [tool.pytest.ini_options]
 pythonpath = [

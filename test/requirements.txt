@@ -1,5 +1,0 @@
-assertpy
-black
-coverage
-pytest
-ruff
