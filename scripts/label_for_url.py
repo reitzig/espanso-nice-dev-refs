@@ -10,9 +10,17 @@ from urllib.parse import unquote
 #       use case: AOK Systems Dev Handbook
 
 
-def prettify_anchor(anchor_arg: str) -> str:
-    a, _ = re.subn(r"(?:^|-)([a-z])", lambda m: f" {m[1]}".upper(), anchor_arg)
+def prettify(anchor_arg: str) -> str:
+    a, _ = re.subn(r"(?:^|[-+\s]+)([a-zA-Z])", lambda m: f" {m[1]}".upper(), unquote(anchor_arg))
     return a.strip()
+
+
+# TODO: Python >=3.9: Remove and replace usages with removeprefix
+# From: https://stackoverflow.com/q/16891340/539599
+def remove_prefix(text: str, prefix: str) -> str:
+    if text.startswith(prefix):
+        return text[len(prefix) :]
+    return text
 
 
 def determine_label(input_url: str) -> str:
@@ -105,8 +113,8 @@ def determine_label(input_url: str) -> str:
         r"$",
         input_url,
     ):  # NB: Include $ to not prematurely match any of the next two cases
-        wiki_page = f" > {m.group('wiki_page').replace('-', ' ')}" if m.group("wiki_page") else ""
-        anchor = f" > {prettify_anchor(m.group('anchor'))}" if m.group("anchor") else ""
+        wiki_page = f" > {prettify(m.group('wiki_page'))}" if m.group("wiki_page") else ""
+        anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
         return f"{m.group('project')}/{m.group('repo')}{wiki_page}{anchor}"
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/("
@@ -131,7 +139,7 @@ def determine_label(input_url: str) -> str:
         )
         filename = filename.strip("/")
         line = f"#{m.group('line')}" if m.group("line") else ""
-        anchor = f" > {prettify_anchor(m.group('anchor'))}" if m.group("anchor") else ""
+        anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
         return f"{m.group('project')}/{m.group('repo')}:{filename}{line}{anchor}"
     elif m := re.search(
         r"^https://(?P<host>[^/]*gitlab[^/]*)"
@@ -181,7 +189,7 @@ def determine_label(input_url: str) -> str:
         )
     ):
         space = m.group("space")
-        title = unquote(m.group("title").replace("+", " ")).strip()
+        title = prettify(m.group("title"))
         return f"{space}/{title}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
@@ -226,12 +234,7 @@ def determine_label(input_url: str) -> str:
                 return f"{cluster}{namespace} > {resource_type}Dashboard"
             else:
                 host = m.group("host")
-                dashboard = (
-                    m.group("dashboard")
-                    .removeprefix("grafana-dashboard-")
-                    .replace("-", " ")
-                    .title()
-                )
+                dashboard = prettify(remove_prefix(m.group("dashboard"), "grafana-dashboard-"))
                 return f"{host} > {dashboard}"
     elif m := re.search(r"\w+://(www\d*\.)?(?P<path>[^?]+)", input_url):
         return m.group("path").strip(" /")
