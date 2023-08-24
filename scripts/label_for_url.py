@@ -44,8 +44,8 @@ def label_from_cache(input_url: str) -> str | None:
     return CACHE_FILE.read_text() if CACHE_FILE.exists() else None
 
 
-def label_from_title(input_url: str) -> str | None:
-    if input_url.startswith("http"):
+def label_from_title(input_url: str) -> str | None:  # pragma: no cover
+    if input_url.startswith("http") and not os.environ.get("CI"):
         try:
             import lassie
 
@@ -56,7 +56,7 @@ def label_from_title(input_url: str) -> str | None:
     return None
 
 
-def label_from_user(input_url: str) -> str | None:
+def label_from_user(input_url: str) -> str | None:  # pragma: no cover
     if not os.environ.get("CI"):
         from tkinter import simpledialog, Tk
 
