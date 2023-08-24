@@ -228,14 +228,15 @@ def determine_label(input_url: str) -> str:
             return f"{namespace}/{resource_name}"
         if options := m.group("dashboard_options"):  # noqa: RET503 -- false positive
             options = dict([option.split("=") for option in options.split("&")])
-            cluster = f"{options['cluster']}/" if options.get("cluster") else ""
             if namespace := options.get("namespace"):
+                cluster = f"{options['cluster']}/" if options.get("cluster") else ""
                 resource_type = f"{options['type'].title()}s " if options.get("type") else ""
                 return f"{cluster}{namespace} > {resource_type}Dashboard"
             else:
-                host = m.group("host")
+                cluster = f"{options['cluster']}" if options.get("cluster") else ""
+                host = m.group("host") if not options.get("cluster") else ""
                 dashboard = prettify(remove_prefix(m.group("dashboard"), "grafana-dashboard-"))
-                return f"{host} > {dashboard}"
+                return f"{host}{cluster} > {dashboard}"
     elif m := re.search(r"\w+://(www\d*\.)?(?P<path>[^?]+)", input_url):
         return m.group("path").strip(" /")
     else:
@@ -244,4 +245,4 @@ def determine_label(input_url: str) -> str:
 
 
 if __name__ == "__main__":
-    print(determine_label(sys.argv[1]))
+    print(determine_label(sys.argv[1]))  # pragma: no cover

@@ -94,3 +94,16 @@ def test_should_label_metrics_dashboard_api() -> None:
 
     # Then:
     assert_that(label).is_equal_to("console-openshift.some.org > Api Performance")
+
+
+def test_should_label_metrics_dashboard_etcd() -> None:
+    # Given:
+    url = (
+        "https://console-openshift.some.org/monitoring/dashboards/" "etcd-dashboard" "?cluster=etcd"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("etcd > Etcd Dashboard")
