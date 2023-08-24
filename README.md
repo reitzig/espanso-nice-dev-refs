@@ -28,11 +28,14 @@ with a _little_ bit more finger-grease as we are used to
 # cd anywhere/you/want
 git clone git@github.com:reitzig/espanso-nice-dev-refs.git
 cd espanso-nice-dev-refs
+git checkout <version>
+poetry install --no-root
+poetry run poe build
 
 espanso install nice-dev-refs --git "$(realpath "$(pwd)")" --external
 
 mkdir -p ~/.config/espanso/scripts/
-ln -s "$(realpath "$(pwd)")"/scripts/*.py ~/.config/espanso/scripts/
+ln -s "$(realpath "$(pwd)")"/dist/* ~/.config/espanso/scripts/
 ```
 
 For more selective application refer
