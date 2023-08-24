@@ -12,22 +12,23 @@ then type any of the following:
 
 ### Supported URL Formats
 
+- **Bitbucket**: project, repository, 
+                 pull request (& comment, commit, file & line), 
+                 file (& line), file (& line) in pull request,
+                 commit (& file), branch, diff
+- **Confluence**: page
+- **DockerHub**: repository (& tag)
 - **GitHub**: repository, issue (& comment), discussion (& comment), 
               pull request, file (& line), release, heading in rendered file, 
               wiki page (& heading), gist (& file & line)
 - **GitLab**: repository, issue, merge request, file (& line), snippet,
               heading in rendered file
-- **DockerHUb**: repository (& tag)
-- **Stack Exchange**: question, answer
-  - **Bitbucket**: project, repository, 
-                   pull request (& comment, commit, file & line), 
-                   file (& line), file (& line) in pull request,
-                   commit (& file), branch, diff
 - **Jenkins**
     - build artifacts
     - classic: "simple" job (& build), multi-branch pipeline (& build);
     - BlueOcean: job build, multi-branch pipeline build
 - **Jira**: project, issue (& comment)
-- **Confluence**: page
+- **OpenShift**: workload, storage, (some) dashboard(s) 
+- **Stack Exchange**: question, answer
 
 If no format matches, (a trimmed version of) the URL itself is used as link text.

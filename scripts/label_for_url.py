@@ -209,6 +209,30 @@ def determine_label(input_url: str) -> str:
         repo = m.group("repo")
         tag = f":{m.group('tag')}" if m.group("tag") else ""
         return f"{org}{repo}{tag}"
+    elif m := re.search(
+        r"^https://(?P<host>[^/?&]*openshift[^/?&]*)"
+        r"(?:/k8s/ns/(?P<namespace>[^/?#]+)/[^/?#]+/(?P<resource_name>[^/?#]+))?"
+        r"(?:/monitoring/dashboards/(?P<dashboard>[^/?#]+)\?(?P<dashboard_options>[^#$]+))?",
+        input_url,
+    ):
+        if namespace := m.group("namespace"):
+            resource_name = m.group("resource_name")
+            return f"{namespace}/{resource_name}"
+        if options := m.group("dashboard_options"):  # noqa: RET503 -- false positive
+            options = dict([option.split("=") for option in options.split("&")])
+            cluster = f"{options['cluster']}/" if options.get("cluster") else ""
+            if namespace := options.get("namespace"):
+                resource_type = f"{options['type'].title()}s " if options.get("type") else ""
+                return f"{cluster}{namespace} > {resource_type}Dashboard"
+            else:
+                host = m.group("host")
+                dashboard = (
+                    m.group("dashboard")
+                    .removeprefix("grafana-dashboard-")
+                    .replace("-", " ")
+                    .title()
+                )
+                return f"{host} > {dashboard}"
     elif m := re.search(r"\w+://(www\d*\.)?(?P<path>[^?]+)", input_url):
         return m.group("path").strip(" /")
     else:
