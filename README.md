@@ -58,20 +58,34 @@ Whether you want to fix a bug or add a feature,
 <!-- TODO: add devenv / devcontainer -->
 
 Prepare a checkout of your fork:
+
 ```shell
-python3 -m venv .venv
-direnv allow # cf. .envrc
-# or activate .venv yourself
-pip install -r test/requirements.txt
+pyenv local  # if you are into this kind of thing
+poetry install --no-root
+# activate .venv
 ```
 
 Now you should be able to run the relevant commands:
+
 ```shell
 black .       # formatting
 ruff check .  # linting
 pytest        # testing
 ```
 
+For convenience, there are also
+
+```shell
+poe lint
+poe test
+```
+
 We include configuration for 
     [evilmartians/lefthook](https://github.com/evilmartians/lefthook)
 which we encourage you to use.
+
+We also consider
+    [direnv/direnv](https://github.com/direnv/direnv)
+to be inherently used,
+and therefore include our
+    [`.envrc`](.envrc).
