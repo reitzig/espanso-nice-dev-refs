@@ -6,7 +6,7 @@ pre-commit:
       run: black {staged_files}
       stage_fixed: true
     2_editorconfig:
-      run: ec --exclude LICENSE --disable-max-line-length
+      run: ec
     3_linter:
       glob: "*.py"
       run: ruff check {staged_files}

@@ -1,0 +1,9 @@
+{
+    "exclude": [
+        "LICENSE",
+        ".run/*"
+    ],
+    "disable": {
+        "maxLineLength": true
+    }
+}
