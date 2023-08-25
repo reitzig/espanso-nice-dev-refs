@@ -16,7 +16,7 @@ then type any of the following:
                  pull request (& comment, commit, file & line), 
                  file (& line), file (& line) in pull request,
                  commit (& file), branch, diff
-- **Confluence**: page
+- **Confluence**: page, space
 - **DockerHub**: repository (& tag)
 - **GitHub**: repository, issue (& comment), discussion (& comment), 
               pull request, file (& line), release, heading in rendered file, 

@@ -179,18 +179,18 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('job')}{subjob}{branch}{build}"
     elif (
         m := re.search(
-            r"^https://.*confluence.*/display/(?P<space>[^/]+)/(?P<title>[^?]+)", input_url
+            r"^https://.*confluence.*/display/(?P<space>[^/]+)" r"(?:/(?P<title>[^?]+))?", input_url
         )
     ) or (
         m := re.search(
             r"^https://.*confluence.*/pages/(?:viewpage|releaseview)\.action\?"
-            r"spaceKey=(?P<space>[^&]+)&title=(?P<title>[^&]+)",
+            r"spaceKey=(?P<space>[^&]+)(?:&title=(?P<title>[^&]+))?",
             input_url,
         )
     ):
         space = m.group("space")
-        title = prettify(m.group("title"))
-        return f"{space}/{title}"
+        title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
+        return f"{space}{title}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
         r"(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?",

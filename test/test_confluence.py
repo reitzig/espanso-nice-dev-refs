@@ -3,6 +3,17 @@ from assertpy import assert_that
 from label_for_url import determine_label
 
 
+def test_should_label_space() -> None:
+    # Given:
+    url = "https://our-confluence.my-org.de/display/MYSPACE/"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MYSPACE")
+
+
 def test_should_label_url_with_title() -> None:
     # Given:
     url = "https://our-confluence.my-org.de/display/MYSPACE/Some+Page+Nobody+Reads"

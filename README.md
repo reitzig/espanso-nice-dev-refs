@@ -86,6 +86,6 @@ which we encourage you to use.
 
 We also consider
     [direnv/direnv](https://github.com/direnv/direnv)
-to be inherently used,
+to be inherently useful,
 and therefore include our
     [`.envrc`](.envrc).
