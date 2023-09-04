@@ -35,7 +35,7 @@ coverage = {version = "7.3.0", extras = ["toml"]}
 editorconfig-checker = "2.7.2"
 poethepoet = "0.22.0"
 pytest = "7.4.0"
-ruff = "0.0.286"
+ruff = "0.0.287"
 
 [tool.poe.tasks.test]
 shell = """
