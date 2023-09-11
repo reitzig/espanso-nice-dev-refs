@@ -3,6 +3,17 @@ from assertpy import assert_that
 from label_for_url import determine_label
 
 
+def test_should_label_project() -> None:
+    # Given:
+    url = "https://console-openshift.some.org/k8s/cluster/projects/some-ns"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("some-ns")
+
+
 def test_should_label_pod() -> None:
     # Given:
     url = "https://console-openshift.some.org/k8s/ns/some-ns/pods/pod-name-fvct8"

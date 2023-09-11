@@ -219,10 +219,13 @@ def determine_label(input_url: str) -> str:
         return f"{org}{repo}{tag}"
     elif m := re.search(
         r"^https://(?P<host>[^/?&]*openshift[^/?&]*)"
+        r"(?:/k8s/cluster/projects/(?P<project>[^/?#]+))?"
         r"(?:/k8s/ns/(?P<namespace>[^/?#]+)/[^/?#]+/(?P<resource_name>[^/?#]+))?"
         r"(?:/monitoring/dashboards/(?P<dashboard>[^/?#]+)\?(?P<dashboard_options>[^#$]+))?",
         input_url,
     ):
+        if project := m.group("project"):
+            return f"{project}"
         if namespace := m.group("namespace"):
             resource_name = m.group("resource_name")
             return f"{namespace}/{resource_name}"
