@@ -33,6 +33,17 @@ matches:
         params:
           cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
           trim: true
+  # HTML-formatted reference to some URL from clipboard
+  - trigger: ":htmlref"
+    replace: "<a href=\"{{clipboard}}\">{{label}}</a>"
+    vars:
+      - name: clipboard
+        type: clipboard
+      - name: label
+        type: shell
+        params:
+          cmd: "python3 ${CONFIG}/scripts/label_for_url.py ${ESPANSO_CLIPBOARD}"
+          trim: true
   # "Rich" reference to some URL from clipboard
   - trigger: ":ref"
     markdown: "[{{label}}]({{clipboard}})"
