@@ -130,17 +130,21 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('project')}/{m.group('repo')}{number}{comment_id}{release_tag}"
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/"
-        r"(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#]+)"
+        r"(?:blob|tree)/(?P<rev>[^/]+)/(?P<file>[^#?]+)"
         r"(?:#L(?P<line>\d+)|#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?",
         input_url,
     ):
+        rev = f"@{m.group('rev')}" if m.group("rev") not in ["master", "main"] else ""
+        if len(rev) > 30 and re.match(r"^@[a-f0-9]+$", rev):
+            rev = rev[0:9]
+
         filename = (
             re.sub(r"\.(adoc|md)$", "", m.group("file")) if m.group("anchor") else m.group("file")
         )
         filename = filename.strip("/")
         line = f"#{m.group('line')}" if m.group("line") else ""
         anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
-        return f"{m.group('project')}/{m.group('repo')}:{filename}{line}{anchor}"
+        return f"{m.group('project')}/{m.group('repo')}{rev}:{filename}{line}{anchor}"
     elif m := re.search(
         r"^https://(?P<host>[^/]*gitlab[^/]*)"
         r"(/(?P<project>[^/]+)/(?P<repo>[^/]+))?/-/snippets/"

@@ -16,7 +16,7 @@ def test_should_label_project() -> None:
 
 def test_should_label_repository() -> None:
     # Given:
-    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" "some-project/browse"
+    url = "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/some-project/browse"
 
     # When:
     label = determine_label(url)
@@ -27,7 +27,7 @@ def test_should_label_repository() -> None:
 
 def test_should_label_user_repository() -> None:
     # Given:
-    url = "https://our-bitbucket.my-org.de/users/user123/repos/" "some-project/browse"
+    url = "https://our-bitbucket.my-org.de/users/user123/repos/some-project/browse"
 
     # When:
     label = determine_label(url)

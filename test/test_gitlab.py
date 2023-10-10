@@ -58,6 +58,50 @@ def test_should_label_file() -> None:
     assert_that(label).is_equal_to("my-account/some-repo:some/file.md")
 
 
+def test_should_label_file_on_main_branch() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/blob/main/some/file.md?ref_type=heads"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md")
+
+
+def test_should_label_file_on_other_branch() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/blob/some-branch/some/file.md?ref_type=heads"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@some-branch:some/file.md")
+
+
+def test_should_label_file_on_tag() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/blob/v1.2.3/some/file.md"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@v1.2.3:some/file.md")
+
+
+def test_should_label_file_on_commit() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/blob/198c9f97383a262318558321414ee4695bd68549/some/file.md"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@198c9f97:some/file.md")
+
+
 def test_should_label_folder() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/tree/main/some/folder"
