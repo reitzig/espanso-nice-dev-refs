@@ -47,6 +47,17 @@ def test_should_label_url_with_title_in_args_for_viewpage() -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
+def test_should_label_url_with_title_in_anchor_for_viewpage() -> None:
+    # Given:
+    url = "https://our-confluence.my-org.de/pages/viewpage.action?pageId=205489860#SomePage-Section"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("SomePage > Section")
+
+
 def test_should_label_url_with_title_in_args_for_releaseview() -> None:
     # Given:
     url = "https://our-confluence.my-org.de/pages/releaseview.action?spaceKey=MYSPACE&title=Some+Page+Nobody+Reads"

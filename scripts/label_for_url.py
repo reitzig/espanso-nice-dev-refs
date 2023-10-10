@@ -183,18 +183,25 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('job')}{subjob}{branch}{build}"
     elif (
         m := re.search(
-            r"^https://.*confluence.*/display/(?P<space>[^/]+)" r"(?:/(?P<title>[^?]+))?", input_url
+            r"^https://.*confluence.*/display/(?P<space>[^/]+)"
+            r"(?:/(?P<title>[^?#]+))?"
+            r"(?:#(?P<anchor>.+))?",
+            input_url,
         )
     ) or (
         m := re.search(
             r"^https://.*confluence.*/pages/(?:viewpage|releaseview)\.action\?"
-            r"spaceKey=(?P<space>[^&]+)(?:&title=(?P<title>[^&]+))?",
+            r"(?:spaceKey=(?P<space>[^&#]+))?"
+            r"(?:pageId=(?P<pageid>[^&#]+))?"
+            r"(?:&title=(?P<title>[^&#]+))?"
+            r"(?:#(?P<anchor>.+))?",
             input_url,
         )
     ):
-        space = m.group("space")
+        space = m.group("space") if m.group("space") else ""
         title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
-        return f"{space}{title}"
+        anchor = " > ".join(m.group("anchor").split("-")) if m.group("anchor") else ""
+        return f"{space}{title}{anchor}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
         r"(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?",
