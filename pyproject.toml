@@ -32,7 +32,7 @@ python = ">=3.8,<3.12"
 assertpy = "1.1"
 black = "23.9.1"
 coverage = {version = "7.3.2", extras = ["toml"]}
-editorconfig-checker = "2.7.2"
+editorconfig-checker = "2.7.3"
 poethepoet = "0.24.1"
 pytest = "7.4.2"
 ruff = "0.0.292"
