@@ -150,12 +150,12 @@ toml = ["tomli"]
 
 [[package]]
 name = "editorconfig-checker"
-version = "2.7.2"
+version = "2.7.3"
 description = "Python wrapper around invoking editorconfig-checker (https://github.com/editorconfig-checker/editorconfig-checker)"
 optional = false
 python-versions = ">=2.7"
 files = [
-    {file = "editorconfig-checker-2.7.2.tar.gz", hash = "sha256:43598be8601d157bc9ad5e4304d96dcabfd905fe6fb801f01636bb03f1b71e85"},
+    {file = "editorconfig-checker-2.7.3.tar.gz", hash = "sha256:69261f55585f0a4897b5534806bd170289d11b4825137411c1e9e5f2c1c5dbc2"},
 ]
 
 [[package]]
@@ -348,4 +348,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.8,<3.12"
-content-hash = "2e2bb3d5eb338eac3b9dc0e28038b35aa372c67229f2d92e9dcc1c207e1b33aa"
+content-hash = "280900b55ba80c9c67642864016f10e77879f28877e05270babf942dc26e2ead"
