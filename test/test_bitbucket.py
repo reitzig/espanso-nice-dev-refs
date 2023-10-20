@@ -363,3 +363,14 @@ def test_should_label_arbitrary_diff() -> None:
 
     # Then:
     assert_that(label).is_equal_to("MY-PROJECT/some-project develop⭤b8aa09a9")
+
+
+def test_should_label_search_query() -> None:
+    # Given:
+    url = "https://our-bitbucket.my-org.de/plugins/servlet/search" "?q=some search in project:STUFF"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("🔍/some search in project:STUFF/")
