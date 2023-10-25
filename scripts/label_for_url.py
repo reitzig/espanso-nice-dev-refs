@@ -87,7 +87,7 @@ def determine_label(input_url: str) -> str:
         return f"🔍/{m.group('query')}/"
     elif m := re.search(
         r"^https://[^/]*jira[^/]*/browse/(?P<project>\w+)(-(?P<issue>\d+))?"
-        r"(?:\?focusedCommentId=(?P<comment>\d+))?",
+        r"(?:\?focused(Comment)?Id=(?P<comment>\d+))?",
         input_url,
     ):
         project = m.group("project")

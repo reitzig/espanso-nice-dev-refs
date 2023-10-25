@@ -40,3 +40,20 @@ def test_should_label_issue_and_comment() -> None:
 
     # Then:
     assert_that(label).is_equal_to("FANCY-77.123456")
+
+
+def test_should_label_issue_and_comment_alternative() -> None:
+    # Given:
+    url = (
+        "https://our-jira.my-org.de/browse/FANCY-77"
+        "?focusedId=123456"
+        "&page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel"
+        "#comment-123456"
+    )
+    # Yup, that's _another_ URL format they went with. 👀
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("FANCY-77.123456")
