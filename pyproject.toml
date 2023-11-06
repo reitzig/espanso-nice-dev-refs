@@ -33,7 +33,7 @@ assertpy = "1.1"
 black = "23.10.0"
 coverage = {version = "7.3.2", extras = ["toml"]}
 editorconfig-checker = "2.7.3"
-poethepoet = "0.24.1"
+poethepoet = "0.24.2"
 pytest = "7.4.2"
 ruff = "0.1.1"
 
