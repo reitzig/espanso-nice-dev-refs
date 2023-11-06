@@ -50,6 +50,22 @@ def test_should_label_file() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project:some/file.md")
 
 
+def test_should_label_file_at_revision() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/browse/some/file.md"
+        "?until=f3b751f5be406abcb020fc5eb72ff3260d0b4103"
+        "&autoSincePath=false"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project@f3b751f5:some/file.md")
+
+
 def test_should_label_file_with_spaces_in_filename() -> None:
     # Given:
     url = (
@@ -338,7 +354,8 @@ def test_should_label_file_diff() -> None:
     # Given:
     url = (
         "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
-        "some-project/diff/some/file.md?until=8743ea85188c51b2c13aef82541b765bf3769d50"
+        "some-project/diff/some/file.md"
+        "?until=8743ea85188c51b2c13aef82541b765bf3769d50"
     )
 
     # When:

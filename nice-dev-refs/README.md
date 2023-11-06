@@ -20,7 +20,7 @@ then type any of the following:
                  search
 - **Confluence**: page (& section), space
 - **DockerHub**: repository (& tag)
-- **GitHub**: repository, issue (& comment), discussion (& comment), 
+- **GitHub**: repository, branch, issue (& comment), discussion (& comment), 
               pull request, file (& line), release, heading in rendered file, 
               wiki page (& heading), gist (& file & line)
 - **GitLab**: repository, issue, merge request, file (& line), snippet,

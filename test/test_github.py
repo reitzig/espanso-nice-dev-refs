@@ -80,6 +80,17 @@ def test_should_label_pr() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#119")
 
 
+def test_should_label_branch() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/tree/some-branch"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@some-branch")
+
+
 def test_should_label_file() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/file.md"
@@ -91,6 +102,17 @@ def test_should_label_file() -> None:
     assert_that(label).is_equal_to("my-account/some-repo:some/file.md")
 
 
+def test_should_label_file_on_branch() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/blob/some-branch/some/file.md"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@some-branch:some/file.md")
+
+
 def test_should_label_folder() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/tree/main/some/folder"
@@ -100,6 +122,17 @@ def test_should_label_folder() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo:some/folder")
+
+
+def test_should_label_folder_on_branch() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/tree/some-branch/some/folder"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@some-branch:some/folder")
 
 
 def test_should_label_folder_and_anchor() -> None:
