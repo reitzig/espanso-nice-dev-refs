@@ -1,3 +1,4 @@
+import pytest
 from assertpy import assert_that
 
 from label_for_url import determine_label
@@ -133,6 +134,29 @@ def test_should_label_file_and_line() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo:some/file.md#77")
+
+
+def test_should_label_commit() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/commit/5ad8783f34a650e6a5c8ad8948b0bdc1131e1a10"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@5ad8783f")
+
+
+@pytest.mark.skip(reason="impossible due to URL format, can't separate branch and file name!")
+def test_should_label_branch() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/tree/feature/something"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@feature/something")
 
 
 def test_should_label_asciidoc_and_anchor() -> None:

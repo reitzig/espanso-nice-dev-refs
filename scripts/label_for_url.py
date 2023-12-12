@@ -134,7 +134,7 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('project')}/{m.group('repo')}{number}{comment_id}{release_tag}"
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/"
-        r"(?:blob|tree)/(?P<rev>[^/]+)"
+        r"(?:blob|tree|commit)/(?P<rev>[^/]+)"
         r"(?:/(?P<file>[^#?]+))?"
         r"(?:#L(?P<line>\d+)|#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?",
         input_url,

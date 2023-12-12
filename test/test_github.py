@@ -157,6 +157,17 @@ def test_should_label_file_and_line() -> None:
     assert_that(label).is_equal_to("my-account/some-repo:some/file.md#77")
 
 
+def test_should_label_commit() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/commit/3577c55c6f18e164c37f332f98b4c08b1242f90e"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@3577c55c")
+
+
 def test_should_label_markdown_and_anchor() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/README.md#some-headline"
