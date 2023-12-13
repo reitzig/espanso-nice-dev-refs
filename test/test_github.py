@@ -14,6 +14,17 @@ def test_should_label_repository() -> None:
     assert_that(label).is_equal_to("my-account/some-repo")
 
 
+def test_should_label_repository_without_seo() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo?utm_source=changelog-news"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo")
+
+
 def test_should_label_repo_and_anchor() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo#some-headline"

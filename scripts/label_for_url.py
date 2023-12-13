@@ -111,9 +111,10 @@ def determine_label(input_url: str) -> str:
         line = f"#{line_part.replace('L', '')}" if line_part else ""
         return f"{m.group('account')}/{m.group('uid')[0:6]}{filename}{line}"
     elif m := re.search(
-        r"https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/#]+)/?"
+        r"https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/#?]+)/?"
         r"(?:wiki/(?P<wiki_page>[^/#?]+))?"
         r"(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?"
+        r"(?:\?.*)?"
         r"$",
         input_url,
     ):  # NB: Include $ to not prematurely match any of the next two cases
