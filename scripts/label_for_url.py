@@ -70,7 +70,7 @@ def determine_label(input_url: str) -> str:
         r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)"
         r"(/repos/(?P<repo>[^/]+))?"
         r"(/(?:browse|diff)(/(?P<file>[^#?]+))?)?"
-        r"(\?at=refs%2Fheads%2F(?P<branch>[^&#]+))?"
+        r"((?:/branches\?base=|\?at=refs%2Fheads%2F)(?P<branch>[^&#]+))?"
         r"(\?until=(?P<commit>[a-fA-F0-9]+))?"
         r"(#(?P<line>[0-9,-]+))?",
         input_url,

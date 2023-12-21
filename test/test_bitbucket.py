@@ -294,6 +294,20 @@ def test_should_label_commit_and_file() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@f3b751f5:some/file.md")
 
 
+def test_should_label_branch_via_branches() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/branches?base=feature%2Fsome-feature"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project@feature/some-feature")
+
+
 def test_should_label_branch_via_commits() -> None:
     # Given:
     url = (
@@ -348,6 +362,21 @@ def test_should_label_branch_diff() -> None:
 
     # Then:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@feature/some-feature")
+
+
+def test_should_label_tag_via_branches() -> None:
+    # https://bitbucket.central.aws.aok-systems.de/projects/CC/repos/jenkins_shared_libraries/branches?base=1.22.0
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/branches?base=1.2.3"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project@1.2.3")
 
 
 def test_should_label_file_diff() -> None:
