@@ -52,7 +52,10 @@ def test_should_revert_url_encoding() -> None:
 
 def test_should_label_url_with_title_in_args_for_viewpage() -> None:
     # Given:
-    url = "https://our-confluence.my-org.de/pages/viewpage.action?spaceKey=MYSPACE&title=Some+Page+Nobody+Reads"
+    url = (
+        "https://our-confluence.my-org.de/pages/viewpage.action"
+        "?spaceKey=MYSPACE&title=Some+Page+Nobody+Reads"
+    )
 
     # When:
     label = determine_label(url)
@@ -63,7 +66,10 @@ def test_should_label_url_with_title_in_args_for_viewpage() -> None:
 
 def test_should_label_url_with_title_in_anchor_for_viewpage() -> None:
     # Given:
-    url = "https://our-confluence.my-org.de/pages/viewpage.action?pageId=205489860#SomePage-Section"
+    url = (
+        "https://our-confluence.my-org.de/pages/viewpage.action"
+        "?pageId=205489860#SomePage-Section"
+    )
 
     # When:
     label = determine_label(url)
@@ -74,7 +80,10 @@ def test_should_label_url_with_title_in_anchor_for_viewpage() -> None:
 
 def test_should_label_url_with_title_in_args_for_releaseview() -> None:
     # Given:
-    url = "https://our-confluence.my-org.de/pages/releaseview.action?spaceKey=MYSPACE&title=Some+Page+Nobody+Reads"
+    url = (
+        "https://our-confluence.my-org.de/pages/releaseview.action"
+        "?spaceKey=MYSPACE&title=Some+Page+Nobody+Reads"
+    )
 
     # When:
     label = determine_label(url)
