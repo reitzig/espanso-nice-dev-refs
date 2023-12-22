@@ -94,7 +94,10 @@ def test_should_label_file_on_tag() -> None:
 
 def test_should_label_file_on_commit() -> None:
     # Given:
-    url = "https://gitlab.some.org/my-account/some-repo/-/blob/198c9f97383a262318558321414ee4695bd68549/some/file.md"
+    url = (
+        "https://gitlab.some.org/my-account/some-repo/-/"
+        "blob/198c9f97383a262318558321414ee4695bd68549/some/file.md"
+    )
 
     # When:
     label = determine_label(url)
