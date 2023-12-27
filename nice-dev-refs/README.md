@@ -23,7 +23,8 @@ then type any of the following:
 - **GitHub**: repository, branch, commit,
               issue (& comment), discussion (& comment), 
               pull request, file (& line), release, heading in rendered file, 
-              wiki page (& heading), gist (& file & line)
+              wiki page (& heading), gist (& file & line),
+              advisories
 - **GitLab**: repository, commit, 
               issue, merge request, file (& line), snippet,
               heading in rendered file

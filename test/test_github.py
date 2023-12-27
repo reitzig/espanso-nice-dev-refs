@@ -255,3 +255,14 @@ def test_should_label_wiki_page_and_anchor() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo > Some Page > Some Headline")
+
+
+def test_should_label_security_advisories() -> None:
+    # Given:
+    url = "https://github.com/advisories/GHSA-7ww5-4wqc-m92c"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("GHSA-7ww5-4wqc-m92c")
