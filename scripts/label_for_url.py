@@ -199,6 +199,7 @@ def determine_label(input_url: str) -> str:
         m := re.search(
             r"^https://.*confluence.*/display/(?P<space>[^/]+)"
             r"(?:/(?P<title>[^?#]+))?"
+            r"[^#]*"
             r"(?:#(?P<anchor>.+))?",
             input_url,
         )
@@ -208,6 +209,7 @@ def determine_label(input_url: str) -> str:
             r"(?:spaceKey=(?P<space>[^&#]+))?"
             r"(?:pageId=(?P<pageid>[^&#]+))?"
             r"(?:&title=(?P<title>[^&#]+))?"
+            r"[^#]*"
             r"(?:#(?P<anchor>.+))?",
             input_url,
         )
@@ -215,6 +217,11 @@ def determine_label(input_url: str) -> str:
         space = m.group("space") if m.group("space") else ""
         title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
         anchor = " > ".join(m.group("anchor").split("-")) if m.group("anchor") else ""
+        anchor = (
+            anchor.replace("comment >", " > Comment", 1)
+            if anchor.startswith("comment >")
+            else anchor
+        )
         return f"{space}{title}{anchor}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"

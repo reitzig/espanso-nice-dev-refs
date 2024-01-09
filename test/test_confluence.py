@@ -25,6 +25,20 @@ def test_should_label_url_with_title() -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
+def test_should_label_url_with_title_and_comment() -> None:
+    # Given:
+    url = (
+        "https://our-confluence.my-org.de/display/MYSPACE/Some+Page+Nobody+Reads"
+        "?focusedCommentId=241754794#comment-241754794"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads > Comment 241754794")
+
+
 def test_should_revert_url_encoding() -> None:
     # Given:
     url = "https://our-confluence.my-org.de/display/MYSPACE/%5BWIP%5D+Some+Plan+Nobody+Reads"

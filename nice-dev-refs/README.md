@@ -18,7 +18,7 @@ then type any of the following:
                  file (& line), file (& line) in pull request,
                  commit (& file), branch, diff,
                  search
-- **Confluence**: page (& section), space
+- **Confluence**: page (& section, comment), space
 - **DockerHub**: repository (& tag)
 - **GitHub**: repository, branch, commit,
               issue (& comment), discussion (& comment), 
