@@ -197,17 +197,21 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('job')}{subjob}{branch}{build}"
     elif (
         m := re.search(
-            r"^https://.*confluence.*/display/(?P<space>[^/]+)"
+            r"^https://(?P<host>.*confluence.*)"
+            r"/display/(?P<space>[^/]+)"
             r"(?:/(?P<title>[^?#]+))?"
+            r"[^#]*"
+            r"(?:pageId=(?P<pageId>[^&#]+))?"  # NB: never used, but group needed to avoid errors
             r"[^#]*"
             r"(?:#(?P<anchor>.+))?",
             input_url,
         )
     ) or (
         m := re.search(
-            r"^https://.*confluence.*/pages/(?:viewpage|releaseview)\.action\?"
+            r"^https://(?P<host>.*confluence.*)"
+            r"/pages/(?:viewpage|releaseview)\.action\?"
             r"(?:spaceKey=(?P<space>[^&#]+))?"
-            r"(?:pageId=(?P<pageid>[^&#]+))?"
+            r"(?:pageId=(?P<pageId>[^&#]+))?"
             r"(?:&title=(?P<title>[^&#]+))?"
             r"[^#]*"
             r"(?:#(?P<anchor>.+))?",
@@ -222,7 +226,11 @@ def determine_label(input_url: str) -> str:
             if anchor.startswith("comment >")
             else anchor
         )
-        return f"{space}{title}{anchor}"
+        page_id = f"/{m.group('pageId')}" if m.group("pageId") else ""
+        return (
+            f"{space}{title}{anchor}"  # noqa: SIM222 -- https://github.com/astral-sh/ruff/issues/9479
+            or f"{m.group('host')}{page_id}"
+        )
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
         r"(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?",
