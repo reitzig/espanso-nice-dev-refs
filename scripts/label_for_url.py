@@ -227,10 +227,7 @@ def determine_label(input_url: str) -> str:
             else anchor
         )
         page_id = f"/{m.group('pageId')}" if m.group("pageId") else ""
-        return (
-            f"{space}{title}{anchor}"  # noqa: SIM222 -- https://github.com/astral-sh/ruff/issues/9479
-            or f"{m.group('host')}{page_id}"
-        )
+        return f"{space}{title}{anchor}" or f"{m.group('host')}{page_id}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
         r"(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?",
