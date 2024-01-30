@@ -171,7 +171,7 @@ def determine_label(input_url: str) -> str:
             return f"{m.group('host')}${m.group('uid')}"
     elif m := re.search(
         r"^https://[^/]*jenkins[^/]*/(?:view/[^/]+/)?job/"
-        r"(?P<job>[^/]+)/(?:job/(?P<subjob>[^/]+)/)?(?P<build>\d+)?"
+        r"(?P<job>[^/]+)(?:/job/(?P<subjob>[^/]+))?(?:/(?P<build>\d+))?"
         r"(/artifact/(?P<file>[^?#]+))?",
         input_url,
     ):
