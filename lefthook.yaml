@@ -1,12 +1,15 @@
 pre-commit:
   piped: true
   commands:
-    1_formatter:
+    formatter:
+      priority: 1
       glob: "*.py"
       run: ruff format {staged_files}
       stage_fixed: true
-    2_editorconfig:
+    editorconfig:
+      priority: 2
       run: ec
-    3_linter:
+    linter:
+      priority: 2
       glob: "*.py"
       run: ruff check {staged_files}
