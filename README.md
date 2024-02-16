@@ -49,7 +49,7 @@ let's stick to things you link to _all the time_ in software development.
 Whether you want to fix a bug or add a feature,
 - add at least one (red) test,
 - make it green, 
-- make sure neither `black` nor `ruff` complain, and
+- make sure `ruff` does not complain, and
 - create a PR.
 
 
@@ -68,7 +68,7 @@ poetry install --no-root
 Now you should be able to run the relevant commands:
 
 ```shell
-black .       # formatting
+ruff format . # formatting
 ruff check .  # linting
 pytest        # testing
 ```

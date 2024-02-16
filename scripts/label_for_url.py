@@ -196,26 +196,29 @@ def determine_label(input_url: str) -> str:
         build = f"#{m.group('build')}" if m.group("build") else ""
         return f"{m.group('job')}{subjob}{branch}{build}"
     elif (
-        m := re.search(
-            r"^https://(?P<host>.*confluence.*)"
-            r"/display/(?P<space>[^/]+)"
-            r"(?:/(?P<title>[^?#]+))?"
-            r"[^#]*"
-            r"(?:pageId=(?P<pageId>[^&#]+))?"  # NB: never used, but group needed to avoid errors
-            r"[^#]*"
-            r"(?:#(?P<anchor>.+))?",
-            input_url,
+        (
+            m := re.search(
+                r"^https://(?P<host>.*confluence.*)"
+                r"/display/(?P<space>[^/]+)"
+                r"(?:/(?P<title>[^?#]+))?"
+                r"[^#]*"
+                r"(?:pageId=(?P<pageId>[^&#]+))?"  # NB: never used, but need group to avoid errors
+                r"[^#]*"
+                r"(?:#(?P<anchor>.+))?",
+                input_url,
+            )
         )
-    ) or (
-        m := re.search(
-            r"^https://(?P<host>.*confluence.*)"
-            r"/pages/(?:viewpage|releaseview)\.action\?"
-            r"(?:spaceKey=(?P<space>[^&#]+))?"
-            r"(?:pageId=(?P<pageId>[^&#]+))?"
-            r"(?:&title=(?P<title>[^&#]+))?"
-            r"[^#]*"
-            r"(?:#(?P<anchor>.+))?",
-            input_url,
+        or (
+            m := re.search(
+                r"^https://(?P<host>.*confluence.*)"
+                r"/pages/(?:viewpage|releaseview)\.action\?"
+                r"(?:spaceKey=(?P<space>[^&#]+))?"
+                r"(?:pageId=(?P<pageId>[^&#]+))?"
+                r"(?:&title=(?P<title>[^&#]+))?"
+                r"[^#]*"
+                r"(?:#(?P<anchor>.+))?",
+                input_url,
+            )
         )
     ):
         space = m.group("space") if m.group("space") else ""

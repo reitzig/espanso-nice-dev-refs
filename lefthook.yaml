@@ -3,7 +3,7 @@ pre-commit:
   commands:
     1_formatter:
       glob: "*.py"
-      run: black {staged_files}
+      run: ruff format {staged_files}
       stage_fixed: true
     2_editorconfig:
       run: ec

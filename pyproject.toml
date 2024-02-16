@@ -30,7 +30,6 @@ python = ">=3.8,<3.12"
 
 [tool.poetry.group.dev.dependencies]
 assertpy = "1.1"
-black = "24.1.1"
 coverage = {version = "7.4.1", extras = ["toml"]}
 editorconfig-checker = "2.7.3"
 poethepoet = "0.24.4"
@@ -45,7 +44,7 @@ shell = """
 
 [tool.poe.tasks.lint]
 shell = """
-    black --check .
+    ruff format --check .
     ruff check --respect-gitignore . && echo "ruff: clean"
 """
 
@@ -71,11 +70,7 @@ exclude_lines = [
 ]
 
 [tool.ruff]
-# Set maximum line length to `ceil(1.1 * $black.line-length) to
-# make ruff's E501 equivalent to B950 (which is not implemented)
-# cf. https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html#line-length
-#     https://github.com/astral-sh/ruff/issues/389
-line-length = 110
+line-length = 100
 
 [tool.ruff.lint]
 # cf. https://beta.ruff.rs/docs/rules/
@@ -87,7 +82,3 @@ ignore = [
     "COM812",   # incompatible with Black code style
     "RET505",   # I prefer symmetric structure
 ]
-
-[tool.black]
-line-length = 100
-target-version = ['py310']
