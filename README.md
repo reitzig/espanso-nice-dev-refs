@@ -20,8 +20,8 @@ Takes URLs from the clipboard and inserts a formatted link based on it.
 
 Requirements: Python >= 3.8
 
-Unfortunately, we have to perform the installation 
-with a _little_ bit more finger-grease as we are used to 
+Unfortunately, we have to perform the installation
+with a _little_ bit more finger-grease as we are used to
 ([Discussion](https://github.com/espanso/espanso/discussions/1558)):
 
 ```bash
@@ -38,20 +38,19 @@ ln -s "$(realpath "$(pwd)")"/scripts/*.py ~/.config/espanso/scripts/
 For more selective application refer
 to [Include and Exclude rules](https://espanso.org/docs/configuration/include-and-exclude/)
 
-
 ## Contributing
 
 🥳 Support for additional URL patterns is welcome –
 unless and until replace performance decreases too much.
-To limit the scope _somewhat_, 
+To limit the scope _somewhat_,
 let's stick to things you link to _all the time_ in software development.
 
 Whether you want to fix a bug or add a feature,
+
 - add at least one (red) test,
-- make it green, 
+- make it green,
 - make sure `ruff` does not complain, and
 - create a PR.
-
 
 ## Development
 
@@ -80,7 +79,7 @@ poe lint
 poe test
 ```
 
-We include configuration for 
+We include configuration for
     [evilmartians/lefthook](https://github.com/evilmartians/lefthook)
 which we encourage you to use.
 

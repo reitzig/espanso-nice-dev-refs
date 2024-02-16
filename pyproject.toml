@@ -15,7 +15,7 @@ maintainers = [
 readme = "README.md"
 repository = "https://github.com/reitzig/espanso-nice-dev-refs"
 documentation = "https://github.com/reitzig/espanso-nice-dev-refs/blob/main/README.md"
-classifiers=[
+classifiers = [
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -31,7 +31,7 @@ python = ">=3.8,<3.13"
 
 [tool.poetry.group.dev.dependencies]
 assertpy = "1.1"
-coverage = {version = "7.4.1", extras = ["toml"]}
+coverage = { version = "7.4.1", extras = ["toml"] }
 editorconfig-checker = "2.7.3"
 poethepoet = "0.24.4"
 pytest = "8.0.0"
@@ -54,8 +54,8 @@ pythonpath = [
     "scripts",
     "test",
 ]
-log_cli=true
-log_level="DEBUG"
+log_cli = true
+log_level = "DEBUG"
 
 [tool.coverage.run]
 source = [
@@ -80,6 +80,6 @@ select = [
     "INP", "INT", "N", "PGH", "PT", "PTH", "PYI", "RET", "RUF",
     "SIM", "SLF", "TCH", "UP", "W"]
 ignore = [
-    "COM812",   # incompatible with Black code style
-    "RET505",   # I prefer symmetric structure
+    "COM812", # incompatible with Black code style
+    "RET505", # I prefer symmetric structure
 ]
