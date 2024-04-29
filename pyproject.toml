@@ -31,11 +31,11 @@ python = ">=3.8,<3.13"
 
 [tool.poetry.group.dev.dependencies]
 assertpy = "1.1"
-coverage = { version = "7.4.4", extras = ["toml"] }
+coverage = { version = "7.5.0", extras = ["toml"] }
 editorconfig-checker = "2.7.3"
-poethepoet = "0.25.1"
-pytest = "8.1.1"
-ruff = "0.4.1"
+poethepoet = "0.26.0"
+pytest = "8.2.0"
+ruff = "0.4.2"
 
 [tool.poe.tasks.test]
 shell = """
