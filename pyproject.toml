@@ -34,7 +34,7 @@ assertpy = "1.1"
 coverage = { version = "7.5.1", extras = ["toml"] }
 editorconfig-checker = "2.7.3"
 poethepoet = "0.26.1"
-pytest = "8.2.0"
+pytest = "8.2.1"
 ruff = "0.4.4"
 
 [tool.poe.tasks.test]
