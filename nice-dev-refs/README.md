@@ -33,6 +33,7 @@ then type any of the following:
     - classic: "simple" job (& build), multi-branch pipeline (& build);
     - BlueOcean: job build, multi-branch pipeline build
 - **Jira**: project, issue (& comment)
+- **YouTrack**: issue (& comment)
 - **OpenShift**: project, workload, storage, (some) dashboard(s)
 - **Stack Exchange**: question, answer
 

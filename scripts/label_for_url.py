@@ -95,6 +95,14 @@ def determine_label(input_url: str) -> str:
         comment = f".{m.group('comment')}" if m.group("comment") else ""
         return f"{project}{issue}{comment}"
     elif m := re.search(
+        r"^https://[^/]*youtrack[^/]*/issue/(?P<issue>\w+-\d+)"
+        r"(?:/[^#]*#focus=Comments-\d+-(?P<comment>[0-9]+))?",
+        input_url,
+    ):
+        issue = m.group("issue")
+        comment = f".{m.group('comment')}" if m.group("comment") else ""
+        return f"{issue}{comment}"
+    elif m := re.search(
         r"^https://gist.github.com/(?P<account>[^/]+)/"
         r"(?P<uid>[a-f0-9]+)(?:#file-(?P<fileline>[^?]+))?$",
         input_url,
