@@ -53,8 +53,6 @@ Whether you want to fix a bug or add a feature,
 
 ## Development
 
-<!-- TODO: add devenv / devcontainer -->
-
 Prepare a checkout of your fork:
 
 ```shell
@@ -78,9 +76,20 @@ poe lint
 poe test
 ```
 
+Other tools can be installed with
+    [aqua](https://github.com/aquaproj/aqua):
+
+```bash
+aqua install
+```
+
 We include configuration for
     [evilmartians/lefthook](https://github.com/evilmartians/lefthook)
-which we encourage you to use.
+which we encourage you to use:
+
+```bash
+lefthook install
+```
 
 We also consider
     [direnv/direnv](https://github.com/direnv/direnv)

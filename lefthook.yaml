@@ -1,3 +1,5 @@
+rc: .config/lefthook.rc
+
 pre-commit:
   piped: true
   commands:
