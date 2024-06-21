@@ -305,6 +305,17 @@ def determine_label(input_url: str) -> str:
                 host = m.group("host") if not options.get("cluster") else ""
                 dashboard = prettify(remove_prefix(m.group("dashboard"), "grafana-dashboard-"))
                 return f"{host}{cluster} > {dashboard}"
+    elif m := re.search(
+        r"^https://teams.microsoft.com/l/channel/[^/]+/(?P<channel>[^?/$]+)", input_url
+    ):
+        return f"{unquote(m.group('channel'))}"
+    elif m := re.search(
+        r"^https://teams.microsoft.com/l/message/[^/]+/(?P<id>\d+)\?.*?"
+        "&teamName=(?P<team>[^&#$]+).*?"
+        "&channelName=(?P<channel>[^&#$]+)",
+        input_url,
+    ):
+        return f"{unquote(m.group('team'))} > {unquote(m.group('channel'))} > #{m.group('id')}"
     elif m := re.search(r"\w+://(www\d*\.)?(?P<path>[^?]+)", input_url):
         return m.group("path").strip(" /")
     else:

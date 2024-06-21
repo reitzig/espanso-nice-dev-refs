@@ -33,8 +33,9 @@ then type any of the following:
     - classic: "simple" job (& build), multi-branch pipeline (& build);
     - BlueOcean: job build, multi-branch pipeline build
 - **Jira**: project, issue (& comment)
-- **YouTrack**: issue (& comment)
+- **MS Teams**: channels, messages in channels
 - **OpenShift**: project, workload, storage, (some) dashboard(s)
 - **Stack Exchange**: question, answer
+- **YouTrack**: issue (& comment)
 
 If no format matches, (a trimmed version of) the URL itself is used as link text.
