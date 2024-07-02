@@ -13,3 +13,9 @@ pre-commit:
       priority: 2
       glob: "*.py"
       run: ruff check {staged_files}
+commit-msg:
+  skip:
+    - ref: "wip/*"
+  commands:
+    cog:
+      run: cog verify --file {1}
