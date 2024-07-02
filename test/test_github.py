@@ -266,3 +266,14 @@ def test_should_label_security_advisories() -> None:
 
     # Then:
     assert_that(label).is_equal_to("GHSA-7ww5-4wqc-m92c")
+
+
+def test_should_label_enterprise() -> None:
+    # Given:
+    url = "https://github.com/enterprises/my-big-company"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-big-company")

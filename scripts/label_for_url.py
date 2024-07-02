@@ -128,9 +128,10 @@ def determine_label(input_url: str) -> str:
         r"$",
         input_url,
     ):  # NB: Include $ to not prematurely match any of the next two cases
+        project = f"{m.group('project')}/" if m.group("project") != "enterprises" else ""
         wiki_page = f" > {prettify(m.group('wiki_page'))}" if m.group("wiki_page") else ""
         anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
-        return f"{m.group('project')}/{m.group('repo')}{wiki_page}{anchor}"
+        return f"{project}{m.group('repo')}{wiki_page}{anchor}"
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/("
         r"((issues|pull|discussions|merge_requests)/(?P<number>\d+)"
