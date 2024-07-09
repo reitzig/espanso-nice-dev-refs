@@ -50,13 +50,28 @@ def test_should_label_file() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project:some/file.md")
 
 
-def test_should_label_file_at_revision() -> None:
+def test_should_label_file_until_revision() -> None:
     # Given:
     url = (
         "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
         "some-project/browse/some/file.md"
         "?until=f3b751f5be406abcb020fc5eb72ff3260d0b4103"
         "&autoSincePath=false"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project@f3b751f5:some/file.md")
+
+
+def test_should_label_file_at_revision() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/browse/some/file.md"
+        "?at=f3b751f5be406abcb020fc5eb72ff3260d0b4103"
     )
 
     # When:
