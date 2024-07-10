@@ -309,6 +309,20 @@ def test_should_label_commit_and_file() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@f3b751f5:some/file.md")
 
 
+def test_should_label_commit_range() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/compare/commits?sourceBranch=b7912386fb6adad455963291da83ffb3da29761f&targetRepoId=3262&targetBranch=9c4fd5effec87136bfe92e9ac96886cd35ea9872"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project b7912386⭤9c4fd5ef")
+
+
 def test_should_label_branch_via_branches() -> None:
     # Given:
     url = (
