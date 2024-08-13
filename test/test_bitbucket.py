@@ -423,6 +423,23 @@ def test_should_label_file_diff() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@8743ea85:some/file.md")
 
 
+def test_should_label_commit_diff() -> None:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/compare/diff"
+        "?sourceBranch=2efa13c3c03ace36bbbf9337c2ab82185a566a56"
+        "&targetRepoId=77"
+        "&targetBranch=ab3ee327d5ec2f0658a44f1f1192e4bfc0243101"
+        "#some%2Ffile.md"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project 2efa13c3⭤ab3ee327")
+
+
 def test_should_label_arbitrary_diff() -> None:
     # Given:
     url = (

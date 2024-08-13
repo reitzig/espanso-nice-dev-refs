@@ -56,14 +56,17 @@ def determine_label(input_url: str) -> str:
                 r"compare/(commits|diff)\?"
                 r"sourceBranch=(refs%2Fheads%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))&"
                 r".*"  # other args
-                r"targetBranch=(refs%2Fheads%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+))(&|$)",
+                r"targetBranch=(refs%2Fheads%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+))"
+                r"(&|#|$)",
                 input_url,
             )
             or re.search(
                 r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
                 r"compare/(commits|diff)\?"
                 r"(?:targetBranch=(refs%2Fheads%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+)&))?"
-                r"sourceBranch=(refs%2Fheads%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))",
+                r".*"  # other args
+                r"sourceBranch=(refs%2Fheads%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))"
+                r"(&|#|$)",
                 input_url,
             )
         )
