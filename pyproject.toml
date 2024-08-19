@@ -31,7 +31,7 @@ python = ">=3.8,<3.13"
 
 [tool.poetry.group.dev.dependencies]
 assertpy = "1.1"
-coverage = { version = "7.5.4", extras = ["toml"] }
+coverage = { version = "7.6.1", extras = ["toml"] }
 editorconfig-checker = "2.7.3"
 poethepoet = "0.27.0"
 pytest = "8.2.2"
