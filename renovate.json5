@@ -11,16 +11,20 @@
     {
       matchFileNames : ["**/aqua.yaml"],
       enabled :        true,
-      groupName :      "dev tools",
+    },
+    {
+      matchFileNames : ["**/aqua.yaml"],
+      matchUpdateTypes : ["patch", "minor"],
+      groupName :      "dev tools (non-major)",
       automerge :      true,
       automergeType :  "branch"
     },
     {
       matchManagers :    ["poetry", "github-actions"],
       matchUpdateTypes : ["lockFileMaintenance", "digest", "patch", "minor"],
-      groupName :        "dependencies (non-major)",
+      groupName :        "dev dependencies (non-major)",
       automerge :        true,
-      automergeType :    "branch",
+      automergeType :    "branch"
     },
   ],
 }
