@@ -10,6 +10,7 @@
   packageRules :        [
     {
       matchFileNames : ["**/aqua.yaml"],
+      enabled :        true,
       groupName :      "dev tools",
       automerge :      true,
       automergeType :  "branch"
