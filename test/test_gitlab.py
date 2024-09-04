@@ -45,7 +45,7 @@ def test_should_label_mr() -> None:
     label = determine_label(url)
 
     # Then:
-    assert_that(label).is_equal_to("my-account/some-repo#119")
+    assert_that(label).is_equal_to("my-account/some-repo!119")
 
 
 def test_should_label_file() -> None:
