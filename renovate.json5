@@ -4,31 +4,20 @@
     "schedule:weekly",
     "github>aquaproj/aqua-renovate-config#2.3.1",
   ],
-  lockFileMaintenance : {enabled : true},
+  lockFileMaintenance : {
+    enabled : true
+  },
   packageRules :        [
     {
       matchFileNames : ["**/aqua.yaml"],
       groupName :      "dev tools",
+      automerge :      true,
+      automergeType :  "branch"
     },
     {
-      matchFileNames :   [
-        "pyproject.toml",
-        "poetry.lock",
-      ],
-      matchDepTypes :    ["dev-dependencies"],
-      matchUpdateTypes : ["lockFileMaintenance", "patch", "minor"],
-      groupName :        "dev dependencies (non-major)",
-      automerge :        true,
-      automergeType :    "branch",
-    },
-    {
-      matchFileNames :   [
-        "pyproject.toml",
-        "poetry.lock",
-      ],
-      matchDepTypes :    ["dependencies"],
-      matchUpdateTypes : ["lockFileMaintenance", "patch", "minor"],
-      groupName :        "dependencies (patch)",
+      matchManagers :    ["poetry", "github-actions"],
+      matchUpdateTypes : ["lockFileMaintenance", "digest", "patch", "minor"],
+      groupName :        "dependencies (non-major)",
       automerge :        true,
       automergeType :    "branch",
     },
