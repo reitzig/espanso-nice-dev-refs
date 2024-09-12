@@ -24,7 +24,9 @@ def remove_prefix(text: str, prefix: str) -> str:
 
 
 def determine_label(input_url: str) -> str:
-    if m := re.search(
+    if m := re.search(r"^mailto:(?P<email>.+@.+)$", input_url):
+        return f"{m.group('email')}"
+    elif m := re.search(
         r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
         r"pull-requests/(?P<pr>\d+)/?"
         r"(commits/(?P<commit>[a-fA-F0-9]+))?"

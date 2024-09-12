@@ -13,6 +13,7 @@ then type any of the following:
 
 ### Supported URL Formats
 
+- Email links, i.e. `mailto:`
 - **Bitbucket**: project, repository, 
                  pull request (& comment, commit, file & line),
                  file (& line), file (& line) in pull request,
