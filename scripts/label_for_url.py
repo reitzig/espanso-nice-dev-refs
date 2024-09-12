@@ -54,18 +54,18 @@ def determine_label(input_url: str) -> str:
             re.search(
                 r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
                 r"compare/(commits|diff)\?"
-                r"sourceBranch=(refs%2Fheads%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))&"
+                r"sourceBranch=(refs%2F(?:heads|tags)%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))&"
                 r".*"  # other args
-                r"targetBranch=(refs%2Fheads%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+))"
+                r"targetBranch=(refs%2F(?:heads|tags)%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+))"
                 r"(&|#|$)",
                 input_url,
             )
             or re.search(
                 r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
                 r"compare/(commits|diff)\?"
-                r"(?:targetBranch=(refs%2Fheads%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+)&))?"
+                r"(?:targetBranch=(refs%2F(?:heads|tags)%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+)&))?"
                 r".*"  # other args
-                r"sourceBranch=(refs%2Fheads%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))"
+                r"sourceBranch=(refs%2F(?:heads|tags)%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))"
                 r"(&|#|$)",
                 input_url,
             )
@@ -85,13 +85,15 @@ def determine_label(input_url: str) -> str:
         r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)"
         r"(/repos/(?P<repo>[^/]+))?"
         r"(/(?:browse|diff)(/(?P<file>[^#?]+))?)?"
-        r"((?:/branches\?base=|\?at=refs%2Fheads%2F)(?P<branch>[^&#]+))?"
+        r"(/branches\?base=(?:refs%2F(?:heads|tags)%2F)?(?P<branch>[^&#]+))?"
+        r"(\?at=refs%2F(?:heads|tags)%2F(?P<branch_alt>[^&#]+))?"
         r"(\?(?:until|at)=(?P<commit>[a-fA-F0-9]+))?"
         r"(#(?P<line>[0-9,-]+))?",
         input_url,
     ):
         repo = f"/{m.group('repo')}" if m.group("repo") else ""
         branch = f"@{unquote(m.group('branch'))}" if m.group("branch") else ""
+        branch = f"@{unquote(m.group('branch_alt'))}" if m.group("branch_alt") else branch
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
         filename = f":{unquote(m.group('file'))}" if m.group("file") else ""
         line = f"#{m.group('line')}" if m.group("line") else ""

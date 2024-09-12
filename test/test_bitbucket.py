@@ -393,8 +393,24 @@ def test_should_label_branch_diff() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@feature/some-feature")
 
 
+def test_should_label_diff_of_tag_and_commit() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/compare/diff"
+        "?sourceBranch=refs%2Ftags%2Fv2.1.0"
+        "&targetBranch=3fa55ecbcd377c10b08c7ec2417492c083c14e13"
+        "#some%2Ffile.md"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project v2.1.0⭤3fa55ecb")
+
+
 def test_should_label_tag_via_branches() -> None:
-    # https://bitbucket.central.aws.aok-systems.de/projects/CC/repos/jenkins_shared_libraries/branches?base=1.22.0
     # Given:
     url = (
         "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
@@ -406,6 +422,21 @@ def test_should_label_tag_via_branches() -> None:
 
     # Then:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@1.2.3")
+
+
+def test_should_label_tag_via_branches_alternative() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/branches"
+        "?base=refs%2Ftags%2Fv2.1.0"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project@v2.1.0")
 
 
 def test_should_label_file_diff() -> None:

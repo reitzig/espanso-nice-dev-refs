@@ -16,7 +16,7 @@ then type any of the following:
 - **Bitbucket**: project, repository, 
                  pull request (& comment, commit, file & line),
                  file (& line), file (& line) in pull request,
-                 commit (& file), branch, diff,
+                 commit (& file), branch, tag, diff,
                  search
 - **Confluence**: page (& section, comment), space
 - **DockerHub**: repository (& tag)
