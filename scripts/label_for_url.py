@@ -199,16 +199,6 @@ def determine_label(input_url: str) -> str:
         else:
             return f"{m.group('host')}${m.group('uid')}"
     elif m := re.search(
-        r"^https://[^/]*jenkins[^/]*/(?:view/[^/]+/)?job/"
-        r"(?P<job>[^/]+)(?:/job/(?P<subjob>[^/]+))?(?:/(?P<build>\d+))?"
-        r"(/artifact/(?P<file>[^?#]+))?",
-        input_url,
-    ):
-        subjob = f":{unquote(unquote(m.group('subjob')))}" if m.group("subjob") else ""
-        build = f"#{m.group('build')}" if m.group("build") else ""
-        file = f":{m.group('file')}" if m.group("file") else ""
-        return f"{m.group('job')}{subjob}{build}{file}"
-    elif m := re.search(
         r"^https://.*jenkins.*/blue/organizations/jenkins/"
         r"(?P<job>[^/]+)"
         r"(?:/detail/(?P<subjob>[^/]+)/(?P<build>\d+)/)?"
@@ -224,6 +214,21 @@ def determine_label(input_url: str) -> str:
         branch = f":{unquote(unquote(m.group('branch')))}" if m.group("branch") else ""
         build = f"#{m.group('build')}" if m.group("build") else ""
         return f"{m.group('job')}{subjob}{branch}{build}"
+    elif m := re.search(
+        r"^https://[^/]*jenkins[^/]*"
+        r"(?:/view/(?P<view>[^/]+))?"
+        r"(?:/job/(?P<job>[^/]+))?"
+        r"(?:/job/(?P<subjob>[^/]+))?"
+        r"(?:/(?P<build>\d+))?"
+        r"(/artifact/(?P<file>[^?#]+))?",
+        input_url,
+    ):
+        view = f"{m.group('view')}" if m.group("view") and not m.group("job") else ""
+        job = f"{m.group('job')}" if m.group("job") else ""
+        subjob = f":{unquote(unquote(m.group('subjob')))}" if m.group("subjob") else ""
+        build = f"#{m.group('build')}" if m.group("build") else ""
+        file = f":{m.group('file')}" if m.group("file") else ""
+        return f"{view}{job}{subjob}{build}{file}"
     elif (
         (
             m := re.search(

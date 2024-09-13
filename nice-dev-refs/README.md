@@ -31,7 +31,7 @@ then type any of the following:
               heading in rendered file
 - **Jenkins**
     - build artifacts
-    - classic: "simple" job (& build), multi-branch pipeline (& build);
+    - classic: "simple" job (& build), multi-branch pipeline (& build), view;
     - BlueOcean: job build, multi-branch pipeline build
 - **Jira**: project, issue (& comment)
 - **MS Teams**: channels, messages in channels
