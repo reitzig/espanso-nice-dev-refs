@@ -44,7 +44,7 @@ def determine_label(input_url: str) -> str:
         r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
         r"commits(/(?P<commit>[a-fA-F0-9]+))?/?"
         r"(#(?P<file>[^?]+))?"
-        r"(\?until=(?P<branch>[^&]+))?",
+        r"(\?until=(?:refs(?:/|%2F)(?:heads|tags)(/|%2F))?(?P<branch>[^&]+))?",
         input_url,
     ):
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""

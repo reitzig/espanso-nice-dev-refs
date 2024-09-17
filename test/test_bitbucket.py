@@ -351,6 +351,20 @@ def test_should_label_branch_via_commits() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@feature/some-feature")
 
 
+def test_should_label_branch_via_commits_alternative() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/some-project/"
+        "commits?until=refs%2Fheads%2Ffeature%2Fsome-feature"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project@feature/some-feature")
+
+
 def test_should_label_branch_via_browse() -> None:
     # Given:
     url = (
