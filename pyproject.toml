@@ -34,7 +34,7 @@ assertpy = "1.1"
 coverage = { version = "7.6.1", extras = ["toml"] }
 poethepoet = "0.28.0"
 pytest = "8.3.3"
-ruff = "0.6.5"
+ruff = "0.6.7"
 
 [tool.poe.tasks.test]
 shell = """
