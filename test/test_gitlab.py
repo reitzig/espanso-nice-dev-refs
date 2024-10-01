@@ -37,6 +37,17 @@ def test_should_label_issue() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#77")
 
 
+def test_should_label_issue_comment() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/issues/77#note_42"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#77.42")
+
+
 def test_should_label_issue_list_by_label() -> None:
     # Given:
     url = (
@@ -140,6 +151,17 @@ def test_should_label_mr() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo!119")
+
+
+def test_should_label_mr_comment() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/merge_requests/119#note_77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo!119.77")
 
 
 def test_should_label_mr_list_by_labels() -> None:

@@ -30,8 +30,8 @@ then type any of the following:
               wiki page (& heading), gist (& file & line),
               advisories, enterprises
 - **GitLab**: repository, commit,
-              issue (& search), 
-              merge request (& search), 
+              issue (& comment, search), 
+              merge request (& comment, search), 
               file (& line), snippet,
               heading in rendered file
 - **Jenkins**
