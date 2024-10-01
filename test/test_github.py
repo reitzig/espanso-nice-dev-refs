@@ -58,6 +58,31 @@ def test_should_label_issue_and_comment() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#77.42")
 
 
+def test_should_label_issue_list_by_label() -> None:
+    # Given:
+    url = (
+        "https://github.com/my-account/some-repo/issues"
+        "?q=is%3Aissue+is%3Aopen+label%3Abug+label%3A%22feedback+needed%22"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#[bug,feedback needed]")
+
+
+def test_should_label_issue_list_with_search_query() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/issues" "?q=is%3Aissue+is%3Aopen"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#[🔍]")
+
+
 def test_should_label_discussion() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/discussions/42"
@@ -89,6 +114,20 @@ def test_should_label_pr() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo#119")
+
+
+def test_should_label_pr_list_by_label() -> None:
+    # Given:
+    url = (
+        "https://github.com/my-account/some-repo/pulls"
+        "?q=is%3Apr+is%3Aopen+label%3Adependencies+label%3A%22no+changelog%22"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#[dependencies,no changelog]")
 
 
 def test_should_label_review_comment() -> None:

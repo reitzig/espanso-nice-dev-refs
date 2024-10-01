@@ -22,8 +22,11 @@ then type any of the following:
 - **Confluence**: page (& section, comment), space
 - **DockerHub**: repository (& tag)
 - **GitHub**: repository, branch, commit,
-              issue (& comment), discussion (& comment),
-              pull request, file (& line), release, heading in rendered file,
+              issue (& comment, search),
+              discussion (& comment),
+              pull request (& comment, search) 
+              file (& line), 
+              release, heading in rendered file,
               wiki page (& heading), gist (& file & line),
               advisories, enterprises
 - **GitLab**: repository, commit,

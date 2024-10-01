@@ -199,6 +199,20 @@ def determine_label(input_url: str) -> str:
         else:
             return f"{m.group('host')}${m.group('uid')}"
     elif m := re.search(
+        r"^https://[^/]*github[^/]*"
+        r"/(?P<project>[^/]+)/(?P<repo>[^/]+)/(?:issues|pulls)"
+        r"\?q=(?P<query>[^&#]+)$",
+        input_url,
+    ):
+        labels = [
+            m.strip('"').replace("+", " ")
+            for m in re.findall(
+                r"(?:^|\+)label:(?P<label>[^+\"]+|\"[^\"]+\")", unquote(m.group("query"))
+            )
+        ]
+        search_representation = f"{','.join(labels)}" if labels else "🔍"
+        return f"{m.group('project')}/{m.group('repo')}#[{search_representation}]"
+    elif m := re.search(
         r"^https://.*jenkins.*/blue/organizations/jenkins/"
         r"(?P<job>[^/]+)"
         r"(?:/detail/(?P<subjob>[^/]+)/(?P<build>\d+)/)?"
