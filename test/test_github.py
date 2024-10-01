@@ -91,6 +91,17 @@ def test_should_label_pr() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#119")
 
 
+def test_should_label_review_comment() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/pull/42#discussion_r77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#42.77")
+
+
 def test_should_label_branch() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/tree/some-branch"
