@@ -213,6 +213,27 @@ def determine_label(input_url: str) -> str:
         search_representation = f"{','.join(labels)}" if labels else "🔍"
         return f"{m.group('project')}/{m.group('repo')}#[{search_representation}]"
     elif m := re.search(
+        r"^https://[^/]*gitlab[^/]*"
+        r"/(?P<project>[^/]+)/(?P<repo>[^/]+)/-/(?P<type>issues|merge_requests)/?\?(?P<query>[^#]+)",
+        input_url,
+    ):
+        query = [
+            [unquote(q[0]), unquote(q[1])]
+            for arg in m.group("query").split("&")
+            if (q := arg.split("="))
+        ]
+        query_labels = []
+        for k, v in query:
+            if k == "label_name[]" or k == "or[label_name][]":
+                query_labels.append(v)
+            elif k == "not[label_name][]":
+                query_labels.append(f"!{v}")
+            elif k == "search":
+                query_labels.append(f"🔍 {v}")
+        query_label = f"{','.join(query_labels)}" if query_labels else "🔍"
+        separator = "#" if m.group("type") == "issues" else "!"
+        return f"{m.group('project')}/{m.group('repo')}{separator}[{query_label}]"
+    elif m := re.search(
         r"^https://.*jenkins.*/blue/organizations/jenkins/"
         r"(?P<job>[^/]+)"
         r"(?:/detail/(?P<subjob>[^/]+)/(?P<build>\d+)/)?"
