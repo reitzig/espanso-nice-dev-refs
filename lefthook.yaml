@@ -20,4 +20,4 @@ commit-msg:
     - ref: "wip/*"
   commands:
     cog:
-      run: cog verify --file {1}
+      run: sh -c "if ! grep -q '^fixup!' {1}; then cog verify --file {1}; fi"
