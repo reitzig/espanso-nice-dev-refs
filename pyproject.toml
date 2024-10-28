@@ -16,18 +16,18 @@ readme = "README.md"
 repository = "https://github.com/reitzig/espanso-nice-dev-refs"
 documentation = "https://github.com/reitzig/espanso-nice-dev-refs/blob/main/README.md"
 classifiers = [
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Operating System :: OS Independent",
     "Topic :: Utilities",
     "Environment :: Plugins",
 ]
 
 [tool.poetry.dependencies]
-python = ">=3.13,<3.14"
+python = ">=3.9,<3.14"
 
 [tool.poetry.group.dev.dependencies]
 assertpy = "1.1"

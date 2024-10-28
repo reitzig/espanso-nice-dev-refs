@@ -17,7 +17,7 @@ Takes URLs from the clipboard and inserts a formatted link based on it.
 
 ## Installation
 
-Requirements: Python >= 3.8
+Requirements: Python >= 3.9
 
 Unfortunately, we have to perform the installation
 with a _little_ bit more finger-grease as we are used to
