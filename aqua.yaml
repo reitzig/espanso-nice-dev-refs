@@ -8,8 +8,8 @@
 #   - all
 registries:
 - type: standard
-  ref: v4.239.0 # renovate: depName=aquaproj/aqua-registry
+  ref: v4.243.0 # renovate: depName=aquaproj/aqua-registry
 packages:
 - name: cocogitto/cocogitto@6.1.0
 - name: editorconfig-checker/editorconfig-checker@v3.0.3
-- name: evilmartians/lefthook@v1.7.22
+- name: evilmartians/lefthook@v1.8.1
