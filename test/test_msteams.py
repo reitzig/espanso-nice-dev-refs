@@ -25,7 +25,7 @@ def test_should_label_message_in_channel() -> None:
         "?tenantId=631aa30f-a4a5-4df5-8d04-eaf02eecacbb"
         "&groupId=631aa30f-a4a5-4df5-8d04-eaf02eecacbb"
         "&parentMessageId=1688399036106"
-        "&teamName=Our%20Team"
+        "&teamName=Our%20(fancy)%20Team"
         "&channelName=Some%20Channel"
         "&createdTime=1688399036106"
         "&allowXTenantAccess=false"
@@ -35,7 +35,7 @@ def test_should_label_message_in_channel() -> None:
     label = determine_label(url)
 
     # Then:
-    assert_that(label).is_equal_to("Our Team > Some Channel > #1688399036106")
+    assert_that(label).is_equal_to("Our (fancy) Team > Some Channel > #1688399036106")
 
 
 # editorconfig-checker-disable
