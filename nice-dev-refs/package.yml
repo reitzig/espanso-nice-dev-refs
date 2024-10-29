@@ -46,7 +46,7 @@ matches:
           trim: true
   # "Rich" reference to some URL from clipboard
   - trigger: ":ref"
-    markdown: "[{{label}}]({{clipboard}})"
+    html: "<a href=\"{{clipboard}}\">{{label}}</a>"
     vars:
       - name: clipboard
         type: clipboard
