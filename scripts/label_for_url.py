@@ -292,7 +292,7 @@ def determine_label(input_url: str) -> str:
     ):
         space = m.group("space") if m.group("space") else ""
         title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
-        anchor = " > ".join(m.group("anchor").split("-")) if m.group("anchor") else ""
+        anchor = unquote(" > ".join(m.group("anchor").split("-"))) if m.group("anchor") else ""
         anchor = (
             anchor.replace("comment >", " > Comment", 1)
             if anchor.startswith("comment >")

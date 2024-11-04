@@ -68,14 +68,14 @@ def test_should_label_url_with_title_in_anchor_for_viewpage() -> None:
     # Given:
     url = (
         "https://our-confluence.my-org.de/pages/viewpage.action"
-        "?pageId=205489860#SomePage-Section"
+        "?pageId=205489860#SomePage-S%C3%A4ction"
     )
 
     # When:
     label = determine_label(url)
 
     # Then:
-    assert_that(label).is_equal_to("SomePage > Section")
+    assert_that(label).is_equal_to("SomePage > Säction")
 
 
 def test_should_label_url_with_title_in_args_for_releaseview() -> None:
