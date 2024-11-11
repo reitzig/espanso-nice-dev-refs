@@ -32,9 +32,9 @@ python = ">=3.9,<3.14"
 [tool.poetry.group.dev.dependencies]
 assertpy = "1.1"
 coverage = { version = "7.6.4", extras = ["toml"] }
-poethepoet = "0.29.0"
+poethepoet = "0.30.0"
 pytest = "8.3.3"
-ruff = "0.7.2"
+ruff = "0.7.3"
 
 [tool.poe.tasks.test]
 shell = """
