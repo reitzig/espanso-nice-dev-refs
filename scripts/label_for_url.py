@@ -103,7 +103,7 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"^https://[^/]*bitbucket[^/]*/plugins/servlet/search\?q=(?P<query>[^&#]+)", input_url
     ):
-        return f"🔍/{m.group('query')}/"
+        return f"🔍/{unquote(m.group('query'))}/"
     elif m := re.search(
         r"^https://[^/]*jira[^/]*/browse/(?P<project>\w+)(-(?P<issue>\d+))?"
         r"(?:\?focused(Comment)?Id=(?P<comment>\d+))?",

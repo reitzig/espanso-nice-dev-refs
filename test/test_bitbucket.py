@@ -504,7 +504,21 @@ def test_should_label_arbitrary_diff() -> None:
 
 def test_should_label_search_query() -> None:
     # Given:
-    url = "https://our-bitbucket.my-org.de/plugins/servlet/search" "?q=some search in project:STUFF"
+    url = "https://our-bitbucket.my-org.de/plugins/servlet/search?q=some search in project:STUFF"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("🔍/some search in project:STUFF/")
+
+
+def test_should_label_search_query_with_url_encoding() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/plugins/servlet/search"
+        "?q=some%20search%20in%20project:STUFF"
+    )
 
     # When:
     label = determine_label(url)
