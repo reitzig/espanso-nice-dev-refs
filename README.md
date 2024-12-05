@@ -56,7 +56,7 @@ Whether you want to fix a bug or add a feature,
 Prepare a checkout of your fork:
 
 ```shell
-pyenv local  # if you are into this kind of thing
+mise up # if you want to
 poetry install --no-root
 # activate .venv
 ```
