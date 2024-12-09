@@ -2,7 +2,7 @@
   extends :             [
     "config:best-practices",
     "schedule:weekly",
-    "github>aquaproj/aqua-renovate-config#2.5.0",
+    "github>aquaproj/aqua-renovate-config#2.6.0",
   ],
   lockFileMaintenance : {
     enabled : true
