@@ -237,7 +237,7 @@ def determine_label(input_url: str) -> str:
         r"^https://.*jenkins.*/blue/organizations/jenkins/"
         r"(?P<job>[^/]+)"
         r"(?:/detail/(?P<subjob>[^/]+)/(?P<build>\d+)/)?"
-        r"(?:/activity\?branch=(?P<branch>[^&#]+))?",
+        r"(?:/activity/?\?branch=(?P<branch>[^&#]+))?",
         input_url,
     ):
         subjob = (

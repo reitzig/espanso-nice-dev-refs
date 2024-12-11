@@ -125,6 +125,20 @@ def test_should_label_blue_ocean_multibranch_pipeline_branch() -> None:
     assert_that(label).is_equal_to("SOME_job-name:fix/some-bug")
 
 
+def test_should_label_blue_ocean_multibranch_pipeline_branch_alternative() -> None:
+    # Given:
+    url = (
+        "https://our-jenkins.my-org.de/blue/organizations/jenkins/"
+        "SOME_job-name/activity/?branch=fix%252Fsome-bug"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("SOME_job-name:fix/some-bug")
+
+
 def test_should_label_artifact() -> None:
     # Given:
     url = (
