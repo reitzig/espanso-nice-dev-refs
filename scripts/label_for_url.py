@@ -86,7 +86,7 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)"
         r"(/repos/(?P<repo>[^/]+))?"
-        r"(/(?:browse|diff)(/(?P<file>[^#?]+))?)?"
+        r"(/(?:browse|diff|raw)(/(?P<file>[^#?]+))?)?"
         r"(/branches\?base=(?:refs%2F(?:heads|tags)%2F)?(?P<branch>[^&#]+))?"
         r"(\?at=refs%2F(?:heads|tags)%2F(?P<branch_alt>[^&#]+))?"
         r"(\?(?:until|at)=(?P<commit>[a-fA-F0-9]+))?"

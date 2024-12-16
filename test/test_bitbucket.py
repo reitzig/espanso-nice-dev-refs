@@ -167,6 +167,34 @@ def test_should_label_file_and_line_on_branch() -> None:
     assert_that(label).is_equal_to("MY-PROJECT/some-project@feature/some-feature:some/file.md#42")
 
 
+def test_should_label_raw_file() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" "some-project/raw/some/file.md"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project:some/file.md")
+
+
+def test_should_label_raw_file_at_revision() -> None:
+    # Given:
+    url = (
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/raw/some/file.md"
+        "?at=refs%2Fheads%2Ffeature%2Fsome-feature"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("MY-PROJECT/some-project@feature/some-feature:some/file.md")
+
+
 def test_should_label_pr() -> None:
     # Given:
     url = (
