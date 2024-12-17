@@ -74,7 +74,10 @@ def test_should_label_issue_list_by_label() -> None:
 
 def test_should_label_issue_list_with_search_query() -> None:
     # Given:
-    url = "https://github.com/my-account/some-repo/issues" "?q=is%3Aissue+is%3Aopen"
+    url = (
+        "https://github.com/my-account/some-repo/issues"
+        "?q=is%3Aissue+is%3Aopen"
+    )  # fmt: skip
 
     # When:
     label = determine_label(url)

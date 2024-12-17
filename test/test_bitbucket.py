@@ -170,8 +170,9 @@ def test_should_label_file_and_line_on_branch() -> None:
 def test_should_label_raw_file() -> None:
     # Given:
     url = (
-        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/" "some-project/raw/some/file.md"
-    )
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "some-project/raw/some/file.md"
+    )  # fmt: skip
 
     # When:
     label = determine_label(url)

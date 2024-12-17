@@ -38,7 +38,7 @@ def test_should_label_old_school_job_build() -> None:
 
 def test_should_label_old_school_view() -> None:
     # Given:
-    url = "https://our-jenkins.my-org.de/view/" "SOME-NAME"
+    url = "https://our-jenkins.my-org.de/view/SOME-NAME"
 
     # When:
     label = determine_label(url)

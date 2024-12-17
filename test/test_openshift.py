@@ -110,8 +110,10 @@ def test_should_label_metrics_dashboard_api() -> None:
 def test_should_label_metrics_dashboard_etcd() -> None:
     # Given:
     url = (
-        "https://console-openshift.some.org/monitoring/dashboards/" "etcd-dashboard" "?cluster=etcd"
-    )
+        "https://console-openshift.some.org/monitoring/dashboards/"
+        "etcd-dashboard"
+        "?cluster=etcd"
+    )  # fmt: skip
 
     # When:
     label = determine_label(url)
