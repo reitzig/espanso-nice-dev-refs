@@ -266,6 +266,17 @@ def test_should_label_file_and_line() -> None:
     assert_that(label).is_equal_to("my-account/some-repo:some/file.md#77")
 
 
+def test_should_label_file_and_line_with_other_args() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/blob/main/some/file.md?ref_type=heads#L77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md#77")
+
+
 def test_should_label_commit() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/commit/5ad8783f34a650e6a5c8ad8948b0bdc1131e1a10"

@@ -168,6 +168,7 @@ def determine_label(input_url: str) -> str:
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/"
         r"(?:blob|tree|commit)/(?P<rev>[^/]+)"
         r"(?:/(?P<file>[^#?]+))?"
+        r"(?:\?[^#?]+)?"
         r"(?:#L(?P<line>\d+)|#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?",
         input_url,
     ):
