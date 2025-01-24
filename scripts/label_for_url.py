@@ -51,26 +51,24 @@ def determine_label(input_url: str) -> str:
         branch = f"@{unquote(m.group('branch'))}" if m.group("branch") else ""
         filename = f":{unquote(m.group('file'))}" if m.group("file") else ""
         return f"{m.group('project')}/{m.group('repo')}{commit}{branch}{filename}"
-    elif (
-        m := (
-            re.search(
-                r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
-                r"compare/(commits|diff)\?"
-                r"sourceBranch=(refs%2F(?:heads|tags)%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))&"
-                r".*"  # other args
-                r"targetBranch=(refs%2F(?:heads|tags)%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+))"
-                r"(&|#|$)",
-                input_url,
-            )
-            or re.search(
-                r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
-                r"compare/(commits|diff)\?"
-                r"(?:targetBranch=(refs%2F(?:heads|tags)%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+)&))?"
-                r".*"  # other args
-                r"sourceBranch=(refs%2F(?:heads|tags)%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))"
-                r"(&|#|$)",
-                input_url,
-            )
+    elif m := (
+        re.search(
+            r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
+            r"compare/(commits|diff)\?"
+            r"sourceBranch=(refs%2F(?:heads|tags)%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))&"
+            r".*"  # other args
+            r"targetBranch=(refs%2F(?:heads|tags)%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+))"
+            r"(&|#|$)",
+            input_url,
+        )
+        or re.search(
+            r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
+            r"compare/(commits|diff)\?"
+            r"(?:targetBranch=(refs%2F(?:heads|tags)%2F(?P<target_branch>[^&]+)|(?P<target_commit>[a-f0-9]+)&))?"
+            r".*"  # other args
+            r"sourceBranch=(refs%2F(?:heads|tags)%2F(?P<source_branch>[^&]+)|(?P<source_commit>[a-f0-9]+))"
+            r"(&|#|$)",
+            input_url,
         )
     ):
         source_branch = unquote(m.group("source_branch")) if m.group("source_branch") else ""
@@ -266,29 +264,26 @@ def determine_label(input_url: str) -> str:
         file = f":{m.group('file')}" if m.group("file") else ""
         return f"{view}{job}{subjob}{build}{file}"
     elif (
-        (
-            m := re.search(
-                r"^https://(?P<host>.*confluence.*)"
-                r"/display/(?P<space>[^/]+)"
-                r"(?:/(?P<title>[^?#]+))?"
-                r"[^#]*"
-                r"(?:pageId=(?P<pageId>[^&#]+))?"  # NB: never used, but need group to avoid errors
-                r"[^#]*"
-                r"(?:#(?P<anchor>.+))?",
-                input_url,
-            )
+        m := re.search(
+            r"^https://(?P<host>.*confluence.*)"
+            r"/display/(?P<space>[^/]+)"
+            r"(?:/(?P<title>[^?#]+))?"
+            r"[^#]*"
+            r"(?:pageId=(?P<pageId>[^&#]+))?"  # NB: never used, but need group to avoid errors
+            r"[^#]*"
+            r"(?:#(?P<anchor>.+))?",
+            input_url,
         )
-        or (
-            m := re.search(
-                r"^https://(?P<host>.*confluence.*)"
-                r"/pages/(?:viewpage|releaseview)\.action\?"
-                r"(?:spaceKey=(?P<space>[^&#]+))?"
-                r"(?:pageId=(?P<pageId>[^&#]+))?"
-                r"(?:&title=(?P<title>[^&#]+))?"
-                r"[^#]*"
-                r"(?:#(?P<anchor>.+))?",
-                input_url,
-            )
+    ) or (
+        m := re.search(
+            r"^https://(?P<host>.*confluence.*)"
+            r"/pages/(?:viewpage|releaseview)\.action\?"
+            r"(?:spaceKey=(?P<space>[^&#]+))?"
+            r"(?:pageId=(?P<pageId>[^&#]+))?"
+            r"(?:&title=(?P<title>[^&#]+))?"
+            r"[^#]*"
+            r"(?:#(?P<anchor>.+))?",
+            input_url,
         )
     ):
         space = m.group("space") if m.group("space") else ""

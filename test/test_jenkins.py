@@ -100,7 +100,7 @@ def test_should_label_blue_ocean_multibranch_pipeline() -> None:
 def test_should_label_blue_ocean_redirect() -> None:
     # Given:
     url = (
-        "https://our-jenkins.my-org.de/job/"
+        "https://our-jenkins.my-org.de/job/"  # keep linebreak
         "SOME_job-name/job/fix%252Fsome-bug/25/display/redirect"
     )
 

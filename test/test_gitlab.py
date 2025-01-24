@@ -51,7 +51,7 @@ def test_should_label_issue_comment() -> None:
 def test_should_label_issue_list_by_label() -> None:
     # Given:
     url = (
-        "https://gitlab.some.org/my-account/some-repo/-/issues/"
+        "https://gitlab.some.org/my-account/some-repo/-/issues/"  # keep linebreak
         "?label_name%5B%5D=feedback%20needed"
     )
 

@@ -39,7 +39,7 @@ def test_should_label_user_repository() -> None:
 def test_should_label_file() -> None:
     # Given:
     url = (
-        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"  # keep linebreak
         "some-project/browse/some/file.md"
     )
 
@@ -199,7 +199,7 @@ def test_should_label_raw_file_at_revision() -> None:
 def test_should_label_pr() -> None:
     # Given:
     url = (
-        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"  # keep linebreak
         "some-project/pull-requests/77/"
     )
 
@@ -456,7 +456,7 @@ def test_should_label_diff_of_tag_and_commit() -> None:
 def test_should_label_tag_via_branches() -> None:
     # Given:
     url = (
-        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"
+        "https://our-bitbucket.my-org.de/projects/MY-PROJECT/repos/"  # keep linebreak
         "some-project/branches?base=1.2.3"
     )
 
