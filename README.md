@@ -57,7 +57,7 @@ Prepare a checkout of your fork:
 
 ```shell
 mise up # if you want to
-poetry install --no-root
+uv sync
 # activate .venv
 ```
 
