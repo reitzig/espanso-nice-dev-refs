@@ -1,4 +1,4 @@
-[![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
+[![uv](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json)](https://github.com/astral-sh/uv)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![license](https://img.shields.io/github/license/reitzig/espanso-nice-dev-refs.svg)](https://github.com/reitzig/espanso-nice-dev-refs/main/LICENSE)
 [![GitHub release date](https://img.shields.io/github/tag-date/reitzig/espanso-nice-dev-refs.svg)](https://github.com/reitzig/espanso-nice-dev-refs/tags)
