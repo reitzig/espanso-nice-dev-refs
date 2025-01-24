@@ -1,5 +1,10 @@
 rc: .config/lefthook.rc
 
+post-checkout:
+  commands:
+    update-venv:
+      glob: "uv.lock"
+      run: uv sync
 pre-commit:
   piped: true
   commands:
