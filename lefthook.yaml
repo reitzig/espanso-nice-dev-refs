@@ -1,8 +1,14 @@
 rc: .config/lefthook.rc
 
 post-checkout:
+  piped: true
   commands:
+    update-tools:
+      priority: 1
+      glob: "mise.toml"
+      run: mise install
     update-venv:
+      priority: 2
       glob: "uv.lock"
       run: uv sync
 pre-commit:
