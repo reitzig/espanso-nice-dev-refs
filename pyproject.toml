@@ -1,20 +1,14 @@
-[build-system]
-requires = ["poetry_core>=1.7.0"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry]
+[project]
+authors = [
+    {name = "Raphael Reitzig", email = "4246780+reitzig@users.noreply.github.com"},
+]
+maintainers = [
+    {name = "Raphael Reitzig", email = "4246780+reitzig@users.noreply.github.com"},
+]
 name = "espanso-nice-dev-refs"
 version = "0.0.0" # not used, cf. nice-dev-refs/_manifest.yml
 description = "A package for espanso; takes URLs from the clipboard and inserts a formatted link based on it."
-authors = [
-    "Raphael Reitzig <4246780+reitzig@users.noreply.github.com>",
-]
-maintainers = [
-    "Raphael Reitzig <4246780+reitzig@users.noreply.github.com>",
-]
 readme = "README.md"
-repository = "https://github.com/reitzig/espanso-nice-dev-refs"
-documentation = "https://github.com/reitzig/espanso-nice-dev-refs/blob/main/README.md"
 classifiers = [
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -25,16 +19,21 @@ classifiers = [
     "Topic :: Utilities",
     "Environment :: Plugins",
 ]
+requires-python = ">=3.9,<3.14"
+dependencies = []
 
-[tool.poetry.dependencies]
-python = ">=3.9,<3.14"
+[project.urls]
+repository = "https://github.com/reitzig/espanso-nice-dev-refs"
+documentation = "https://github.com/reitzig/espanso-nice-dev-refs/blob/main/README.md"
 
-[tool.poetry.group.dev.dependencies]
-assertpy = "1.1"
-coverage = { version = "7.6.10", extras = ["toml"] }
-poethepoet = "0.32.1"
-pytest = "8.3.4"
-ruff = "0.9.2"
+[dependency-groups]
+dev = [
+    "assertpy==1.1",
+    "coverage[toml]==7.6.10",
+    "poethepoet==0.32.1",
+    "pytest==8.3.4",
+    "ruff==0.9.2",
+]
 
 [tool.poe.tasks.test]
 shell = """

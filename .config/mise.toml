@@ -1,6 +1,7 @@
 [tools]
 python = "3.13"
-poetry = "1.8"
+uv = "0.5"
 
 # TODO: migrate ../aqua.yaml here?
 #       If so, adapt Renovate config!
+#       cf. https://github.com/jdx/mise/discussions/1940
