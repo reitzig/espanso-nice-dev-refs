@@ -20,7 +20,7 @@
       automergeType :  "branch"
     },
     {
-      matchManagers :    ["poetry", "github-actions"],
+      matchManagers :    ["pep621", "github-actions"],
       matchUpdateTypes : ["lockFileMaintenance", "digest", "patch", "minor"],
       groupName :        "dev dependencies (non-major)",
       automerge :        true,
