@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
       - name: Install tooling
-        uses: jdx/mise-action@53d027c2e96fed8f955f5d95bff910a3e031cc58 # v2
+        uses: jdx/mise-action@5083fe46898c414b2475087cc79da59e7da859e8 # v2
       - name: Switch to Python ${{ matrix.python-version }}
         run: "mise use python@${{ matrix.python-version }}"
       - name: Install dependencies
