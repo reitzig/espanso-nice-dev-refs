@@ -135,17 +135,20 @@ def determine_label(input_url: str) -> str:
         filename = f":{'-'.join(filename_parts)}" if fileline_parts else ""
         line = f"#{line_part.replace('L', '')}" if line_part else ""
         return f"{m.group('account')}/{m.group('uid')[0:6]}{filename}{line}"
-    elif m := re.search(r"^https://github.com/advisories/(?P<id>[^[/?#]+)(?:[/?#]|$)", input_url):
+    elif m := re.search(
+        r"^https://github.com/(?:enterprises|orgs|advisories)/(?P<id>[^[/?#]+)(?:[/?#]|$)",
+        input_url,
+    ):
         return m.group("id")
     elif m := re.search(
         r"https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/#?]+)/?"
         r"(?:wiki/(?P<wiki_page>[^/#?]+))?"
         r"(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?"
         r"(?:\?.*)?"
-        r"$",
+        r"$",  # NB: Include $ to not prematurely match any of the next two cases
         input_url,
-    ):  # NB: Include $ to not prematurely match any of the next two cases
-        project = f"{m.group('project')}/" if m.group("project") != "enterprises" else ""
+    ):
+        project = f"{m.group('project')}/"
         wiki_page = f" > {prettify(m.group('wiki_page'))}" if m.group("wiki_page") else ""
         anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
         return f"{project}{m.group('repo')}{wiki_page}{anchor}"

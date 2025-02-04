@@ -330,3 +330,16 @@ def test_should_label_enterprise() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-big-company")
+
+    # https://github.com/orgs/oscare-Digital-Layer/repositories
+
+
+def test_should_label_organization() -> None:
+    # Given:
+    url = "https://github.com/orgs/my-cool-org/repositories"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-cool-org")

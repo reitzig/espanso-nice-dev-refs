@@ -28,7 +28,7 @@ then type any of the following:
               file (& line), 
               release, heading in rendered file,
               wiki page (& heading), gist (& file & line),
-              advisories, enterprises
+              advisories, enterprises, organizations
 - **GitLab**: repository, commit,
               issue (& comment, search), 
               merge request (& comment, search), 
