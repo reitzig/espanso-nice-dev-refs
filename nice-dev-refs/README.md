@@ -38,7 +38,7 @@ then type any of the following:
     - build artifacts
     - classic: "simple" job (& build), multi-branch pipeline (& build), view;
     - BlueOcean: job build, multi-branch pipeline build
-- **Jira**: project, issue (& comment)
+- **Jira**: project, issue (& comment), service desk tickets
 - **MS Teams**: channels, messages in channels
 - **OpenShift**: project, workload, storage, (some) dashboard(s)
 - **Stack Exchange**: question, answer

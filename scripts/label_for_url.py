@@ -112,6 +112,11 @@ def determine_label(input_url: str) -> str:
         comment = f".{m.group('comment')}" if m.group("comment") else ""
         return f"{project}{issue}{comment}"
     elif m := re.search(
+        r"^https://[^/]*jira[^/]*/servicedesk/customer/portal/(?P<desk_id>\d+)/(?P<ticket>[\w-]+)",
+        input_url,
+    ):
+        return f"{m.group('ticket')}"
+    elif m := re.search(
         r"^https://[^/]*youtrack[^/]*/issue/(?P<issue>\w+-\d+)"
         r"(?:/[^#]*#focus=Comments-\d+-(?P<comment>[0-9]+))?",
         input_url,
