@@ -1,0 +1,3 @@
+[tasks.install-local-completions]
+hide = true
+run = 'echo skip:'
