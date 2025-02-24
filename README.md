@@ -76,13 +76,6 @@ poe lint
 poe test
 ```
 
-Other tools can be installed with
-    [aqua](https://github.com/aquaproj/aqua):
-
-```bash
-aqua install
-```
-
 We include configuration for
     [evilmartians/lefthook](https://github.com/evilmartians/lefthook)
 which we encourage you to use:

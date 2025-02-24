@@ -1,23 +1,19 @@
 {
+  $schema :             "https://docs.renovatebot.com/renovate-schema.json",
   extends :             [
     "config:best-practices",
     "schedule:weekly",
-    "github>aquaproj/aqua-renovate-config#2.6.0",
   ],
   lockFileMaintenance : {
     enabled : true
   },
   packageRules :        [
     {
-      matchFileNames : ["**/aqua.yaml"],
-      enabled :        true,
-    },
-    {
-      matchFileNames : ["**/aqua.yaml"],
+      matchFileNames :   ["**/mise.toml"],
       matchUpdateTypes : ["patch", "minor"],
-      groupName :      "dev tools (non-major)",
-      automerge :      true,
-      automergeType :  "branch"
+      groupName :        "dev tools (non-major)",
+      automerge :        true,
+      automergeType :    "branch"
     },
     {
       matchManagers :    ["pep621", "github-actions"],
@@ -25,6 +21,25 @@
       groupName :        "dev dependencies (non-major)",
       automerge :        true,
       automergeType :    "branch"
+    },
+  ],
+  customManagers :      [
+    {
+      description :    [
+        "Until the mise managers is mature enough, use comment syntax similar to packages in Dockerfiles",
+        "refs: https://docs.renovatebot.com/presets-customManagers/#custommanagersdockerfileversions",
+        "refs: https://github.com/jdx/mise/discussions/1940",
+      ],
+      customType :     "regex",
+      fileMatch : [
+        // cf. https://mise.jdx.dev/configuration.html#mise-toml
+        "(^|/)\.?mise(\.[^.]+)*\.toml",
+        "(^|/)\.?mise/config\.toml",
+        "(^|/)\.?mise/conf.d/.+\.toml",
+      ],
+      matchStrings :   [
+        "# renovate: datasource=(?<datasource>[a-zA-Z0-9-._]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s[\"']?[^\"'=]+[\"']?\\s*=\\s*[\"']?(?<currentValue>.+?)[\"']?\\s",
+      ],
     },
   ],
 }
