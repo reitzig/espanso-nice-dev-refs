@@ -1,8 +1,25 @@
 [tools]
 python = "3.13"
-uv = "0.6"
-editorconfig-checker = "3.1"
+
+[tools.uv]
+version = "0.6"
+postinstall = "mise run install-local-completions uv generate-shell-completion"
+
+[tools.editorconfig-checker]
+version = "3.1"
+
+[tools.lefthook]
 # renovate: datasource=github-releases depName=evilmartians/lefthook
-lefthook = "1.10"
+version = "1.10"
+postinstall = 'mise run install-local-completions lefthook completion'
+
+[tools."aqua:cocogitto/cocogitto"] # TODO: simplify after https://github.com/jdx/mise/pull/4513
 # renovate: datasource=github-releases depName=cocogitto/cocogitto
-"aqua:cocogitto/cocogitto" = "6.2" # TODO: simplify after https://github.com/jdx/mise/pull/4513
+version = "6.2"
+postinstall = 'mise run install-local-completions cog generate-completions'
+
+# implement in mise.local.toml or ~/.config/mise.toml
+# cf. https://gist.github.com/reitzig/2885464e5c2fcc0f84bda9e1dae4f7b1
+# [tasks.install-local-completions]
+# hide = true
+# run = '<your code>'
