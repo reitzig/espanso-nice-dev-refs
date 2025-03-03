@@ -6,11 +6,11 @@ version = "0.6"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.1"
+version = "3.2.0"
 
 [tools.lefthook]
 # renovate: datasource=github-releases depName=evilmartians/lefthook
-version = "1.10"
+version = "v1.11.2"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto] # TODO: simplify after https://github.com/jdx/mise/pull/4513
