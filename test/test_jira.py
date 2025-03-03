@@ -58,12 +58,11 @@ def test_should_label_issue_and_comment_alternative() -> None:
     # Then:
     assert_that(label).is_equal_to("FANCY-77.123456")
 
+
 def test_should_label_servicedesk_issue() -> None:
     # https://our-jira.my-org.de/servicedesk/customer/portal/77/SUPPORT-123
     # Given:
-    url = (
-        "https://our-jira.my-org.de/servicedesk/customer/portal/77/SUPPORT-123"
-    )
+    url = "https://our-jira.my-org.de/servicedesk/customer/portal/77/SUPPORT-123"
 
     # When:
     label = determine_label(url)

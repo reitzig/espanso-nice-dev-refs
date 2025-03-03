@@ -364,8 +364,18 @@ def determine_label(input_url: str) -> str:
         input_url,
     ):
         return f"{unquote(m.group('team'))} > {unquote(m.group('channel'))} > #{m.group('id')}"
-    elif m := re.search(r"\w+://(www\d*\.)?(?P<path>[^?]+)", input_url):
-        return m.group("path").strip(" /")
+    elif m := re.search(
+        r"\w+://(www\d*\.)?(?P<path>[^?#]+)"
+        r"(?:#:~:text=(?P<text_fragment>[^?#]+))?",
+        input_url,
+    ):
+        path = m.group("path").strip(" /")
+        fragment = f" > {unquote(m.group('text_fragment'))}" if m.group("text_fragment") else ""
+        if (
+            len(fragment) > 23
+        ):  # NB: arbitrary decision to cap to the first 19 chars of the fragment
+            fragment = fragment[:23] + "…"
+        return f"{path}{fragment}"
     else:
         # This doesn't even try to look like a URL -- NOP
         return input_url
