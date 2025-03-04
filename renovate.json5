@@ -9,11 +9,13 @@
   },
   packageRules :        [
     {
-      matchFileNames :   ["**/mise.toml"],
+      matchFileNames :   ["**/mise.toml", "**/mise.lock"],
       matchUpdateTypes : ["patch", "minor"],
       groupName :        "dev tools (non-major)",
-      automerge :        true,
-      automergeType :    "branch"
+      // NB: Neither mise manager nor the custom one below handle "rolling versions" correctly;
+      //     mise.lock is not supported at all. So, manual work is needed, unfortunately.
+      //automerge :        true,
+      //automergeType :    "branch"
     },
     {
       matchManagers :    ["pep621", "github-actions"],
