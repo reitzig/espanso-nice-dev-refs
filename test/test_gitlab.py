@@ -334,3 +334,25 @@ def test_should_label_global_snippet() -> None:
 
 
 # TODO: line in snippet?
+
+
+def test_should_label_pipeline() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/pipelines/123456"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#123456")
+
+
+def test_should_label_job() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/jobs/123456"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#123456")
