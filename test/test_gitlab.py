@@ -164,6 +164,28 @@ def test_should_label_mr_comment() -> None:
     assert_that(label).is_equal_to("my-account/some-repo!119.77")
 
 
+def test_should_label_mr_commit() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/merge_requests/119/diffs?commit_id=83ab20b09fe424c09ae07c0a16bbca1e12c6f5f7"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo!119@83ab20b0")
+
+
+def test_should_label_mr_commit_and_comment() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/merge_requests/119/diffs?commit_id=83ab20b09fe424c09ae07c0a16bbca1e12c6f5f7#note_681200"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo!119@83ab20b0.681200")
+
+
 def test_should_label_mr_list_by_labels() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/merge_requests?label_name%5B%5D=Doing"

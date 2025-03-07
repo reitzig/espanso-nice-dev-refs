@@ -160,6 +160,7 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/("
         r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
+        r"(/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
         r"(#((issue|discussion)comment-|discussion_r|note_)(?P<comment_id>\d+))?)"
         r"|(releases/tag/(?P<release_tag>[^/#?]+))"
         r")",
@@ -167,9 +168,10 @@ def determine_label(input_url: str) -> str:
     ):
         number_prefix = "!" if m.group("number") and m.group("type") == "merge_requests" else "#"
         number = f"{number_prefix}{m.group('number')}" if m.group("number") else ""
+        commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
         comment_id = f".{m.group('comment_id')}" if m.group("comment_id") else ""
         release_tag = f"@{m.group('release_tag')}" if m.group("release_tag") else ""
-        return f"{m.group('project')}/{m.group('repo')}{number}{comment_id}{release_tag}"
+        return f"{m.group('project')}/{m.group('repo')}{number}{commit}{comment_id}{release_tag}"
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/"
         r"(?:blob|tree|commit)/(?P<rev>[^/]+)"
