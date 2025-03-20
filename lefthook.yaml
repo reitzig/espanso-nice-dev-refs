@@ -31,5 +31,4 @@ commit-msg:
     - ref: "wip/*"
   commands:
     cog:
-      run: sh -c "if ! grep -q '^fixup!' {1}; then cog verify --file {1}; fi"
-      # TODO: simplify after https://github.com/cocogitto/cocogitto/issues/403
+      run: cog verify --ignore-fixup-commits --file {1}

@@ -1,9 +1,9 @@
 [tools.cocogitto]
-version = "6.2.0"
+version = "6.3.0"
 backend = "aqua:cocogitto/cocogitto"
 
 [tools.cocogitto.checksums]
-"cocogitto-6.2.0-x86_64-unknown-linux-musl.tar.gz" = "sha256:27199419df2ada5cae3bddd2228e27a292d15fcd7e4593d85da1e91e0311e787"
+"cocogitto-6.3.0-x86_64-unknown-linux-musl.tar.gz" = "sha256:046dbc0ea190528f5a028a64ed761d605f4be85de3a6e469174139331eb058bb"
 
 [tools.editorconfig-checker]
 version = "3.2.1"
