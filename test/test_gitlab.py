@@ -14,6 +14,16 @@ def test_should_label_repository() -> None:
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo")
 
+def test_should_label_subgroups() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-group/my-subgroup/some-repo"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-group/my-subgroup/some-repo")
+
 
 def test_should_label_repo_and_anchor() -> None:
     # Given:
