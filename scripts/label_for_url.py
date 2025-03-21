@@ -146,19 +146,7 @@ def determine_label(input_url: str) -> str:
     ):
         return m.group("id")
     elif m := re.search(
-        r"https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/#?]+)/?"
-        r"(?:wiki/(?P<wiki_page>[^/#?]+))?"
-        r"(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?"
-        r"(?:\?.*)?"
-        r"$",  # NB: Include $ to not prematurely match any of the next two cases
-        input_url,
-    ):
-        project = f"{m.group('project')}/"
-        wiki_page = f" > {prettify(m.group('wiki_page'))}" if m.group("wiki_page") else ""
-        anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
-        return f"{project}{m.group('repo')}{wiki_page}{anchor}"
-    elif m := re.search(
-        r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/("
+        r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z\-/]+?)/(?P<repo>[^/]+)(/-)?/("
         r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
         r"(/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
         r"(#((issue|discussion)comment-|discussion_r|note_)(?P<comment_id>\d+))?)"
@@ -173,7 +161,7 @@ def determine_label(input_url: str) -> str:
         release_tag = f"@{m.group('release_tag')}" if m.group("release_tag") else ""
         return f"{m.group('project')}/{m.group('repo')}{number}{commit}{comment_id}{release_tag}"
     elif m := re.search(
-        r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[^/]+)/(?P<repo>[^/]+)(/-)?/"
+        r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z\-/]+?)/(?P<repo>[^/]+)(/-)?/"
         r"(?:blob|tree|commit)/(?P<rev>[^/]+)"
         r"(?:/(?P<file>[^#?]+))?"
         r"(?:\?[^#?]+)?"
@@ -199,7 +187,7 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('project')}/{m.group('repo')}{rev}{reference}"
     elif m := re.search(
         r"^https://(?P<host>[^/]*gitlab[^/]*)"
-        r"(/(?P<project>[^/]+)/(?P<repo>[^/]+))?/-/snippets/"
+        r"(/(?P<project>[a-zA-Z\-/]+?)/(?P<repo>[^/]+))?/-/snippets/"
         r"(?P<uid>[^/?#]+)",
         input_url,
     ):
@@ -242,6 +230,18 @@ def determine_label(input_url: str) -> str:
         query_label = f"{','.join(query_labels)}" if query_labels else "🔍"
         separator = "#" if m.group("type") == "issues" else "!"
         return f"{m.group('project')}/{m.group('repo')}{separator}[{query_label}]"
+    elif m := re.search(
+            r"https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z\-/]+?)/(?P<repo>[^/#?]+)/?"
+            r"(?:wiki/(?P<wiki_page>[^/#?]+))?"
+            r"(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?"
+            r"(?:\?.*)?"
+            r"$",  # NB: Include $ to not prematurely match any of the next two cases
+            input_url,
+    ):
+        project = f"{m.group('project')}/"
+        wiki_page = f" > {prettify(m.group('wiki_page'))}" if m.group("wiki_page") else ""
+        anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
+        return f"{project}{m.group('repo')}{wiki_page}{anchor}"
     elif m := re.search(
         r"^https://.*jenkins.*/blue/organizations/jenkins/"
         r"(?P<job>[^/]+)"
