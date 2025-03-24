@@ -15,14 +15,6 @@ def prettify(anchor_arg: str) -> str:
     return a.strip()
 
 
-# TODO: Python >=3.9: Remove and replace usages with removeprefix
-# From: https://stackoverflow.com/q/16891340/539599
-def remove_prefix(text: str, prefix: str) -> str:
-    if text.startswith(prefix):
-        return text[len(prefix) :]
-    return text
-
-
 def determine_label(input_url: str) -> str:
     if m := re.search(r"^mailto:(?P<email>.+@.+)$", input_url):
         return f"{m.group('email')}"
@@ -353,7 +345,7 @@ def determine_label(input_url: str) -> str:
             else:
                 cluster = f"{options['cluster']}" if options.get("cluster") else ""
                 host = m.group("host") if not options.get("cluster") else ""
-                dashboard = prettify(remove_prefix(m.group("dashboard"), "grafana-dashboard-"))
+                dashboard = prettify(m.group("dashboard").removeprefix("grafana-dashboard-"))
                 return f"{host}{cluster} > {dashboard}"
     elif m := re.search(
         r"^https://teams.microsoft.com/l/channel/[^/]+/(?P<channel>[^?/$]+)", input_url
