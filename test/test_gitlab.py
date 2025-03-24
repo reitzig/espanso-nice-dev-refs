@@ -4,6 +4,28 @@ from assertpy import assert_that
 from label_for_url import determine_label
 
 
+def test_should_label_group() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account")
+
+
+def test_should_label_subgroup() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-group/my-subgroup"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-group/my-subgroup")
+
+
 def test_should_label_repository() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo"

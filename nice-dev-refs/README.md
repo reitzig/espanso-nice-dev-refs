@@ -29,7 +29,7 @@ then type any of the following:
               release, heading in rendered file,
               wiki page (& heading), gist (& file & line),
               advisories, enterprises, organizations
-- **GitLab**: repository, commit,
+- **GitLab**: (sub)group, repository, commit,
               issue (& comment, search),
               merge request (& comment, search),
               pipeline, job,

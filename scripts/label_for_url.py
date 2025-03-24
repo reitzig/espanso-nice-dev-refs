@@ -7,7 +7,7 @@ from urllib.parse import unquote
 
 # TODO: refactor into loop over (regexp, lambda)
 # TODO: make the list extendable -- how?
-#       use case: AOK Systems Dev Handbook
+#       use case: context-specific documentation websites
 
 
 def prettify(anchor_arg: str) -> str:
@@ -144,7 +144,7 @@ def determine_label(input_url: str) -> str:
         r"^https://github.com/(?:enterprises|orgs|advisories)/(?P<id>[^[/?#]+)(?:[/?#]|$)",
         input_url,
     ):
-        return m.group("id")
+        return f"{m.group('id')}"
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)(/-)?/("
         r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
@@ -231,17 +231,17 @@ def determine_label(input_url: str) -> str:
         separator = "#" if m.group("type") == "issues" else "!"
         return f"{m.group('project')}/{m.group('repo')}{separator}[{query_label}]"
     elif m := re.search(
-        r"https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z\-/]+?)/(?P<repo>[^/#?]+)/?"
+        r"https://[^/]*git(hub|lab)[^/]*/(?P<project>.+?)/?"
         r"(?:wiki/(?P<wiki_page>[^/#?]+))?"
         r"(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?"
         r"(?:\?.*)?"
-        r"$",  # NB: Include $ to not prematurely match any of the next two cases
+        r"$",
         input_url,
     ):
-        project = f"{m.group('project')}/"
+        project = f"{m.group('project')}"
         wiki_page = f" > {prettify(m.group('wiki_page'))}" if m.group("wiki_page") else ""
         anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
-        return f"{project}{m.group('repo')}{wiki_page}{anchor}"
+        return f"{project}{wiki_page}{anchor}"
     elif m := re.search(
         r"^https://.*jenkins.*/blue/organizations/jenkins/"
         r"(?P<job>[^/]+)"
