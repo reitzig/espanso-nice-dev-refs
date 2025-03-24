@@ -29,10 +29,10 @@ documentation = "https://github.com/reitzig/espanso-nice-dev-refs/blob/main/READ
 [dependency-groups]
 dev = [
     "assertpy==1.1",
-    "coverage[toml]==7.7.0",
+    "coverage[toml]==7.7.1",
     "poethepoet==0.33.1",
     "pytest==8.3.5",
-    "ruff==0.11.0",
+    "ruff==0.11.2",
 ]
 
 [tool.poe.tasks.test]
