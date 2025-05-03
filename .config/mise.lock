@@ -13,19 +13,19 @@ backend = "aqua:editorconfig-checker/editorconfig-checker"
 "ec-linux-amd64.tar.gz" = "sha256:e6c4e61733d3f76c308468da5121bf27b3d43b0d18b7b478b5a80e4199bc91be"
 
 [tools.lefthook]
-version = "1.11.5"
+version = "1.11.11"
 backend = "aqua:evilmartians/lefthook"
 
 [tools.lefthook.checksums]
-"lefthook_1.11.5_Linux_x86_64.gz" = "sha256:4cdc8a46f33706868efaca729f6b8800ecd6b4bd05b6330c832bb4bfa35011b3"
+"lefthook_1.11.11_Linux_x86_64.gz" = "sha256:01c73cea0cd25bd8b11480fecd3e1722d05c64754e6b8b85e7f6efa6d5e27f84"
 
 [tools.python]
-version = "3.13.2"
+version = "3.13.3"
 backend = "core:python"
 
 [tools.uv]
-version = "0.6.9"
+version = "0.6.17"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv.checksums]
-"uv-x86_64-unknown-linux-musl.tar.gz" = "sha256:2b2914da53f9412a1aad7457cee424680da037e6a49c378365c3b5ff5ef0b926"
+"uv-x86_64-unknown-linux-musl.tar.gz" = "sha256:28bd6b50be068cc09d8a46b76f8c4b72271d471c6673a5bdb47793622e62224d"
