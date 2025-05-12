@@ -6,11 +6,11 @@ backend = "aqua:cocogitto/cocogitto"
 "cocogitto-6.3.0-x86_64-unknown-linux-musl.tar.gz" = "sha256:046dbc0ea190528f5a028a64ed761d605f4be85de3a6e469174139331eb058bb"
 
 [tools.editorconfig-checker]
-version = "3.2.1"
+version = "3.3.0"
 backend = "aqua:editorconfig-checker/editorconfig-checker"
 
 [tools.editorconfig-checker.checksums]
-"ec-linux-amd64.tar.gz" = "sha256:e6c4e61733d3f76c308468da5121bf27b3d43b0d18b7b478b5a80e4199bc91be"
+"ec-linux-amd64.tar.gz" = "sha256:923b80494b09b362d4fdb0d706913b67da0d60b4e2d34e5e346aa7e4118d6ab3"
 
 [tools.lefthook]
 version = "1.11.11"

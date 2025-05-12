@@ -6,7 +6,7 @@ version = "0.7"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.2"
+version = "3.3"
 
 [tools.lefthook]
 # renovate: datasource=github-releases depName=evilmartians/lefthook
