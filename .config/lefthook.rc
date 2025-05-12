@@ -1,2 +1,1 @@
 eval "$(mise env -s bash)"
-export PATH="$(aqua root-dir)/bin:${PATH}"
