@@ -278,7 +278,7 @@ def determine_label(input_url: str) -> str:
         )
     ) or (
         m := re.search(
-            r"^https://(?P<host>.*confluence.*)"
+            r"^https://(?P<host>[^/]*confluence[^/]*)"
             r"/pages/(?:viewpage|releaseview)\.action\?"
             r"(?:spaceKey=(?P<space>[^&#]+))?"
             r"(?:pageId=(?P<pageId>[^&#]+))?"
@@ -298,6 +298,25 @@ def determine_label(input_url: str) -> str:
         )
         page_id = f"/{m.group('pageId')}" if m.group("pageId") else ""
         return f"{space}{title}{anchor}" or f"{m.group('host')}{page_id}"
+    elif m := re.search(
+        r"^https://[^/]*atlassian\.(?:com|net)/wiki"
+        r"/spaces/(?P<space>[^/]+)"
+        r"(?:/pages/[0-9]+/(?P<title>[^?#]+))?"
+        r"(?:\?(?P<args>.*))?",
+        input_url,
+    ):
+        space = m.group("space")
+        title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
+
+        comment = ""
+        if m.group("args"):
+            args = m.group("args").split("&")  # ["focusedCommentId=43245234", "test=abc"]
+            for key, value in [arg.split("=") for arg in args]:
+                if key == "focusedCommentId":
+                    comment = f" > Comment {value}"
+                    break
+
+        return f"{space}{title}{comment}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
         r"(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?",
