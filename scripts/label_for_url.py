@@ -95,7 +95,7 @@ def determine_label(input_url: str) -> str:
     ):
         return f"🔍/{unquote(m.group('query'))}/"
     elif m := re.search(
-        r"^https://[^/]*jira[^/]*/browse/(?P<project>\w+)(-(?P<issue>\d+))?"
+        r"^https://[^/]*(jira|atlassian)[^/]*/browse/(?P<project>\w+)(-(?P<issue>\d+))?"
         r"(?:\?focused(Comment)?Id=(?P<comment>\d+))?",
         input_url,
     ):
@@ -104,7 +104,7 @@ def determine_label(input_url: str) -> str:
         comment = f".{m.group('comment')}" if m.group("comment") else ""
         return f"{project}{issue}{comment}"
     elif m := re.search(
-        r"^https://[^/]*jira[^/]*/servicedesk/customer/portal/(?P<desk_id>\d+)/(?P<ticket>[\w-]+)",
+        r"^https://[^/]*(jira|atlassian)[^/]*/servicedesk/customer/portal/(?P<desk_id>\d+)/(?P<ticket>[\w-]+)",
         input_url,
     ):
         return f"{m.group('ticket')}"
