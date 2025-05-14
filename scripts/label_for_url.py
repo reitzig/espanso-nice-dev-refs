@@ -298,6 +298,28 @@ def determine_label(input_url: str) -> str:
         )
         page_id = f"/{m.group('pageId')}" if m.group("pageId") else ""
         return f"{space}{title}{anchor}" or f"{m.group('host')}{page_id}"
+    elif  (
+            m := re.search(
+                r"^https://(?P<org>.*atlassian.*)"
+                r"/wiki/spaces/(?P<space>[^/]+)"
+                r"(?:/pages/(?P<pageId>.*/(?P<title>[^?#]+))?)?"
+                r"\??(?P<args>.*)",
+                input_url,
+            )
+    ):
+        space = m.group("space") if m.group("space") else ""
+        title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
+        args = m.group("args").split("&") # ["focusedCommentId=43245234", "test=abc"]
+
+        args = args[0].split("=") if args[0].startswith("focusedCommentId") else args
+        args = (" > ".join(args) if args[0] == "focusedCommentId" else "")
+        args = (
+            args.replace("focusedCommentId >", " > Comment", 1)
+            if args.startswith("focusedCommentId >")
+            else args
+        )
+        page_id = f"/{m.group('pageId')}" if m.group("pageId") else ""
+        return f"{space}{title}{args}" or f"{m.group('host')}{page_id}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
         r"(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?",
