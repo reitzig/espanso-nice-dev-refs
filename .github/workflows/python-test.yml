@@ -21,6 +21,7 @@ jobs:
       - name: Install tooling
         uses: jdx/mise-action@c94f0bf9e520b150e34c017db785461f7e71c5fb # v2
         with:
+          # TODO: remove after https://github.com/jdx/mise/discussions/5001 is fixed
           version: 2025.4.4
       - name: Switch to Python ${{ matrix.python-version }}
         run: "mise use python@${{ matrix.python-version }}"

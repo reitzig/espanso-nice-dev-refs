@@ -355,7 +355,7 @@ def determine_label(input_url: str) -> str:
         if namespace := m.group("namespace"):
             resource_name = m.group("resource_name")
             return f"{namespace}/{resource_name}"
-        if options := m.group("dashboard_options"):  # noqa: RET503 -- false positive
+        if options := m.group("dashboard_options"):
             options = dict([option.split("=") for option in options.split("&")])
             if namespace := options.get("namespace"):
                 cluster = f"{options['cluster']}/" if options.get("cluster") else ""
@@ -366,6 +366,7 @@ def determine_label(input_url: str) -> str:
                 host = m.group("host") if not options.get("cluster") else ""
                 dashboard = prettify(m.group("dashboard").removeprefix("grafana-dashboard-"))
                 return f"{host}{cluster} > {dashboard}"
+        raise f"Not yet implemented: {input_url}"
     elif m := re.search(
         r"^https://teams.microsoft.com/l/channel/[^/]+/(?P<channel>[^?/$]+)", input_url
     ):
