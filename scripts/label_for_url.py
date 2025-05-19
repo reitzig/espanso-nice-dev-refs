@@ -235,6 +235,35 @@ def determine_label(input_url: str) -> str:
         anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
         return f"{project}{wiki_page}{anchor}"
     elif m := re.search(
+        r"^https://[^/]*gitea[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)"
+        r"(/pulls/(?P<number>\d+)(?:/commits/(?P<pr_commit>[a-f0-9]+))?(#issuecomment-(?P<comment_id>\d+))?)?"
+        r"((?:/src)?/(?:branch/(?P<branch>[^/#?]+)|commit/(?P<commit>[a-f0-9]+))(?:/(?P<file>[^#?]+)(?:#L(?P<line>\d+))?)?)?",
+        input_url,
+    ):
+        number = f"#{m.group('number')}" if m.group("number") else ""
+        branch = (
+            f"@{m.group('branch')}"
+            if m.group("branch") and m.group("branch") not in ["main", "master"]
+            else ""
+        )
+        commit = (
+            f"@{m.group('commit')[0:8]}"
+            if m.group("commit")
+            else f"@{m.group('pr_commit')[0:8]}"
+            if m.group("pr_commit")
+            else ""
+        )
+        comment_id = f".{m.group('comment_id')}" if m.group("comment_id") else ""
+        if m.group("file"):
+            filename = m.group("file").strip("/")
+            line = f"#{m.group('line')}" if m.group("line") else ""
+            reference = f":{filename}{line}"
+        else:
+            reference = ""
+        return (
+            f"{m.group('project')}/{m.group('repo')}{number}{commit}{branch}{reference}{comment_id}"
+        )
+    elif m := re.search(
         r"^https://.*jenkins.*/blue/organizations/jenkins/"
         r"(?P<job>[^/]+)"
         r"(?:/detail/(?P<subjob>[^/]+)/(?P<build>\d+)/)?"

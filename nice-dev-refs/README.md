@@ -35,6 +35,9 @@ then type any of the following:
               pipeline, job,
               file (& line), snippet,
               heading in rendered file
+- **Gitea**: repository, branch, commit,
+              pull request (& comment) 
+              file (& line), 
 - **Jenkins**
     - build artifacts
     - classic: "simple" job (& build), multi-branch pipeline (& build), view;
