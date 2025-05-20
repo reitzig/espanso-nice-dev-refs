@@ -64,7 +64,6 @@ def test_should_revert_url_encoding(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE/[WIP] Some Page Nobody Reads")
 
 
-# TODO: Add test for Confluence cloud variant - not sure yet how the URL looks like
 def test_should_label_url_with_title_in_args_for_viewpage() -> None:
     # Given:
     url = (
