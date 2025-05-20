@@ -4,8 +4,13 @@ from assertpy import assert_that
 from label_for_url import determine_label
 
 
-@pytest.mark.parametrize("url", ["https://our-confluence.my-org.de/display/MYSPACE/",
-                                 "https://my-org.atlassian.net/wiki/spaces/MYSPACE/overview"])
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://our-confluence.my-org.de/display/MYSPACE/",
+        "https://my-org.atlassian.net/wiki/spaces/MYSPACE/overview",
+    ],
+)
 def test_should_label_space(url: str) -> None:
     # When:
     label = determine_label(url)
@@ -14,8 +19,13 @@ def test_should_label_space(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE")
 
 
-@pytest.mark.parametrize("url", ["https://our-confluence.my-org.de/display/MYSPACE/Some+Page+Nobody+Reads",
-                                 "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads"])
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://our-confluence.my-org.de/display/MYSPACE/Some+Page+Nobody+Reads",
+        "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads",
+    ],
+)
 def test_should_label_url_with_title(url: str) -> None:
     # When:
     label = determine_label(url)
@@ -28,8 +38,9 @@ def test_should_label_url_with_title(url: str) -> None:
     "url",
     [
         "https://our-confluence.my-org.de/display/MYSPACE/Some+Page+Nobody+Reads?focusedCommentId=241754794#comment-241754794",
-        "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads?focusedCommentId=241754794"
-    ])
+        "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads?focusedCommentId=241754794",
+    ],
+)
 def test_should_label_url_with_title_and_comment(url: str) -> None:
     # When:
     label = determine_label(url)
@@ -38,9 +49,13 @@ def test_should_label_url_with_title_and_comment(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads > Comment 241754794")
 
 
-@pytest.mark.parametrize("url",
-                         ["https://our-confluence.my-org.de/display/MYSPACE/%5BWIP%5D+Some+Page+Nobody+Reads",
-                          "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/%5BWIP%5D+Some+Page+Nobody+Reads"])
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://our-confluence.my-org.de/display/MYSPACE/%5BWIP%5D+Some+Page+Nobody+Reads",
+        "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/%5BWIP%5D+Some+Page+Nobody+Reads",
+    ],
+)
 def test_should_revert_url_encoding(url: str) -> None:
     # When:
     label = determine_label(url)
