@@ -56,7 +56,7 @@ Whether you want to fix a bug or add a feature,
 Prepare a checkout of your fork:
 
 ```shell
-mise up # if you want to
+mise install # if you want to
 uv sync
 # activate .venv
 ```
