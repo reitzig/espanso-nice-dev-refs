@@ -3,7 +3,10 @@ from assertpy import assert_that
 
 from label_for_url import determine_label
 
-@pytest.mark.parametrize("url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"])
+
+@pytest.mark.parametrize(
+    "url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"]
+)
 def test_should_label_project(url_prefix: str) -> None:
     # Given:
     url = f"{url_prefix}/browse/FANCY"
@@ -14,7 +17,10 @@ def test_should_label_project(url_prefix: str) -> None:
     # Then:
     assert_that(label).is_equal_to("FANCY")
 
-@pytest.mark.parametrize("url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"])
+
+@pytest.mark.parametrize(
+    "url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"]
+)
 def test_should_label_issue(url_prefix: str) -> None:
     # Given:
     url = f"{url_prefix}/browse/FANCY-77"
@@ -25,7 +31,10 @@ def test_should_label_issue(url_prefix: str) -> None:
     # Then:
     assert_that(label).is_equal_to("FANCY-77")
 
-@pytest.mark.parametrize("url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"])
+
+@pytest.mark.parametrize(
+    "url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"]
+)
 def test_should_label_issue_and_comment(url_prefix: str) -> None:
     # Given:
     url = (
@@ -42,7 +51,10 @@ def test_should_label_issue_and_comment(url_prefix: str) -> None:
     # Then:
     assert_that(label).is_equal_to("FANCY-77.123456")
 
-@pytest.mark.parametrize("url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"])
+
+@pytest.mark.parametrize(
+    "url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"]
+)
 def test_should_label_issue_and_comment_alternative(url_prefix: str) -> None:
     # Given:
     url = (
@@ -59,7 +71,10 @@ def test_should_label_issue_and_comment_alternative(url_prefix: str) -> None:
     # Then:
     assert_that(label).is_equal_to("FANCY-77.123456")
 
-@pytest.mark.parametrize("url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"])
+
+@pytest.mark.parametrize(
+    "url_prefix", ["https://our-jira.my-org.de", "https://my-org.atlassian.net"]
+)
 def test_should_label_servicedesk_issue(url_prefix: str) -> None:
     # https://our-jira.my-org.de/servicedesk/customer/portal/77/SUPPORT-123
     # Given:
