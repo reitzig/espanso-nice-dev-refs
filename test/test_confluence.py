@@ -78,7 +78,6 @@ def test_should_label_url_with_title_in_args_for_viewpage() -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
-# TODO: Add test for Confluence cloud variant - not sure yet how the URL looks like
 def test_should_label_url_with_title_in_anchor_for_viewpage() -> None:
     # Given:
     url = (
@@ -93,7 +92,6 @@ def test_should_label_url_with_title_in_anchor_for_viewpage() -> None:
     assert_that(label).is_equal_to("SomePage > Säction")
 
 
-# TODO: Add test for Confluence cloud variant - not sure yet how the URL looks like
 def test_should_label_url_with_title_in_args_for_releaseview() -> None:
     # Given:
     url = (
@@ -108,7 +106,6 @@ def test_should_label_url_with_title_in_args_for_releaseview() -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
-# TODO: Add test for Confluence cloud variant - not sure yet how the URL looks like
 def test_should_label_url_without_info() -> None:
     # Given:
     url = "https://our-confluence.my-org.de/pages/viewpage.action?pageId=241739726&src=contextnavpagetreemode"
