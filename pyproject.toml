@@ -36,16 +36,19 @@ dev = [
 ]
 
 [tool.poe.tasks.test]
-shell = """
-    coverage run -m pytest
-    coverage report
-"""
+sequence = [
+    "coverage run -m pytest",
+    "coverage report",
+]
+default_item_type = "cmd"
 
 [tool.poe.tasks.lint]
-shell = """
-    ruff format --check .
-    ruff check --respect-gitignore . && echo "ruff: clean"
-"""
+sequence = [
+    "ruff format --check .",
+    "ruff check --respect-gitignore .",
+]
+default_item_type = "cmd"
+ignore_fail = "return_non_zero"
 
 [tool.pytest.ini_options]
 pythonpath = [
