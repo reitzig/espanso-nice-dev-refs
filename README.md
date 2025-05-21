@@ -51,6 +51,14 @@ Whether you want to fix a bug or add a feature,
 - make sure `ruff` does not complain, and
 - create a PR.
 
+> ℹ️ While the code structure is simple in its spaghettific glory,
+>    the construction of and interaction between the different 
+>    regexps is definitely bespoke.
+>    The approach here is to tame weird code with tests;
+>    if there is no test for any given URL schema, 
+>    the behaviour is undefined.
+>    If your change does not break any tests, go for it!
+
 ## Development
 
 Prepare a checkout of your fork:
