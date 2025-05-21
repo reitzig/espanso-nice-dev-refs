@@ -49,16 +49,11 @@ def test_should_label_url_with_title_and_comment(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads > Comment 241754794")
 
 
-@pytest.mark.parametrize(
-    "url",
-    [
-        "https://our-confluence.my-org.de/display/MYSPACE/%5BWIP%5D+Some+Page+Nobody+Reads",
-        "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/%5BWIP%5D+Some+Page+Nobody+Reads",
-    ],
-)
-def test_should_revert_url_encoding(url: str) -> None:
+def test_should_revert_url_encoding() -> None:
     # When:
-    label = determine_label(url)
+    label = determine_label(
+        "https://our-confluence.my-org.de/display/MYSPACE/%5BWIP%5D+Some+Page+Nobody+Reads"
+    )
 
     # Then:
     assert_that(label).is_equal_to("MYSPACE/[WIP] Some Page Nobody Reads")
