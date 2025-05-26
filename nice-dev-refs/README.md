@@ -21,7 +21,7 @@ then type any of the following:
                  search
 - **Confluence**: page (& section, comment), space
 - **DockerHub**: repository (& tag)
-- **GitHub**: repository, branch, commit,
+- **GitHub**: repository, branch, commit (& diff),
               issue (& comment, search),
               discussion (& comment),
               pull request (& comment, search) 
@@ -29,7 +29,7 @@ then type any of the following:
               release, heading in rendered file,
               wiki page (& heading), gist (& file & line),
               advisories, enterprises, organizations
-- **GitLab**: (sub)group, repository, commit,
+- **GitLab**: (sub)group, repository, commit (& diff),
               issue (& comment, search),
               merge request (& comment, search),
               pipeline, job,

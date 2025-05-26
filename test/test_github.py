@@ -232,6 +232,28 @@ def test_should_label_commit() -> None:
     assert_that(label).is_equal_to("my-account/some-repo@3577c55c")
 
 
+def test_should_label_commit_diff() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/compare/3577c55c6f18e164c37f332f98b4c08b1242f90e...some-branch"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@3577c55c⭤some-branch")
+
+
+def test_should_label_tag_diff() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/compare/v1.2.3...v1.2.4"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@v1.2.3⭤v1.2.4")
+
+
 def test_should_label_markdown_and_anchor() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/blob/main/some/README.md#some-headline"

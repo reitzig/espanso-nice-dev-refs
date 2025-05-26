@@ -140,18 +140,28 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)(/-)?/("
         r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
-        r"(/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
-        r"(#((issue|discussion)comment-|discussion_r|note_)(?P<comment_id>\d+))?)"
-        r"|(releases/tag/(?P<release_tag>[^/#?]+))"
+        r"(?:/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
+        r"(?:#((issue|discussion)comment-|discussion_r|note_)(?P<comment_id>\d+))?)"
+        r"|compare/(?P<compare_left>[^?#]+?)\.{2,3}(?P<compare_right>[^?#]+)"
+        r"|releases/tag/(?P<release_tag>[^/#?]+)"
         r")",
         input_url,
     ):
         number_prefix = "!" if m.group("number") and m.group("type") == "merge_requests" else "#"
         number = f"{number_prefix}{m.group('number')}" if m.group("number") else ""
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
+        compare = ""
+        if (cmp_left := m.group("compare_left")) and (cmp_right := m.group("compare_right")):
+            # Shorten commit hashes; keep "short" hex strings as they may be branch names or tags
+            cmp_left = cmp_left[0:8] if re.match(r"^[a-f0-9]{16,}$", cmp_left) else cmp_left
+            cmp_right = cmp_right[0:8] if re.match(r"^[a-f0-9]{16,}$", cmp_right) else cmp_right
+            compare = f"@{cmp_left}⭤{cmp_right}"
         comment_id = f".{m.group('comment_id')}" if m.group("comment_id") else ""
         release_tag = f"@{m.group('release_tag')}" if m.group("release_tag") else ""
-        return f"{m.group('project')}/{m.group('repo')}{number}{commit}{comment_id}{release_tag}"
+        return (
+            f"{m.group('project')}/{m.group('repo')}"
+            f"{number}{commit}{compare}{comment_id}{release_tag}"
+        )
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)(/-)?/"
         r"(?:blob|tree|commit)/(?P<rev>[^/]+)"
