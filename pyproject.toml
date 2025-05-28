@@ -50,6 +50,9 @@ sequence = [
 default_item_type = "cmd"
 ignore_fail = "return_non_zero"
 
+[tool.poe.tasks.format]
+cmd = "ruff format ."
+
 [tool.pytest.ini_options]
 pythonpath = [
     "scripts",
