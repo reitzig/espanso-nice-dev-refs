@@ -141,7 +141,8 @@ def determine_label(input_url: str) -> str:
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)(/-)?/("
         r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
         r"(?:/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
-        r"(?:#((issue|discussion)comment-|discussion_r|note_)(?P<comment_id>\d+))?)"
+        r"(?:/commits/(?P<pr_commit>[a-f0-9]+))?"
+        r"(?:#((issue|discussion)comment-|discussion_r|note_|r)(?P<comment_id>\d+))?)"
         r"|compare/(?P<compare_left>[^?#]+?)\.{2,3}(?P<compare_right>[^?#]+)"
         r"|releases/tag/(?P<release_tag>[^/#?]+)"
         r")",
@@ -150,6 +151,7 @@ def determine_label(input_url: str) -> str:
         number_prefix = "!" if m.group("number") and m.group("type") == "merge_requests" else "#"
         number = f"{number_prefix}{m.group('number')}" if m.group("number") else ""
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
+        commit = f"@{m.group('pr_commit')[0:8]}" if m.group("pr_commit") else commit
         compare = ""
         if (cmp_left := m.group("compare_left")) and (cmp_right := m.group("compare_right")):
             # Shorten commit hashes; keep "short" hex strings as they may be branch names or tags

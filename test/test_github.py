@@ -119,6 +119,47 @@ def test_should_label_pr() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#119")
 
 
+def test_should_label_pr_and_commit() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/pull/119/commits/3577c55c6f18e164c37f332f98b4c08b1242f90e"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#119@3577c55c")
+
+
+def test_should_label_pr_and_commit_and_file() -> None:
+    # Given:
+    url = (
+        "https://github.com/my-account/some-repo/pull/119/commits/3577c55c6f18e164c37f332f98b4c08b1242f90e"
+        "#diff-e20ce122c39fb84454a31dab91b2648d7985906f50dff8d2936193e6152c33bf"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to(
+        "my-account/some-repo#119@3577c55c"
+    )  # NB: No filename to be found
+
+
+def test_should_label_pr_and_review_comment() -> None:
+    # Given:
+    url = (
+        "https://github.com/my-account/some-repo/pull/119/commits/3577c55c6f18e164c37f332f98b4c08b1242f90e"
+        "#r2112066737"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#119@3577c55c.2112066737")
+
+
 def test_should_label_pr_list_by_label() -> None:
     # Given:
     url = (
