@@ -105,6 +105,17 @@ def test_should_label_pr_comment() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#42.77")
 
 
+def test_should_label_pr_and_review_comment() -> None:
+    # Given:
+    url = "https://gitea.some.org/my-account/some-repo/pulls/42/files#issuecomment-77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#42.77")
+
+
 def test_should_label_pr_commit() -> None:
     # Given:
     url = (

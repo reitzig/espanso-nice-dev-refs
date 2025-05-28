@@ -248,7 +248,7 @@ def determine_label(input_url: str) -> str:
         return f"{project}{wiki_page}{anchor}"
     elif m := re.search(
         r"^https://[^/]*gitea[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)"
-        r"(/pulls/(?P<number>\d+)(?:/commits/(?P<pr_commit>[a-f0-9]+))?(#issuecomment-(?P<comment_id>\d+))?)?"
+        r"(/pulls/(?P<number>\d+)(?:/commits/(?P<pr_commit>[a-f0-9]+))?(?:/files)?(#issuecomment-(?P<comment_id>\d+))?)?"
         r"((?:/src)?/(?:branch/(?P<branch>[^/#?]+)|commit/(?P<commit>[a-f0-9]+))(?:/(?P<file>[^#?]+)(?:#L(?P<line>\d+))?)?)?",
         input_url,
     ):
