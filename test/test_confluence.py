@@ -34,6 +34,19 @@ def test_should_label_url_with_title(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
+def test_should_label_url_with_title_and_section() -> None:
+    # When:
+    label = determine_label(
+        "https://my-org.atlassian.net/wiki/"
+        "spaces/MYSPACE/"
+        "pages/1333624914/Some+Page+Nobody+Reads"
+        "#Some-Things-%26-Stuff"
+    )
+
+    # Then:
+    assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads > Some Things & Stuff")
+
+
 @pytest.mark.parametrize(
     "url",
     [

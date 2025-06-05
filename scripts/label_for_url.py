@@ -343,11 +343,13 @@ def determine_label(input_url: str) -> str:
         r"^https://[^/]*atlassian\.(?:com|net)/wiki"
         r"/spaces/(?P<space>[^/]+)"
         r"(?:/pages/[0-9]+/(?P<title>[^?#]+))?"
-        r"(?:\?(?P<args>.*))?",
+        r"(?:\?(?P<args>[^#]*))?"
+        r"(?:#(?P<anchor>.+))?",
         input_url,
     ):
         space = m.group("space")
         title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
+        anchor = unquote(f" > {m.group('anchor').replace('-', ' ')}") if m.group("anchor") else ""
 
         comment = ""
         if m.group("args"):
@@ -357,7 +359,7 @@ def determine_label(input_url: str) -> str:
                     comment = f" > Comment {value}"
                     break
 
-        return f"{space}{title}{comment}"
+        return f"{space}{title}{anchor}{comment}"
     elif m := re.search(
         r"^https://(?P<page>\w+\.stackexchange|stackoverflow|askubuntu|serverfault|superuser)\.com/"
         r"(q(uestions)?|a(nswers)?)/(?P<qid>[^/]+)/[^/]+(/(?P<aid>[^/#]+))?",
