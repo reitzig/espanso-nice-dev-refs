@@ -20,12 +20,9 @@ backend = "aqua:evilmartians/lefthook"
 "lefthook_1.11.13_Linux_x86_64.gz" = "sha256:77473e403efb1d34196811b63960e4a268e115e44e3f703c12e8fb6ba28b11fb"
 
 [tools.python]
-version = "3.13.3"
+version = "3.13.4"
 backend = "core:python"
 
 [tools.uv]
-version = "0.7.8"
+version = "0.7.11"
 backend = "aqua:astral-sh/uv"
-
-[tools.uv.checksums]
-"uv-x86_64-unknown-linux-musl.tar.gz" = "sha256:8a707e45e0d1a8bdbc5bd1af0ae7d19ffab55f3722c5e73471039561900e3d48"
