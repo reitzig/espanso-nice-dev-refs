@@ -169,7 +169,8 @@ def determine_label(input_url: str) -> str:
         r"(?:blob|tree|commit)/(?P<rev>[^/]+)"
         r"(?:/(?P<file>[^#?]+))?"
         r"(?:\?[^#?]+)?"
-        r"(?:#L(?P<line>\d+)|#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?",
+        r"(?:#L(?P<line>\d+)(?:-L(?P<line_to>\d+))?)?"
+        r"(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?",
         input_url,
     ):
         rev = f"@{m.group('rev')}" if m.group("rev") not in ["master", "main"] else ""
@@ -184,6 +185,7 @@ def determine_label(input_url: str) -> str:
             )
             filename = filename.strip("/")
             line = f"#{m.group('line')}" if m.group("line") else ""
+            line = f"{line}-{m.group('line_to')}" if m.group("line_to") else line
             anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
             reference = f":{filename}{line}{anchor}"
         else:
