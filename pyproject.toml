@@ -31,8 +31,8 @@ dev = [
     "assertpy==1.1",
     "coverage[toml]==7.9.1",
     "poethepoet==0.35.0",
-    "pytest==8.4.0",
-    "ruff==0.11.13",
+    "pytest==8.4.1",
+    "ruff==0.12.0",
 ]
 
 [tool.poe.tasks.test]
