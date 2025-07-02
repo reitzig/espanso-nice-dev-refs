@@ -94,6 +94,17 @@ def test_should_label_branch() -> None:
     assert_that(label).is_equal_to("my-account/some-repo@some-branch")
 
 
+def test_should_label_branch_comparison() -> None:
+    # Given:
+    url = "https://gitea.some.org/my-account/some-repo/compare/feat/something...chore/else"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@feat/something⭤chore/else")
+
+
 def test_should_label_pr_comment() -> None:
     # Given:
     url = "https://gitea.some.org/my-account/some-repo/pulls/42#issuecomment-77"

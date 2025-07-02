@@ -35,7 +35,7 @@ then type any of the following:
               pipeline, job,
               file (& line), snippet,
               heading in rendered file
-- **Gitea**: repository, branch, commit,
+- **Gitea**: repository, branch (& diff), commit (& diff),
               pull request (& comment) 
               file (& line), 
 - **Jenkins**
