@@ -2,7 +2,7 @@
 python = "3.13"
 
 [tools.uv]
-version = "0.7"
+version = "0.8.3"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
@@ -10,7 +10,7 @@ version = "3.3"
 
 [tools.lefthook]
 # renovate: datasource=github-releases depName=evilmartians/lefthook
-version = "1.11"
+version = "v1.12.2"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
