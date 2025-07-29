@@ -36,6 +36,17 @@ def test_should_label_file_and_line() -> None:
     assert_that(label).is_equal_to("my-account/some-repo:some/file.md#77")
 
 
+def test_should_label_file_and_lines() -> None:
+    # Given:
+    url = "https://gitea.some.org/my-account/some-repo/src/branch/main/some/file.md#L42-L77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md#42-77")
+
+
 def test_should_label_file_on_branch() -> None:
     # Given:
     url = "https://gitea.some.org/my-account/some-repo/src/branch/some-branch/some/file.md"
