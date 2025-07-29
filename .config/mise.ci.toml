@@ -1,3 +1,12 @@
 [tasks.install-local-completions]
 hide = true
 run = 'echo skip:'
+
+[tools.cocogitto]
+postinstall = ""
+
+[tools.lefthook]
+postinstall = ""
+
+[tools.uv]
+postinstall = ""
