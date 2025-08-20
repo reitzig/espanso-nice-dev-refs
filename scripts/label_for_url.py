@@ -346,7 +346,7 @@ def determine_label(input_url: str) -> str:
         page_id = f"/{m.group('pageId')}" if m.group("pageId") else ""
         return f"{space}{title}{anchor}" or f"{m.group('host')}{page_id}"
     elif m := re.search(
-        r"^https://[^/]*atlassian\.(?:com|net)/wiki"
+        r"^https://(?:[^/]*atlassian\.(?:com|net)/wiki|[^/]*confluence.[^/]*)"
         r"/spaces/(?P<space>[^/]+)"
         r"(?:/pages/[0-9]+/(?P<title>[^?#]+))?"
         r"(?:\?(?P<args>[^#]*))?"
@@ -355,7 +355,11 @@ def determine_label(input_url: str) -> str:
     ):
         space = m.group("space")
         title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
-        anchor = unquote(f" > {m.group('anchor').replace('-', ' ')}") if m.group("anchor") else ""
+        anchor = (
+            unquote(f" > {m.group('anchor').replace('-', ' ')}")
+            if m.group("anchor") and not m.group("anchor").startswith("comment-")
+            else ""
+        )
 
         comment = ""
         if m.group("args"):
