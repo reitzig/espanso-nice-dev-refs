@@ -347,7 +347,7 @@ def determine_label(input_url: str) -> str:
         return f"{space}{title}{anchor}" or f"{m.group('host')}{page_id}"
     elif m := re.search(
         r"^https://(?:[^/]*atlassian\.(?:com|net)/wiki|[^/]*confluence.[^/]*)"
-        r"/spaces/(?P<space>[^/]+)"
+        r"/spaces/~?(?P<space>[^/]+)"
         r"(?:/pages/[0-9]+/(?P<title>[^?#]+))?"
         r"(?:\?(?P<args>[^#]*))?"
         r"(?:#(?P<anchor>.+))?",

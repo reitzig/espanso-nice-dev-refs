@@ -36,6 +36,37 @@ def test_should_label_url_with_title(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://our-confluence.my-org.de/spaces/~john.doe/pages/292389791/Some+Page+Nobody+Reads",
+        "https://my-org.atlassian.net/wiki/spaces/~john.doe/pages/1333624914/Some+Page+Nobody+Reads",
+    ],
+)
+def test_should_label_url_with_title_in_personal_space(url: str) -> None:
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("john.doe/Some Page Nobody Reads")
+
+
+@pytest.mark.skip(reason="NYI")
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://our-confluence.my-org.de/spaces/~712020afb4c029c9124da686f37b4ffdf992ff/pages/292389791/Some+Page+Nobody+Reads",
+        "https://my-org.atlassian.net/wiki/spaces/~712020afb4c029c9124da686f37b4ffdf992ff/pages/1333624914/Some+Page+Nobody+Reads",
+    ],
+)
+def test_should_label_url_with_title_in_id_space(url: str) -> None:
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("712020af/Some Page Nobody Reads")
+
+
 def test_should_label_url_with_title_and_section() -> None:
     # When:
     label = determine_label(
