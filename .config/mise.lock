@@ -3,8 +3,13 @@ version = "6.3.0"
 backend = "aqua:cocogitto/cocogitto"
 
 [tools.editorconfig-checker]
-version = "3.3.0"
+version = "3.4.0"
 backend = "aqua:editorconfig-checker/editorconfig-checker"
+
+[tools.editorconfig-checker.platforms.linux-x64]
+checksum = "sha256:feae0baaf8d55e51fd9b6c9e04497f2fb288b40034110fb9ac83fb1bf0b6011e"
+size = 1824478
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.4.0/ec-linux-amd64.tar.gz"
 
 [tools.lefthook]
 version = "1.12.2"
