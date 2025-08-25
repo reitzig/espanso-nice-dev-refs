@@ -142,6 +142,7 @@ def determine_label(input_url: str) -> str:
         r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
         r"(?:/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
         r"(?:/commits/(?P<pr_commit>[a-f0-9]+))?"
+        r"(?:/files#diff-(?P<diff_id>[a-f0-9]+)(?:R(?P<diff_line_a>\d+)(?:-R(?P<diff_line_b>\d+))?)?)?"
         r"(?:#((issue|discussion)comment-|discussion_r|note_|r)(?P<comment_id>\d+))?)"
         r"|compare/(?P<compare_left>[^?#]+?)\.{2,3}(?P<compare_right>[^?#]+)"
         r"|releases/tag/(?P<release_tag>[^/#?]+)"
@@ -152,6 +153,11 @@ def determine_label(input_url: str) -> str:
         number = f"{number_prefix}{m.group('number')}" if m.group("number") else ""
         commit = f"@{m.group('commit')[0:8]}" if m.group("commit") else ""
         commit = f"@{m.group('pr_commit')[0:8]}" if m.group("pr_commit") else commit
+        pr_diff_lines = f"#{m.group('diff_line_a')}" if m.group("diff_line_a") else ""
+        pr_diff_lines = (
+            f"{pr_diff_lines}-{m.group('diff_line_b')}" if m.group("diff_line_b") else pr_diff_lines
+        )
+        pr_diff = f":{m.group('diff_id')[0:8]}{pr_diff_lines}" if m.group("diff_id") else ""
         compare = ""
         if (cmp_left := m.group("compare_left")) and (cmp_right := m.group("compare_right")):
             # Shorten commit hashes; keep "short" hex strings as they may be branch names or tags
@@ -162,7 +168,7 @@ def determine_label(input_url: str) -> str:
         release_tag = f"@{m.group('release_tag')}" if m.group("release_tag") else ""
         return (
             f"{m.group('project')}/{m.group('repo')}"
-            f"{number}{commit}{compare}{comment_id}{release_tag}"
+            f"{number}{commit}{pr_diff}{compare}{comment_id}{release_tag}"
         )
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)(/-)?/"

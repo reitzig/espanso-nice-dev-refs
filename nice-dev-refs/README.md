@@ -26,7 +26,7 @@ then type any of the following:
 - **GitHub**: repository, branch, commit (& diff),
               issue (& comment, search),
               discussion (& comment),
-              pull request (& comment, search) 
+              pull request (& comment, search, diff lines) 
               file (& line), 
               release, heading in rendered file,
               wiki page (& heading), gist (& file & line),
