@@ -440,7 +440,7 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"https://dev.azure.com/(?P<org>[^/]+)/(?P<project>[^/]+)"
         r"(?:/_build/results\?buildId=(?P<build>\d+)(?:&view=[^&#]+)?)?"
-        r"(?:&j=(?P<job>[a-f0-9-]+))?"
+        r"(?:&[js]=(?P<job>[a-f0-9-]+))?"
         r"(?:&t=(?P<step>[a-f0-9-]+))?",
         input_url,
     ):
