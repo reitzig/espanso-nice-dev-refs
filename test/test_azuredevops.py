@@ -20,6 +20,17 @@ def test_should_label_project() -> None:
 
 def test_should_label_build() -> None:
     # Given:
+    url = "https://dev.azure.com/someorg/MyProject/_build/results?buildId=17337"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("someorg/MyProject#17337")
+
+
+def test_should_label_build_results() -> None:
+    # Given:
     url = "https://dev.azure.com/someorg/MyProject/_build/results?buildId=17337&view=results"
 
     # When:
