@@ -431,7 +431,7 @@ def determine_label(input_url: str) -> str:
                 host = m.group("host") if not options.get("cluster") else ""
                 dashboard = prettify(m.group("dashboard").removeprefix("grafana-dashboard-"))
                 return f"{host}{cluster} > {dashboard}"
-        raise f"Not yet implemented: {input_url}"
+        raise NotImplementedError(f"Not yet implemented: {input_url}")
     elif m := re.search(
         r"^https://teams.microsoft.com/l/channel/[^/]+/(?P<channel>[^?/$]+)", input_url
     ):

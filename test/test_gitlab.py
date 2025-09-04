@@ -1,7 +1,7 @@
 import pytest
 from assertpy import assert_that
 
-from label_for_url import determine_label
+from scripts.label_for_url import determine_label
 
 
 def test_should_label_group() -> None:

@@ -1,6 +1,6 @@
 from assertpy import assert_that
 
-from label_for_url import determine_label
+from scripts.label_for_url import determine_label
 
 
 def test_should_return_trimmed_host_for_urls() -> None:

@@ -1,7 +1,8 @@
 import pytest
+from _pytest.fixtures import SubRequest
 from assertpy import assert_that
 
-from label_for_url import determine_label
+from scripts.label_for_url import determine_label
 
 
 @pytest.fixture(
@@ -10,8 +11,7 @@ from label_for_url import determine_label
         "https://my-org.atlassian.net",
     ]
 )
-def url_prefix(request: any) -> str:
-    print(type(request))
+def url_prefix(request: SubRequest) -> str:
     return request.param
 
 
