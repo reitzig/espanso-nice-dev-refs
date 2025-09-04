@@ -15,7 +15,7 @@ then type any of the following:
 
 - Email links, i.e. `mailto:`; link to text fragment
 - **Azure DevOps**: project,
-                    build (& job & step)
+                    build (& job & step & log line)
 - **Bitbucket**: project, repository, 
                  pull request (& comment, commit, file & line),
                  file (& line), file (& line) in pull request,

@@ -441,14 +441,16 @@ def determine_label(input_url: str) -> str:
         r"https://dev.azure.com/(?P<org>[^/]+)/(?P<project>[^/]+)"
         r"(?:/_build/results\?buildId=(?P<build>\d+)(?:&view=[^&#]+)?)?"
         r"(?:&[js]=(?P<job>[a-f0-9-]+))?"
-        r"(?:&t=(?P<step>[a-f0-9-]+))?",
+        r"(?:&t=(?P<step>[a-f0-9-]+))?"
+        r"(?:&l=(?P<line>[0-9]+))?",
         input_url,
     ):
         project = f"{unquote(m.group('org'))}/{unquote(m.group('project'))}"
         build = f"#{m.group('build')}" if m.group("build") else ""
         job = f".{m.group('job')[0:8]}" if m.group("job") else ""
         step = f".{m.group('step')[0:8]}" if m.group("step") else ""
-        return f"{project}{build}{job}{step}"
+        line = f":{m.group('line')}" if m.group("line") else ""
+        return f"{project}{build}{job}{step}{line}"
     elif m := re.search(
         r"\w+://(www\d*\.)?(?P<path>[^?#]+)"
         r"(?:#:~:text=(?P<text_fragment>[^?#]+))?",
