@@ -318,6 +318,28 @@ def test_should_label_commit() -> None:
     assert_that(label).is_equal_to("my-account/some-repo@3577c55c")
 
 
+def test_should_label_commit_and_file() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/commit/3577c55c6f18e164c37f332f98b4c08b1242f90e#diff-2f754321d62f08ba8392b9b168b83e24ea2852bb5d815d63e767f6c3d23c6ac5"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@3577c55c:2f754321")
+
+
+def test_should_label_commit_and_file_and_line() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/commit/3577c55c6f18e164c37f332f98b4c08b1242f90e#diff-2f754321d62f08ba8392b9b168b83e24ea2852bb5d815d63e767f6c3d23c6ac5R77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@3577c55c:2f754321#77")
+
+
 def test_should_label_commit_diff() -> None:
     # Given:
     url = "https://github.com/my-account/some-repo/compare/3577c55c6f18e164c37f332f98b4c08b1242f90e...some-branch"

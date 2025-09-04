@@ -172,10 +172,11 @@ def determine_label(input_url: str) -> str:
         )
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)(/-)?/"
-        r"(?:blob|tree|commit)/(?P<rev>[^/]+)"
+        r"(?:blob|tree|commit)/(?P<rev>[^/#]+)"
         r"(?:/(?P<file>[^#?]+))?"
         r"(?:\?[^#?]+)?"
         r"(?:#L(?P<line>\d+)(?:-L(?P<line_to>\d+))?)?"
+        r"(?:#diff-(?P<diff_file>[a-f0-9]+)(?:R(?P<diff_line>\d+))?)?"
         r"(?:#(?P<anchor>[a-z][a-zA-Z0-9_-]+))?",
         input_url,
     ):
@@ -192,8 +193,13 @@ def determine_label(input_url: str) -> str:
             filename = filename.strip("/")
             line = f"#{m.group('line')}" if m.group("line") else ""
             line = f"{line}-{m.group('line_to')}" if m.group("line_to") else line
+
             anchor = f" > {prettify(m.group('anchor'))}" if m.group("anchor") else ""
             reference = f":{filename}{line}{anchor}"
+        elif m.group("diff_file"):
+            file = f":{m.group('diff_file')[0:8]}"
+            line = f"#{m.group('diff_line')}" if m.group("diff_line") else ""
+            reference = f"{file}{line}"
         else:
             reference = ""
         return f"{m.group('project')}/{m.group('repo')}{rev}{reference}"

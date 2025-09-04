@@ -23,7 +23,7 @@ then type any of the following:
                  search
 - **Confluence**: page (& section, comment), space
 - **DockerHub**: repository (& tag)
-- **GitHub**: repository, branch, commit (& diff),
+- **GitHub**: repository, branch, commit (& diff & line),
               issue (& comment, search),
               discussion (& comment),
               pull request (& comment, search, diff lines) 
