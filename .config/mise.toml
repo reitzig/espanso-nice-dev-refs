@@ -10,7 +10,7 @@ version = "3.4.0"
 
 [tools.lefthook]
 # renovate: datasource=github-releases depName=evilmartians/lefthook
-version = "1.12"
+version = "v1.13.6"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
