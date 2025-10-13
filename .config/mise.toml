@@ -1,12 +1,12 @@
 [tools]
-python = "3.13"
+python = "3.14.0"
 
 [tools.uv]
-version = "0.8"
+version = "0.9.2"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.4.0"
+version = "3.4.1"
 
 [tools.lefthook]
 # renovate: datasource=github-releases depName=evilmartians/lefthook
