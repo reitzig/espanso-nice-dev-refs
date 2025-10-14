@@ -118,19 +118,11 @@ def determine_label(input_url: str) -> str:
         return f"{issue}{comment}"
     elif m := re.search(
         r"^https://gist.github.com/(?P<account>[^/]+)/"
-        r"(?P<uid>[a-f0-9]+)(?:#file-(?P<fileline>[^?]+))?$",
+        r"(?P<uid>[a-f0-9]+)(?:#file-(?P<file>[^?]+?)(?:-L(?P<line>\d+))?)?$",
         input_url,
     ):
-        # Take apart the wicked file-line format:
-        fileline_parts = m.group("fileline").split("-") if m.group("fileline") else None
-        filename_parts, line_part = (
-            [fileline_parts[0:-1], fileline_parts[-1]]
-            if fileline_parts and re.search(r"^L\d+$", fileline_parts[-1])
-            else [fileline_parts, ""]
-        )
-
-        filename = f":{'-'.join(filename_parts)}" if fileline_parts else ""
-        line = f"#{line_part.replace('L', '')}" if line_part else ""
+        filename = f":{m.group('file')}" if m.group("file") else ""
+        line = f"#{m.group('line')}" if m.group("line") else ""
         return f"{m.group('account')}/{m.group('uid')[0:6]}{filename}{line}"
     elif m := re.search(
         r"^https://github.com/(?:enterprises|orgs|advisories)/(?P<id>[^[/?#]+)(?:[/?#]|$)",
