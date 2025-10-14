@@ -142,7 +142,7 @@ def determine_label(input_url: str) -> str:
         r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
         r"(?:/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
         r"(?:/commits/(?P<pr_commit>[a-f0-9]+))?"
-        r"(?:/files#diff-(?P<diff_id>[a-f0-9]+)(?:R(?P<diff_line_a>\d+)(?:-R(?P<diff_line_b>\d+))?)?)?"
+        r"(?:/files(?:#diff-(?P<diff_id>[a-f0-9]+)(?:R(?P<diff_line_a>\d+)(?:-R(?P<diff_line_b>\d+))?)?)?)?"
         r"(?:#((issue|discussion)comment-|discussion_r|note_|r)(?P<comment_id>\d+))?)"
         r"|compare/(?P<compare_left>[^?#]+?)\.{2,3}(?P<compare_right>[^?#]+)"
         r"|releases/tag/(?P<release_tag>[^/#?]+)"

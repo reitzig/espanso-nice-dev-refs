@@ -194,6 +194,17 @@ def test_should_label_pr_and_review_comment() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#119@3577c55c.2112066737")
 
 
+def test_should_label_pr_and_review_on_file() -> None:
+    # Given:
+    url = "https://github.com/my-account/some-repo/pull/119/files#r2112066737"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#119.2112066737")
+
+
 def test_should_label_pr_list_by_label() -> None:
     # Given:
     url = (
