@@ -36,6 +36,28 @@ def test_should_label_url_with_title(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
+def test_should_label_blog_post() -> None:
+    # When:
+    label = determine_label(
+        "https://our-confluence.my-org.de/spaces/SOME/blog/2025/09/26/326959444/An+Important+Title"
+    )
+
+    # Then:
+    assert_that(label).is_equal_to("SOME/2025-09-26 An Important Title")
+
+
+def test_should_label_blog_post_commend() -> None:
+    # When:
+    label = determine_label(
+        "https://our-confluence.my-org.de/spaces/SOME/blog/"
+        "2025/09/26/326959444/An+Important+Title"
+        "?focusedCommentId=241754794#comment-241754794"
+    )
+
+    # Then:
+    assert_that(label).is_equal_to("SOME/2025-09-26 An Important Title > Comment 241754794")
+
+
 @pytest.mark.parametrize(
     "url",
     [

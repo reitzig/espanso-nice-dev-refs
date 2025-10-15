@@ -352,13 +352,14 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"^https://(?:[^/]*atlassian\.(?:com|net)/wiki|[^/]*confluence.[^/]*)"
         r"/spaces/~?(?P<space>[^/]+)"
-        r"(?:/pages/[0-9]+/(?P<title>[^?#]+))?"
+        r"(?:/(?:pages|blog/(?P<blog_date>\d{4}/\d{2}/\d{2}))/[0-9]+/(?P<title>[^?#]+))?"
         r"(?:\?(?P<args>[^#]*))?"
         r"(?:#(?P<anchor>.+))?",
         input_url,
     ):
         space = m.group("space")
-        title = f"/{prettify(m.group('title'))}" if m.group("title") else ""
+        date = f"{m.group('blog_date').replace('/', '-')} " if m.group("blog_date") else ""
+        title = f"/{date}{prettify(m.group('title'))}" if m.group("title") else ""
         anchor = (
             unquote(f" > {m.group('anchor').replace('-', ' ')}")
             if m.group("anchor") and not m.group("anchor").startswith("comment-")
