@@ -1,12 +1,12 @@
 [tools]
-python = "3.14.0"
+python = "3.14"
 
 [tools.uv]
-version = "0.9.2"
+version = "0.9"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.4.1"
+version = "3.4"
 
 [tools.lefthook]
 # renovate: datasource=github-releases depName=evilmartians/lefthook
@@ -15,7 +15,7 @@ postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
 # renovate: datasource=github-releases depName=cocogitto/cocogitto
-version = "6.3"
+version = "6.4"
 postinstall = 'mise run install-local-completions cog generate-completions'
 
 # implement in mise.local.toml or ~/.config/mise.toml
