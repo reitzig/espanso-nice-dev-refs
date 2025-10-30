@@ -438,6 +438,8 @@ def determine_label(input_url: str) -> str:
         return f"{unquote(m.group('team'))} > {unquote(m.group('channel'))} > #{m.group('id')}"
     elif m := re.search(
         r"https://dev.azure.com/(?P<org>[^/]+)/(?P<project>[^/]+)"
+        r"(?:/_build\?definitionScope=(?P<scope>[^&#]+))?"
+        r"(?:/_build\?definitionId=(?P<definition>[^&#]+)(?:.*?&\w+Filter=(?P<filter>[^&#]+))?)?"
         r"(?:/_build/results\?buildId=(?P<build>\d+)(?:&view=[^&#]+)?)?"
         r"(?:&[js]=(?P<job>[a-f0-9-]+))?"
         r"(?:&t=(?P<step>[a-f0-9-]+))?"
@@ -445,11 +447,18 @@ def determine_label(input_url: str) -> str:
         input_url,
     ):
         project = f"{unquote(m.group('org'))}/{unquote(m.group('project'))}"
+        scope = (
+            ":" + f"{unquote(m.group('scope'))}".replace("\\", "/").strip("/")
+            if m.group("scope")
+            else ""
+        )
+        definition = f":{m.group('definition')}" if m.group("definition") else ""
+        definition_filter = f".{m.group('filter')}" if m.group("filter") else ""
         build = f"#{m.group('build')}" if m.group("build") else ""
         job = f".{m.group('job')[0:8]}" if m.group("job") else ""
         step = f".{m.group('step')[0:8]}" if m.group("step") else ""
         line = f":{m.group('line')}" if m.group("line") else ""
-        return f"{project}{build}{job}{step}{line}"
+        return f"{project}{scope}{definition}{definition_filter}{build}{job}{step}{line}"
     elif m := re.search(
         r"\w+://(www\d*\.)?(?P<path>[^?#]+)"
         r"(?:#:~:text=(?P<text_fragment>[^?#]+))?",

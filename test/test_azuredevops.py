@@ -18,6 +18,50 @@ def test_should_label_project() -> None:
     assert_that(label).is_equal_to("someorg/MyProject")
 
 
+def test_should_label_list_of_pipelines() -> None:
+    # Given:
+    url = "https://dev.azure.com/someorg/MyProject/_build?definitionScope=%5Cmyproject%5Csome-repo"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("someorg/MyProject:myproject/some-repo")
+
+
+def test_should_label_list_of_pipeline_runs() -> None:
+    # Given:
+    url = "https://dev.azure.com/someorg/MyProject/_build?definitionId=77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("someorg/MyProject:77")
+
+
+def test_should_label_filtered_list_of_pipeline_runs() -> None:
+    # Given:
+    url = "https://dev.azure.com/someorg/MyProject/_build?definitionId=77&branchFilter=42"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("someorg/MyProject:77.42")
+
+
+def test_should_label_filtered_list_of_pipeline_runs_alt() -> None:
+    # Given:
+    url = "https://dev.azure.com/someorg/MyProject/_build?definitionId=77&_a=summary&statusFilter=failed"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("someorg/MyProject:77.failed")
+
+
 def test_should_label_build() -> None:
     # Given:
     url = "https://dev.azure.com/someorg/MyProject/_build/results?buildId=17337"

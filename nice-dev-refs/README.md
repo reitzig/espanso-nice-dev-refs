@@ -14,7 +14,8 @@ then type any of the following:
 ### Supported URL Formats
 
 - Email links, i.e. `mailto:`; link to text fragment
-- **Azure DevOps**: project,
+- **Azure DevOps**: project, pipeline list, 
+                    (filtered) build list,
                     build (& job & step & log line)
 - **Bitbucket**: project, repository, 
                  pull request (& comment, commit, file & line),
