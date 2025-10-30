@@ -47,6 +47,17 @@ def test_should_label_file_and_lines() -> None:
     assert_that(label).is_equal_to("my-account/some-repo:some/file.md#42-77")
 
 
+def test_should_label_markdown_file_and_section() -> None:
+    # Given:
+    url = "https://gitea.some.org/my-account/some-repo/src/branch/main/some/file.md#some-section"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo:some/file.md > Some Section")
+
+
 def test_should_label_file_on_branch() -> None:
     # Given:
     url = "https://gitea.some.org/my-account/some-repo/src/branch/some-branch/some/file.md"
@@ -150,3 +161,7 @@ def test_should_label_pr_commit() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo#119@3577c55c")
+
+
+# pr file
+# https://gitea.prod.azdigital-health.io/azdigital-health/pricing-determinator-v2/pulls/155/files#diff-4d4d44167f6aa578f206927ef5f25bef8c276dc9

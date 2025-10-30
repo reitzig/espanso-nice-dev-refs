@@ -255,7 +255,9 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"^https://[^/]*gitea[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)"
         r"(?:/pulls/(?P<number>\d+)(?:/commits/(?P<pr_commit>[a-f0-9]+))?(?:/files)?(#issuecomment-(?P<comment_id>\d+))?)?"
-        r"(?:(?:/src)?/(?:branch/(?P<branch>[^/#?]+)|commit/(?P<commit>[a-f0-9]+))(?:/(?P<file>[^#?]+)(?:#L(?P<line_a>\d+)(?:-L(?P<line_b>\d+))?)?)?)?"
+        r"(?:(?:/src)?/(?:branch/(?P<branch>[^/#?]+)|commit/(?P<commit>[a-f0-9]+))(?:/(?P<file>[^#?]+)"
+        r"(?:#L(?P<line_a>\d+)(?:-L(?P<line_b>\d+))?)?(?:(?<=\.md)#(?P<md_anchor>[^#]+))?"
+        ")?)?"
         r"(?:/compare/(?P<cmp_left>[^.#?]+)...(?P<cmp_right>[^.#?]+))?",
         input_url,
     ):
@@ -275,9 +277,16 @@ def determine_label(input_url: str) -> str:
         comment_id = f".{m.group('comment_id')}" if m.group("comment_id") else ""
         if m.group("file"):
             filename = m.group("file").strip("/")
-            line_a = f"#{m.group('line_a')}" if m.group("line_a") else ""
-            line_b = f"-{m.group('line_b')}" if m.group("line_b") else ""
-            reference = f":{filename}{line_a}{line_b}"
+            if m.group("md_anchor"):
+                section = prettify(m.group("md_anchor"))
+                subreference = f" > {section}"
+            elif m.group("line_a"):
+                line_a = f"#{m.group('line_a')}"
+                line_b = f"-{m.group('line_b')}" if m.group("line_b") else ""
+                subreference = f"{line_a}{line_b}"
+            else:
+                subreference = ""
+            reference = f":{filename}{subreference}"
         else:
             reference = ""
         compare = f"@{m.group('cmp_left')}⭤{m.group('cmp_right')}" if m.group("cmp_left") else ""

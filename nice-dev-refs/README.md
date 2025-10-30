@@ -41,7 +41,8 @@ then type any of the following:
               heading in rendered file
 - **Gitea**: repository, branch (& diff), commit (& diff),
               pull request (& comment) 
-              file (& line), 
+              file (& line),
+              heading in rendered file
 - **Jenkins**
     - build artifacts
     - classic: "simple" job (& build), multi-branch pipeline (& build), view;
