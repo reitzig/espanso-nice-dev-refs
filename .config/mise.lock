@@ -1,11 +1,11 @@
 [[tools.cocogitto]]
-version = "6.4.0"
+version = "6.5.0"
 backend = "aqua:cocogitto/cocogitto"
 
 [tools.cocogitto.platforms.linux-x64]
-checksum = "blake3:09be7d961bdee67f867828b361f5cd3f412b74e4b727ae0942e71f5d60005615"
-size = 3062508
-url = "https://github.com/cocogitto/cocogitto/releases/download/6.4.0/cocogitto-6.4.0-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:9de1086c8b6521a8a01abbd62c562d6d355990f542e3082b49ec4a597f925646"
+size = 3055836
+url = "https://github.com/cocogitto/cocogitto/releases/download/6.5.0/cocogitto-6.5.0-x86_64-unknown-linux-musl.tar.gz"
 
 [[tools.editorconfig-checker]]
 version = "3.4.1"
@@ -30,5 +30,5 @@ version = "3.14.0"
 backend = "core:python"
 
 [[tools.uv]]
-version = "0.9.4"
+version = "0.9.7"
 backend = "aqua:astral-sh/uv"
