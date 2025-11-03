@@ -15,7 +15,7 @@ postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
 # renovate: datasource=github-releases depName=cocogitto/cocogitto
-version = "6.4"
+version = "6.5.0"
 postinstall = 'mise run install-local-completions cog generate-completions'
 
 # implement in mise.local.toml or ~/.config/mise.toml
