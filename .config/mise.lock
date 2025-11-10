@@ -30,5 +30,5 @@ version = "3.14.0"
 backend = "core:python"
 
 [[tools.uv]]
-version = "0.9.7"
+version = "0.9.8"
 backend = "aqua:astral-sh/uv"
