@@ -83,6 +83,31 @@ def test_should_label_file_at_revision() -> None:
     assert_that(label).is_equal_to("my-account/some-repo@3577c55c:some/file.md")
 
 
+def test_should_label_file_history_from_revision() -> None:
+    # Given:
+    url = (
+        "https://gitea.some.org/my-account/some-repo"
+        "/commits/commit/3577c55c6f18e164c37f332f98b4c08b1242f90e/some/file.md"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@3577c55c...:some/file.md")
+
+
+def test_should_label_file_history_from_branch() -> None:
+    # Given:
+    url = "https://gitea.some.org/my-account/some-repo/commits/branch/some-branch/some/file.md"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@some-branch...:some/file.md")
+
+
 def test_should_label_folder() -> None:
     # Given:
     url = "https://gitea.some.org/my-account/some-repo/src/branch/main/some/folder"
@@ -114,6 +139,29 @@ def test_should_label_branch() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo@some-branch")
+
+
+def test_should_label_commits_on_default_branch() -> None:
+    # Given:
+    url = "https://gitea.some.org/my-account/some-repo/commits/branch/main"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@main...")
+
+
+def test_should_label_commits_on_branch() -> None:
+    # Given:
+    #
+    url = "https://gitea.some.org/my-account/some-repo/commits/branch/some-branch"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo@some-branch...")
 
 
 def test_should_label_branch_comparison() -> None:

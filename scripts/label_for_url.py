@@ -255,20 +255,22 @@ def determine_label(input_url: str) -> str:
     elif m := re.search(
         r"^https://[^/]*gitea[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)"
         r"(?:/pulls/(?P<number>\d+)(?:/commits/(?P<pr_commit>[a-f0-9]+))?(?:/files)?(#issuecomment-(?P<comment_id>\d+))?)?"
-        r"(?:(?:/src)?/(?:branch/(?P<branch>[^/#?]+)|commit/(?P<commit>[a-f0-9]+))(?:/(?P<file>[^#?]+)"
+        r"(?:(?:/(?P<view>src|commits))?/(?:branch/(?P<branch>[^/#?]+)|commit/(?P<commit>[a-f0-9]+))(?:/(?P<file>[^#?]+)"
         r"(?:#L(?P<line_a>\d+)(?:-L(?P<line_b>\d+))?)?(?:(?<=\.md)#(?P<md_anchor>[^#]+))?"
         ")?)?"
         r"(?:/compare/(?P<cmp_left>[^.#?]+)...(?P<cmp_right>[^.#?]+))?",
         input_url,
     ):
         number = f"#{m.group('number')}" if m.group("number") else ""
+        commit_range = "..." if m.group("view") and m.group("view") == "commits" else ""
         branch = (
-            f"@{m.group('branch')}"
-            if m.group("branch") and m.group("branch") not in ["main", "master"]
+            f"@{m.group('branch')}{commit_range}"
+            if m.group("branch")
+            and (m.group("branch") not in ["main", "master"] or commit_range != "")
             else ""
         )
         commit = (
-            f"@{m.group('commit')[0:8]}"
+            f"@{m.group('commit')[0:8]}{commit_range}"
             if m.group("commit")
             else f"@{m.group('pr_commit')[0:8]}"
             if m.group("pr_commit")
