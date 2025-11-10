@@ -9,12 +9,10 @@ postinstall = "mise run install-local-completions uv generate-shell-completion"
 version = "3.4"
 
 [tools.lefthook]
-# renovate: datasource=github-releases depName=evilmartians/lefthook
 version = "2.0"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
-# renovate: datasource=github-releases depName=cocogitto/cocogitto
 version = "6.5"
 postinstall = 'mise run install-local-completions cog generate-completions'
 

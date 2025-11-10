@@ -25,23 +25,4 @@
       automergeType :    "branch"
     },
   ],
-  customManagers :      [
-    {
-      description :    [
-        "Until the mise managers is mature enough, use comment syntax similar to packages in Dockerfiles",
-        "refs: https://docs.renovatebot.com/presets-customManagers/#custommanagersdockerfileversions",
-        "refs: https://github.com/jdx/mise/discussions/1940",
-      ],
-      customType :     "regex",
-      managerFilePatterns: [
-        // cf. https://mise.jdx.dev/configuration.html#mise-toml
-        "/(^|/)\.?mise(\.[^.]+)*\.toml/",
-        "/(^|/)\.?mise/config\.toml/",
-        "/(^|/)\.?mise/conf.d/.+\.toml/",
-      ],
-      matchStrings :   [
-        "# renovate: datasource=(?<datasource>[a-zA-Z0-9-._]+?) depName=(?<depName>[^\\s]+?)(?: (lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[^\\s]+?))?(?: extractVersion=(?<extractVersion>[^\\s]+?))?(?: registryUrl=(?<registryUrl>[^\\s]+?))?\\s[\"']?[^\"'=]+[\"']?\\s*=\\s*[\"']?(?<currentValue>.+?)[\"']?\\s",
-      ],
-    },
-  ],
 }
