@@ -6,7 +6,7 @@ version = "0.9"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.4"
+version = "3.5"
 
 [tools.lefthook]
 version = "2.0"

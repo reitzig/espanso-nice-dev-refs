@@ -8,13 +8,13 @@ size = 3055836
 url = "https://github.com/cocogitto/cocogitto/releases/download/6.5.0/cocogitto-6.5.0-x86_64-unknown-linux-musl.tar.gz"
 
 [[tools.editorconfig-checker]]
-version = "3.4.1"
+version = "3.5.0"
 backend = "aqua:editorconfig-checker/editorconfig-checker"
 
 [tools.editorconfig-checker.platforms.linux-x64]
-checksum = "sha256:8412b617d9f6ee9af78df8122f627470b2782e29a977ee147322a49bae16bde5"
-size = 1835510
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.4.1/ec-linux-amd64.tar.gz"
+checksum = "sha256:e12ef1a2c9224ce4fe75be1b2f368644265a78e1aa688c6f30fb51aa8d1bb6e0"
+size = 1958218
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.5.0/ec-linux-amd64.tar.gz"
 
 [[tools.lefthook]]
 version = "2.0.4"
