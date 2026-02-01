@@ -18,5 +18,6 @@ version = "3.14.2"
 backend = "core:python"
 
 [[tools.uv]]
-version = "0.9.27"
+version = "0.9.28"
 backend = "aqua:astral-sh/uv"
+"platforms.linux-x64" = { checksum = "sha256:83cd032167b6b97ac94830608efe11159b3d485654e39fdb0bf84718ef236afe", url = "https://github.com/astral-sh/uv/releases/download/0.9.28/uv-x86_64-unknown-linux-musl.tar.gz"}
