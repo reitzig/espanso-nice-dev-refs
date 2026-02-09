@@ -2,14 +2,14 @@
 python = "3.14"
 
 [tools.uv]
-version = "0.9"
+version = "0.10.0"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.5"
+version = "3.6.1"
 
 [tools.lefthook]
-version = "2.0"
+version = "2.1.0"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
