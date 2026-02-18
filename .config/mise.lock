@@ -4,20 +4,20 @@ backend = "aqua:cocogitto/cocogitto"
 "platforms.linux-x64" = { checksum = "sha256:9de1086c8b6521a8a01abbd62c562d6d355990f542e3082b49ec4a597f925646", url = "https://github.com/cocogitto/cocogitto/releases/download/6.5.0/cocogitto-6.5.0-x86_64-unknown-linux-musl.tar.gz"}
 
 [[tools.editorconfig-checker]]
-version = "3.5.0"
+version = "3.6.1"
 backend = "aqua:editorconfig-checker/editorconfig-checker"
-"platforms.linux-x64" = { checksum = "sha256:e12ef1a2c9224ce4fe75be1b2f368644265a78e1aa688c6f30fb51aa8d1bb6e0", url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.5.0/ec-linux-amd64.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:cd32084fce5f3d49ba49697f362ac3a114989715c98819303247dd54c1f368b0", url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.6.1/ec-linux-amd64.tar.gz"}
 
 [[tools.lefthook]]
-version = "2.0.16"
+version = "2.1.1"
 backend = "aqua:evilmartians/lefthook"
-"platforms.linux-x64" = { checksum = "sha256:a0916703db56e2457142e9e636812d511db6512ee98156a2bb1e033e09c65969", url = "https://github.com/evilmartians/lefthook/releases/download/v2.0.16/lefthook_2.0.16_Linux_x86_64.gz"}
+"platforms.linux-x64" = { checksum = "sha256:5d29942bb5954c59d67d8c37184411034e576ed2829e22b0a6d88bba934e4fbb", url = "https://github.com/evilmartians/lefthook/releases/download/v2.1.1/lefthook_2.1.1_Linux_x86_64.gz"}
 
 [[tools.python]]
 version = "3.14.2"
 backend = "core:python"
 
 [[tools.uv]]
-version = "0.9.28"
+version = "0.10.4"
 backend = "aqua:astral-sh/uv"
-"platforms.linux-x64" = { checksum = "sha256:83cd032167b6b97ac94830608efe11159b3d485654e39fdb0bf84718ef236afe", url = "https://github.com/astral-sh/uv/releases/download/0.9.28/uv-x86_64-unknown-linux-musl.tar.gz"}
+"platforms.linux-x64" = { checksum = "sha256:18adf097cea30a165ba086c1e72659fec3c5aca056a560e7c39e0164ac871196", url = "https://github.com/astral-sh/uv/releases/download/0.10.4/uv-x86_64-unknown-linux-musl.tar.gz"}
