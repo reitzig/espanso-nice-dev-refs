@@ -36,7 +36,7 @@ then type any of the following:
 - **GitLab**: (sub)group, repository, commit (& diff),
               issue (& comment, search),
               merge request (& comment, search),
-              pipeline, job,
+              pipeline, job (& line),
               file (& line), snippet,
               heading in rendered file
 - **Gitea**: repository, branch (& diff, commits), 

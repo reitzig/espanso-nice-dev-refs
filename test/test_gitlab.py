@@ -433,3 +433,14 @@ def test_should_label_job() -> None:
 
     # Then:
     assert_that(label).is_equal_to("my-account/some-repo#123456")
+
+
+def test_should_label_job_and_logline() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/jobs/123456#L77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#123456:77")
