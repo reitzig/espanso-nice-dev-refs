@@ -17,7 +17,7 @@ pre-commit:
     formatter:
       priority: 1
       glob: "*.py"
-      run: ruff format {staged_files}
+      run: uv run ruff format {staged_files}
       stage_fixed: true
     editorconfig:
       priority: 2
@@ -25,7 +25,7 @@ pre-commit:
     linter:
       priority: 2
       glob: "*.py"
-      run: ruff check {staged_files}
+      run: uv run ruff check {staged_files}
 commit-msg:
   skip:
     - ref: "wip/*"
