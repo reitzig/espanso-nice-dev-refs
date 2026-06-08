@@ -1,15 +1,15 @@
 [tools]
-python = "3.14"
+python = "3.14.5"
 
 [tools.uv]
-version = "0.11.3"
+version = "0.11.19"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.6"
+version = "3.7.0"
 
 [tools.lefthook]
-version = "2.1"
+version = "2.1.9"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
