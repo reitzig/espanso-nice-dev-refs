@@ -32,7 +32,7 @@ dev = [
     "coverage[toml]==7.14.1",
     "poethepoet==0.46.0",
     "pytest==9.0.3",
-    "ruff==0.15.15",
+    "ruff==0.15.16",
 ]
 
 [tool.poe.tasks.test]
