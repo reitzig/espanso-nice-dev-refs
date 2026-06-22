@@ -34,7 +34,7 @@ then type any of the following:
               wiki page (& heading), gist (& file & line),
               advisories, enterprises, organizations
 - **GitLab**: (sub)group, repository, commit (& diff),
-              issue (& comment, search),
+              work item (& comment, search),
               merge request (& comment, search),
               pipeline, job (& line),
               file (& line), snippet,

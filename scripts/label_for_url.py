@@ -131,7 +131,7 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('id')}"
     elif m := re.search(
         r"^https://[^/]*git(hub|lab)[^/]*/(?P<project>[a-zA-Z0-9._/+-]+?)/(?P<repo>[^/]+)(/-)?/("
-        r"((?P<type>issues|pull|discussions|merge_requests|pipelines|jobs)/(?P<number>\d+)"
+        r"((?P<type>issues|pull|discussions|work_items|merge_requests|pipelines|jobs)/(?P<number>\d+)"
         r"(?:/diffs\?commit_id=(?P<commit>[a-f0-9]+))?"
         r"(?:/files|/commits/(?P<pr_commit>[a-f0-9]+))?"
         r"(?:#L(?P<line>[0-9]+))?"
@@ -223,7 +223,7 @@ def determine_label(input_url: str) -> str:
         return f"{m.group('project')}/{m.group('repo')}#[{search_representation}]"
     elif m := re.search(
         r"^https://[^/]*gitlab[^/]*"
-        r"/(?P<project>[^/]+)/(?P<repo>[^/]+)/-/(?P<type>issues|merge_requests)/?\?(?P<query>[^#]+)",
+        r"/(?P<project>[^/]+)/(?P<repo>[^/]+)/-/(?P<type>issues|work_items|merge_requests)/?\?(?P<query>[^#]+)",
         input_url,
     ):
         query = [
@@ -240,7 +240,7 @@ def determine_label(input_url: str) -> str:
             elif k == "search":
                 query_labels.append(f"🔍 {v}")
         query_label = f"{','.join(query_labels)}" if query_labels else "🔍"
-        separator = "#" if m.group("type") == "issues" else "!"
+        separator = "#" if m.group("type") in ["issues", "work_items"] else "!"
         return f"{m.group('project')}/{m.group('repo')}{separator}[{query_label}]"
     elif m := re.search(
         r"https://[^/]*git(hub|lab)[^/]*/(?P<project>.+?)/?"

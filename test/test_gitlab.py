@@ -70,9 +70,31 @@ def test_should_label_issue() -> None:
     assert_that(label).is_equal_to("my-account/some-repo#77")
 
 
+def test_should_label_work_item() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/work_items/77"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#77")
+
+
 def test_should_label_issue_comment() -> None:
     # Given:
     url = "https://gitlab.some.org/my-account/some-repo/-/issues/77#note_42"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#77.42")
+
+
+def test_should_label_work_item_comment() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/work_items/77#note_42"
 
     # When:
     label = determine_label(url)
@@ -86,6 +108,22 @@ def test_should_label_issue_list_by_label() -> None:
     url = (
         "https://gitlab.some.org/my-account/some-repo/-/issues/"  # keep linebreak
         "?label_name%5B%5D=feedback%20needed"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#[feedback needed]")
+
+
+def test_should_label_work_item_list_by_label() -> None:
+    # Given:
+    url = (
+        "https://gitlab.some.org/my-account/some-repo/-/work_items"  # keep linebreak
+        "?sort=created_date&state=all"
+        "&label_name%5B%5D=feedback%20needed"
+        "&first_page_size=20"
     )
 
     # When:
@@ -114,8 +152,8 @@ def test_should_label_issue_list_by_labels() -> None:
 def test_should_label_issue_list_by_label_exclusion() -> None:
     # Given:
     url = (
-        "https://gitlab.some.org/my-account/some-repo/-/issues/?"
-        "sort=created_date&state=opened"
+        "https://gitlab.some.org/my-account/some-repo/-/issues/"
+        "?sort=created_date&state=opened"
         "&not%5Blabel_name%5D%5B%5D=bug&not%5Blabel_name%5D%5B%5D=feedback%20needed"
         "&first_page_size=20"
     )
@@ -130,8 +168,8 @@ def test_should_label_issue_list_by_label_exclusion() -> None:
 def test_should_label_issue_list_by_description_search() -> None:
     # Given:
     url = (
-        "https://gitlab.some.org/my-account/some-repo/-/issues/?"
-        "sort=created_date&state=opened"
+        "https://gitlab.some.org/my-account/some-repo/-/issues/"
+        "?sort=created_date&state=opened"
         "&in=DESCRIPTION&search=some%20query"
         "&first_page_size=20"
     )
@@ -146,9 +184,25 @@ def test_should_label_issue_list_by_description_search() -> None:
 def test_should_label_issue_list_by_title_search() -> None:
     # Given:
     url = (
-        "https://gitlab.some.org/my-account/some-repo/-/issues/?"
-        "sort=created_date&state=opened"
+        "https://gitlab.some.org/my-account/some-repo/-/issues/"
+        "?sort=created_date&state=opened"
         "&in=TITLE&search=some%20query"
+        "&first_page_size=20"
+    )
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo#[🔍 some query]")
+
+
+def test_should_label_work_item_list_by_text_search() -> None:
+    # Given:
+    url = (
+        "https://gitlab.some.org/my-account/some-repo/-/work_items"
+        "?sort=created_date&state=opened"
+        "&search=some%20query"
         "&first_page_size=20"
     )
 
@@ -162,8 +216,8 @@ def test_should_label_issue_list_by_title_search() -> None:
 def test_should_label_issue_list_with_any_search() -> None:
     # Given:
     url = (
-        "https://gitlab.some.org/my-account/some-repo/-/issues/?"
-        "sort=created_date&state=opened"
+        "https://gitlab.some.org/my-account/some-repo/-/issues/"
+        "?sort=created_date&state=opened"
         "&my_reaction_emoji=thumbsup"
         "&first_page_size=20"
     )
