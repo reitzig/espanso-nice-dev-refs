@@ -33,36 +33,36 @@ checksum = "sha256:ee4570d25e31393b88518af570f54e97f89e07346d545809e0c7404e8d076
 url = "https://github.com/cocogitto/cocogitto/releases/download/6.5.0/cocogitto-6.5.0-x86_64-pc-windows-msvc.tar.gz"
 
 [[tools.editorconfig-checker]]
-version = "3.7.0"
+version = "3.8.0"
 backend = "aqua:editorconfig-checker/editorconfig-checker"
 
 [tools.editorconfig-checker."platforms.linux-arm64"]
-checksum = "sha256:e978f3f0940469989930311af8e101dd9ce8c2ee4da69264f3d76a3787e961ad"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.7.0/ec-linux-arm64.tar.gz"
+checksum = "sha256:5676889ac4eed1036180ffbe2aeb2062d985ac50f7e6035fe61160c6b8be2c33"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.8.0/ec-linux-arm64.tar.gz"
 
 [tools.editorconfig-checker."platforms.linux-arm64-musl"]
-checksum = "sha256:e978f3f0940469989930311af8e101dd9ce8c2ee4da69264f3d76a3787e961ad"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.7.0/ec-linux-arm64.tar.gz"
+checksum = "sha256:5676889ac4eed1036180ffbe2aeb2062d985ac50f7e6035fe61160c6b8be2c33"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.8.0/ec-linux-arm64.tar.gz"
 
 [tools.editorconfig-checker."platforms.linux-x64"]
-checksum = "sha256:9a0c3a5170bffa24f9e5f0def53d285777b6c5284a95367f40d399d0b76af552"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.7.0/ec-linux-amd64.tar.gz"
+checksum = "sha256:613bd88f34165a334adcb6b7e92a123c9de0eada65846d31af63613b779ff3be"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.8.0/ec-linux-amd64.tar.gz"
 
 [tools.editorconfig-checker."platforms.linux-x64-musl"]
-checksum = "sha256:9a0c3a5170bffa24f9e5f0def53d285777b6c5284a95367f40d399d0b76af552"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.7.0/ec-linux-amd64.tar.gz"
+checksum = "sha256:613bd88f34165a334adcb6b7e92a123c9de0eada65846d31af63613b779ff3be"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.8.0/ec-linux-amd64.tar.gz"
 
 [tools.editorconfig-checker."platforms.macos-arm64"]
-checksum = "sha256:727e6ef506c6fbe7719cc29c69b495715b64514a00059f3f179077bfad0580e5"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.7.0/ec-darwin-arm64.tar.gz"
+checksum = "sha256:73bbb23c24b94c9e61d7ed3694cc313943c59e5e8bc5bee9f186a997a45eb046"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.8.0/ec-darwin-arm64.tar.gz"
 
 [tools.editorconfig-checker."platforms.macos-x64"]
-checksum = "sha256:6cd2e4aa2a374d391e3baeaae43fc28906fd15b09490f5669eee206a63eef00a"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.7.0/ec-darwin-amd64.tar.gz"
+checksum = "sha256:ee0d45c94b9808a5aa15e08f94333a81842b456f511f29f71a8fe589b82d72a1"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.8.0/ec-darwin-amd64.tar.gz"
 
 [tools.editorconfig-checker."platforms.windows-x64"]
-checksum = "sha256:9c6b8a4cd7ccc5826ab96d34c460f37ab18b9cb50607d3ee9eb743fc47335da7"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.7.0/ec-windows-amd64.zip"
+checksum = "sha256:7ec31e1a6a9983aa2a4942cb66dfd35e8b61e76263460413988438ae1426906a"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.8.0/ec-windows-amd64.zip"
 
 [[tools.lefthook]]
 version = "2.1.9"
@@ -143,40 +143,40 @@ url = "https://github.com/astral-sh/python-build-standalone/releases/download/20
 provenance = "github-attestations"
 
 [[tools.uv]]
-version = "0.11.23"
+version = "0.11.25"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv."platforms.linux-arm64"]
-checksum = "sha256:80efb615b78c1e5721e5858135cd3499609b26741220332c843bd58936053bc6"
-url = "https://github.com/astral-sh/uv/releases/download/0.11.23/uv-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:3d9c9a95f1868ff20ac880712f3a337d710ea4b65f135184b7a35635d1acbf84"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.25/uv-aarch64-unknown-linux-musl.tar.gz"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-arm64-musl"]
-checksum = "sha256:80efb615b78c1e5721e5858135cd3499609b26741220332c843bd58936053bc6"
-url = "https://github.com/astral-sh/uv/releases/download/0.11.23/uv-aarch64-unknown-linux-musl.tar.gz"
+checksum = "sha256:3d9c9a95f1868ff20ac880712f3a337d710ea4b65f135184b7a35635d1acbf84"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.25/uv-aarch64-unknown-linux-musl.tar.gz"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64"]
-checksum = "sha256:6be47081100ff1ce0ac7e85ba2ac12e32f2ffa6f946d78bf7f24ee9ce3a46181"
-url = "https://github.com/astral-sh/uv/releases/download/0.11.23/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:7195cfcc1785d0c559d4682ad9109f26664b8db4d828d42d66078ef454061891"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.25/uv-x86_64-unknown-linux-musl.tar.gz"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64-musl"]
-checksum = "sha256:6be47081100ff1ce0ac7e85ba2ac12e32f2ffa6f946d78bf7f24ee9ce3a46181"
-url = "https://github.com/astral-sh/uv/releases/download/0.11.23/uv-x86_64-unknown-linux-musl.tar.gz"
+checksum = "sha256:7195cfcc1785d0c559d4682ad9109f26664b8db4d828d42d66078ef454061891"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.25/uv-x86_64-unknown-linux-musl.tar.gz"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-arm64"]
-checksum = "sha256:71ef9de85db820749b3b12b7585624ee279e9c5afcbc6f8236bc3d628c4305b0"
-url = "https://github.com/astral-sh/uv/releases/download/0.11.23/uv-aarch64-apple-darwin.tar.gz"
+checksum = "sha256:5fc334bb25d19806262efd1f6e7d380155c7e817d89bf426df4ba7ae873c9471"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.25/uv-aarch64-apple-darwin.tar.gz"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-x64"]
-checksum = "sha256:7a88155033cc469bba5bd5a24212e355eb92e3e2a276320b669ec576296c1e25"
-url = "https://github.com/astral-sh/uv/releases/download/0.11.23/uv-x86_64-apple-darwin.tar.gz"
+checksum = "sha256:65ff85b33212f75d34d7c0f0724aba9a742c74f62559f67dc0d6c543dc2fc52f"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.25/uv-x86_64-apple-darwin.tar.gz"
 provenance = "github-attestations"
 
 [tools.uv."platforms.windows-x64"]
-checksum = "sha256:02ad29f07e674d68726ba3bb1ff25b335d83515756e2b1a194bb56c3cc30e07c"
-url = "https://github.com/astral-sh/uv/releases/download/0.11.23/uv-x86_64-pc-windows-msvc.zip"
+checksum = "sha256:15bfd1423b7eaa7aae949922d4712ebaac2bb44a81af64ab59bbe007090cb0d0"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.25/uv-x86_64-pc-windows-msvc.zip"
 provenance = "github-attestations"
