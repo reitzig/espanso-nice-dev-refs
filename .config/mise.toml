@@ -5,11 +5,11 @@ minimum_release_age = "3d"
 python = "3.14.6"
 
 [tools.uv]
-version = "0.11.23"
+version = "0.11.25"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
-version = "3.7.0"
+version = "3.8.0"
 
 [tools.lefthook]
 version = "2.1.9"
