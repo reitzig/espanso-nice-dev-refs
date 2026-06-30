@@ -16,7 +16,7 @@ version = "2.1.9"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
-version = "6.5"
+version = "7.0.0"
 postinstall = 'mise run install-local-completions cog generate-completions'
 
 # implement in mise.local.toml or ~/.config/mise.toml
