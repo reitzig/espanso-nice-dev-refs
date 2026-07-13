@@ -10,6 +10,7 @@ from scripts.label_for_url import determine_label
         "https://our-confluence.my-org.de/display/MYSPACE/",
         "https://our-confluence.my-org.de/spaces/MYSPACE/overview",
         "https://my-org.atlassian.net/wiki/spaces/MYSPACE/overview",
+        "https://confluence.cloud.my-org.de/wiki/spaces/MYSPACE/overview?homepageId=188776667",
     ],
 )
 def test_should_label_space(url: str) -> None:
@@ -26,6 +27,7 @@ def test_should_label_space(url: str) -> None:
         "https://our-confluence.my-org.de/display/MYSPACE/Some+Page+Nobody+Reads",
         "https://our-confluence.my-org.de/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads",
         "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads",
+        "https://confluence.cloud.my-org.de/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads",
     ],
 )
 def test_should_label_url_with_title(url: str) -> None:
@@ -36,23 +38,40 @@ def test_should_label_url_with_title(url: str) -> None:
     assert_that(label).is_equal_to("MYSPACE/Some Page Nobody Reads")
 
 
-def test_should_label_blog_post() -> None:
+@pytest.mark.parametrize(
+    "url",
+    [
+        "https://our-confluence.my-org.de/spaces/SOME/blog/2025/09/26/326959444/An+Important+Title",
+        "https://my-org.atlassian.net/wiki/spaces/SOME/blog/2025/09/26/326959444/An+Important+Title",
+        "https://confluence.cloud.my-org.de/wiki/spaces/SOME/blog/2025/09/26/326959444/An+Important+Title",
+    ],
+)
+def test_should_label_blog_post(url: str) -> None:
     # When:
-    label = determine_label(
-        "https://our-confluence.my-org.de/spaces/SOME/blog/2025/09/26/326959444/An+Important+Title"
-    )
+    label = determine_label(url)
 
     # Then:
     assert_that(label).is_equal_to("SOME/2025-09-26 An Important Title")
 
 
-def test_should_label_blog_post_commend() -> None:
-    # When:
-    label = determine_label(
+#
+@pytest.mark.parametrize(
+    "url",
+    [
         "https://our-confluence.my-org.de/spaces/SOME/blog/"
         "2025/09/26/326959444/An+Important+Title"
-        "?focusedCommentId=241754794#comment-241754794"
-    )
+        "?focusedCommentId=241754794#comment-241754794",
+        "https://my-org.atlassian.net/wiki/spaces/SOME/blog/"
+        "2025/09/26/326959444/An+Important+Title"
+        "?focusedCommentId=241754794",
+        "https://confluence.cloud.my-org.de/wiki/spaces/SOME/blog/"
+        "2025/09/26/326959444/An+Important+Title"
+        "?focusedCommentId=241754794",
+    ],
+)
+def test_should_label_blog_post_comment(url: str) -> None:
+    # When:
+    label = determine_label(url)
 
     # Then:
     assert_that(label).is_equal_to("SOME/2025-09-26 An Important Title > Comment 241754794")
@@ -63,6 +82,7 @@ def test_should_label_blog_post_commend() -> None:
     [
         "https://our-confluence.my-org.de/spaces/~john.doe/pages/292389791/Some+Page+Nobody+Reads",
         "https://my-org.atlassian.net/wiki/spaces/~john.doe/pages/1333624914/Some+Page+Nobody+Reads",
+        "https://confluence.cloud.my-org.de/wiki/spaces/~john.doe/pages/1333624914/Some+Page+Nobody+Reads",
     ],
 )
 def test_should_label_url_with_title_in_personal_space(url: str) -> None:
@@ -79,6 +99,7 @@ def test_should_label_url_with_title_in_personal_space(url: str) -> None:
     [
         "https://our-confluence.my-org.de/spaces/~712020afb4c029c9124da686f37b4ffdf992ff/pages/292389791/Some+Page+Nobody+Reads",
         "https://my-org.atlassian.net/wiki/spaces/~712020afb4c029c9124da686f37b4ffdf992ff/pages/1333624914/Some+Page+Nobody+Reads",
+        "https://confluence.cloud.my-org.de/wiki/spaces/~712020afb4c029c9124da686f37b4ffdf992ff/pages/1333624914/Some+Page+Nobody+Reads",
     ],
 )
 def test_should_label_url_with_title_in_id_space(url: str) -> None:
@@ -108,6 +129,7 @@ def test_should_label_url_with_title_and_section() -> None:
         "https://our-confluence.my-org.de/display/MYSPACE/Some+Page+Nobody+Reads?focusedCommentId=241754794#comment-241754794",
         "https://our-confluence.my-org.de/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads?focusedCommentId=241754794#comment-241754794",
         "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads?focusedCommentId=241754794",
+        "https://confluence.cloud.my-org.de/wiki/spaces/MYSPACE/pages/1333624914/Some+Page+Nobody+Reads?focusedCommentId=241754794",
     ],
 )
 def test_should_label_url_with_title_and_comment(url: str) -> None:
@@ -124,6 +146,7 @@ def test_should_label_url_with_title_and_comment(url: str) -> None:
         "https://our-confluence.my-org.de/display/MYSPACE/%5BWIP%5D+Some+Page+Nobody+Reads",
         "https://our-confluence.my-org.de/spaces/MYSPACE/pages/1333624914/%5BWIP%5D+Some+Page+Nobody+Reads",
         "https://my-org.atlassian.net/wiki/spaces/MYSPACE/pages/1333624914/%5BWIP%5D+Some+Page+Nobody+Reads",
+        "https://confluence.cloud.my-org.de/wiki/spaces/MYSPACE/pages/1333624914/%5BWIP%5D+Some+Page+Nobody+Reads",
     ],
 )
 def test_should_revert_url_encoding(url: str) -> None:

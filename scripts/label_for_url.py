@@ -363,7 +363,8 @@ def determine_label(input_url: str) -> str:
         page_id = f"/{m.group('pageId')}" if m.group("pageId") else ""
         return f"{space}{title}{anchor}" or f"{m.group('host')}{page_id}"
     elif m := re.search(
-        r"^https://(?:[^/]*atlassian\.(?:com|net)/wiki|[^/]*confluence.[^/]*)"
+        r"^https://(?:[^/]*atlassian\.(?:com|net)|[^/]*confluence.[^/]*)"
+        r"(?:/wiki)?"  # cloud vs data center
         r"/spaces/~?(?P<space>[^/]+)"
         r"(?:/(?:pages|blog/(?P<blog_date>\d{4}/\d{2}/\d{2}))/[0-9]+/(?P<title>[^?#]+))?"
         r"(?:\?(?P<args>[^#]*))?"
