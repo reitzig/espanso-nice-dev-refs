@@ -431,9 +431,20 @@ def test_should_label_branch() -> None:
     assert_that(label).is_equal_to("my-account/some-repo@feature/something")
 
 
+def test_should_label_markdown_and_anchor() -> None:
+    # Given:
+    url = "https://gitlab.some.org/my-account/some-repo/-/blob/main/some/README.md?ref_type=heads#some-headline"
+
+    # When:
+    label = determine_label(url)
+
+    # Then:
+    assert_that(label).is_equal_to("my-account/some-repo:some/README > Some Headline")
+
+
 def test_should_label_asciidoc_and_anchor() -> None:
     # Given:
-    url = "https://gitlab.com/my-account/some-repo/-/blob/main/some/README.adoc#some-headline"
+    url = "https://gitlab.some.org/my-account/some-repo/-/blob/main/some/README.adoc#some-headline"
 
     # When:
     label = determine_label(url)
