@@ -5,7 +5,18 @@ name: Test
 
 on:
   push:
+    branches:
+    - main
+    - renovate/**/*
+    tags:
+    - 'v*'
   pull_request:
+    types:
+    - opened
+    - synchronize
+    - reopened
+    branches-ignore:
+      - renovate/**/*
 
 jobs:
   test:
