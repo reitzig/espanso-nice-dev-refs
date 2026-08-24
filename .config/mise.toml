@@ -12,7 +12,7 @@ postinstall = "mise run install-local-completions uv generate-shell-completion"
 version = "3.11.1"
 
 [tools.lefthook]
-version = "2.1.10"
+version = "2.1.11"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
