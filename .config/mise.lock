@@ -35,43 +35,43 @@ url = "https://github.com/cocogitto/cocogitto/releases/download/7.0.0/cocogitto-
 url_api = "https://api.github.com/repos/cocogitto/cocogitto/releases/assets/366659399"
 
 [[tools.editorconfig-checker]]
-version = "3.11.2"
+version = "3.11.3"
 backend = "aqua:editorconfig-checker/editorconfig-checker"
 
 [tools.editorconfig-checker."platforms.linux-arm64"]
-checksum = "sha256:7c61c94a67658bff62467453c3d7d9a98d57139728d27e545e9d3e3688fc9ca6"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.2/ec-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/529790774"
+checksum = "sha256:6d333917ad3c21cf0a23c191ec660549de381e6df56ee5e76ace0c513da2b7b4"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.3/ec-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324052"
 
 [tools.editorconfig-checker."platforms.linux-arm64-musl"]
-checksum = "sha256:7c61c94a67658bff62467453c3d7d9a98d57139728d27e545e9d3e3688fc9ca6"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.2/ec-linux-arm64.tar.gz"
-url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/529790774"
+checksum = "sha256:6d333917ad3c21cf0a23c191ec660549de381e6df56ee5e76ace0c513da2b7b4"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.3/ec-linux-arm64.tar.gz"
+url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324052"
 
 [tools.editorconfig-checker."platforms.linux-x64"]
-checksum = "sha256:bc815e5b3b1891a0ee9e1242fe3475312655f8b0f4c4a79510be0a009294571a"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.2/ec-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/529790765"
+checksum = "sha256:6a73858f8906e466910fb3b3b525c206b27dacdad138910b0b0513f021ab32c4"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.3/ec-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324059"
 
 [tools.editorconfig-checker."platforms.linux-x64-musl"]
-checksum = "sha256:bc815e5b3b1891a0ee9e1242fe3475312655f8b0f4c4a79510be0a009294571a"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.2/ec-linux-amd64.tar.gz"
-url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/529790765"
+checksum = "sha256:6a73858f8906e466910fb3b3b525c206b27dacdad138910b0b0513f021ab32c4"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.3/ec-linux-amd64.tar.gz"
+url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324059"
 
 [tools.editorconfig-checker."platforms.macos-arm64"]
-checksum = "sha256:9ed40abdc3051c1b76c9557cd58c66ab1784728242dbd9c40cfffe1528195ab2"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.2/ec-darwin-arm64.tar.gz"
-url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/529790802"
+checksum = "sha256:eeb0e5d1db4a913277da781bc40802542eb42c4f3f43b7c87c000714dd905faf"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.3/ec-darwin-arm64.tar.gz"
+url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324096"
 
 [tools.editorconfig-checker."platforms.macos-x64"]
-checksum = "sha256:1a013573bbd394341168ea95174790ed44d6fc180f6d16e75c2ebc032f05bcc1"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.2/ec-darwin-amd64.tar.gz"
-url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/529790801"
+checksum = "sha256:126c8fa83500389078f6b2072a04170f063787ec9905e5d1ab69a5a62ee5b10d"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.3/ec-darwin-amd64.tar.gz"
+url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324099"
 
 [tools.editorconfig-checker."platforms.windows-x64"]
-checksum = "sha256:ca6879da5ff16101c00432dc1f67f46fba6da229f7d24a715b2fd3be4249f7ab"
-url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.2/ec-windows-amd64.zip"
-url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/529790777"
+checksum = "sha256:0d6739507ac0b57099f0339fce1de0856584c71dd878c89cbc07845884f42ab5"
+url = "https://github.com/editorconfig-checker/editorconfig-checker/releases/download/v3.11.3/ec-windows-amd64.zip"
+url_api = "https://api.github.com/repos/editorconfig-checker/editorconfig-checker/releases/assets/543324056"
 
 [[tools.lefthook]]
 version = "2.1.12"
@@ -159,47 +159,47 @@ url = "https://github.com/astral-sh/python-build-standalone/releases/download/20
 provenance = "github-attestations"
 
 [[tools.uv]]
-version = "0.12.8"
+version = "0.12.11"
 backend = "aqua:astral-sh/uv"
 
 [tools.uv."platforms.linux-arm64"]
-checksum = "sha256:ba8661f4fd207c8e94814191598e619b355ac10d5014e851e21eb800f9ef2b00"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.8/uv-aarch64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/538591961"
+checksum = "sha256:e9933d907fb9cd27d606d819bbded419f2844c0e2efc98225ecfa409288eb28d"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.11/uv-aarch64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/551278504"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-arm64-musl"]
-checksum = "sha256:975917badc8370163989e5bbe5a7c69bf922d19f8e57cb2652531bbffc935f84"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.8/uv-aarch64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/538591964"
+checksum = "sha256:de99cafdeb5ee6f61ac3acd6d9dc6a1ef166f9398fa5623c436246ee1ecea099"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.11/uv-aarch64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/551278510"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64"]
-checksum = "sha256:2e2b37e9811e17675a9e70bed5e1a58fc8c0388be63d751d72cc735188c149ff"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.8/uv-x86_64-unknown-linux-gnu.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/538592029"
+checksum = "sha256:4ae93e0f148a18434cc094072547cec88912fc4a72b984183c7d0d0e9586cb5e"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.11/uv-x86_64-unknown-linux-gnu.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/551278642"
 provenance = "github-attestations"
 
 [tools.uv."platforms.linux-x64-musl"]
-checksum = "sha256:6ca4597639c97e921fb915e113061ce8e4a14ead9e42a1ead521dbb0a6763795"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.8/uv-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/538592032"
+checksum = "sha256:3343303ad6b4f9537ae0abfb36f1926a90c0445ba8f23d0e0a840a66a124cffd"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.11/uv-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/551278646"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-arm64"]
-checksum = "sha256:8ce083658dbff20143607ca7af8e0c1d64b6fd7bf03a5cdcb62bf3d47d991b5f"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.8/uv-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/538591946"
+checksum = "sha256:e01b69ee15e81918d5e8fc9cf39b3db7f59c5576e5e306cd9b7aeb2c7b7321c3"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.11/uv-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/551278468"
 provenance = "github-attestations"
 
 [tools.uv."platforms.macos-x64"]
-checksum = "sha256:bfcd4407de99e0a2c1904df0902fa1795653d4edd145358e6561527e746a4f16"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.8/uv-x86_64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/538592016"
+checksum = "sha256:96d773bf5fda4f9b08c4444847f9183d1c14bc8a28ff9c0490e261a8fc6e5309"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.11/uv-x86_64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/551278628"
 provenance = "github-attestations"
 
 [tools.uv."platforms.windows-x64"]
-checksum = "sha256:e07acf3f8a29fe41f9e04b799c3325cb0e0893836bb222bf102829b45c679ad6"
-url = "https://github.com/astral-sh/uv/releases/download/0.12.8/uv-x86_64-pc-windows-msvc.zip"
-url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/538592024"
+checksum = "sha256:e94225dea91e051472847bd6d146d7d66c4f54ffcd1f106678866a99580845f9"
+url = "https://github.com/astral-sh/uv/releases/download/0.12.11/uv-x86_64-pc-windows-msvc.zip"
+url_api = "https://api.github.com/repos/astral-sh/uv/releases/assets/551278631"
 provenance = "github-attestations"
