@@ -2,17 +2,17 @@
 minimum_release_age = "3d"
 
 [tools]
-python = "3.14.7"
+python = "3.14.8"
 
 [tools.uv]
-version = "0.12.19"
+version = "0.12.23"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
 version = "4.0.2"
 
 [tools.lefthook]
-version = "2.1.14"
+version = "2.1.17"
 postinstall = 'mise run install-local-completions lefthook completion'
 
 [tools.cocogitto]
