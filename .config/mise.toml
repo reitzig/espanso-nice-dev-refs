@@ -2,7 +2,7 @@
 minimum_release_age = "3d"
 
 [tools]
-python = "3.14.8"
+python = "3.15.0"
 
 [tools.uv]
 version = "0.13.0"
