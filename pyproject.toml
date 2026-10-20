@@ -30,9 +30,9 @@ documentation = "https://github.com/reitzig/espanso-nice-dev-refs/blob/main/READ
 dev = [
     "assertpy==1.1",
     "coverage[toml]==7.16.2",
-    "poethepoet==0.48.0",
+    "poethepoet==0.49.0",
     "pytest==9.1.1",
-    "ruff==0.17.0",
+    "ruff==0.17.1",
 ]
 
 [tool.poe.tasks.test]
