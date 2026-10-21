@@ -12,12 +12,25 @@ from urllib.parse import unquote
 
 def prettify(anchor_arg: str) -> str:
     a, _ = re.subn(r"(?:^|[-+\s]+)([a-zA-Z])", lambda m: f" {m[1]}".upper(), unquote(anchor_arg))
-    return a.strip()
+    a = a.strip()
+    return re.sub(r"\.html?$", "", a)
 
 
 def determine_label(input_url: str) -> str:
     if m := re.search(r"^mailto:(?P<email>.+@.+)$", input_url):
         return f"{m.group('email')}"
+    elif m := re.search(
+        r"\w+://(www\d*\.)?(?P<host>docs\.[^?#/]+)(/[a-z]{2}/)?"
+        r"(?P<path>[^?#]+)"
+        r"(?:#(?P<anchor>.+))?",
+        input_url,
+    ):
+        host = [m.group("host")]
+        path_elements = m.group("path").strip(" /").split("/") if m.group("path") else []
+        breadcrumbs = [prettify(bc) for bc in path_elements]
+        anchor = [prettify(m.group("anchor"))] if m.group("anchor") else []
+
+        return f"{' > '.join(host + breadcrumbs + anchor)}"
     elif m := re.search(
         r"^https://[^/]*bitbucket[^/]*/(?:projects|users)/(?P<project>[^/]+)/repos/(?P<repo>[^/]+)/"
         r"pull-requests/(?P<pr>\d+)/?"

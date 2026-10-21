@@ -14,6 +14,7 @@ then type any of the following:
 ### Supported URL Formats
 
 - Email links, i.e. `mailto:`; link to text fragment
+- Documentation pages, i.e. `docs` subdomain
 - **Azure DevOps**: project, pipeline list, 
                     (filtered) build list,
                     build (& job & step & log line)
