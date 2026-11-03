@@ -2,10 +2,10 @@
 minimum_release_age = "3d"
 
 [tools]
-python = "3.15.1"
+python = "3.15.2"
 
 [tools.uv]
-version = "0.13.5"
+version = "0.13.7"
 postinstall = "mise run install-local-completions uv generate-shell-completion"
 
 [tools.editorconfig-checker]
